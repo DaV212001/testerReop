@@ -36,7 +36,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           'Connect with fellow learners, share insights, and collaborate on coding projects.',
     },
   ];
-  final List<Widget> pages = [];
 
   @override
   void initState() {
@@ -46,10 +45,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         _currentPageAsDouble = _pageController.page!;
       });
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
+    final List<Widget> pages = [];
     for (var item in pagesData) {
       Widget page = Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 40.0,vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +67,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 20,
+                  fontSize: 25,
                 ),
               ),
               const SizedBox(
@@ -71,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 item['description'],
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   fontSize: 12,
                 ),
               ),
@@ -81,12 +87,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
       pages.add(page);
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-
     return Scaffold(
         body: SafeArea(
       child: Padding(
@@ -110,17 +110,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 dotsCount: pages.length,
                 position: _currentPageAsDouble,
                 decorator: DotsDecorator(
-                  activeColor: theme.colorScheme.primary,
-                  color: theme.colorScheme.tertiary,
+                  activeColor:
+                      theme.bottomNavigationBarTheme.selectedItemColor!,
+                  color: theme.bottomNavigationBarTheme.unselectedItemColor!,
                   activeSize: const Size(15, 15),
                   size: const Size(10, 10),
                 ),
               ),
             const SizedBox(
-              height: 75,
+              height: 50,
             ),
             Button(
-                width: 350,
+                width: 300,
                 text: "Next",
                 onPress: _currentPage == pages.length - 1
                     ? onPressedOnLastPage
@@ -140,6 +141,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void onPressedOnLastPage() async {
     //save in shared pref
-    Get.to(AppRoutes.initial);
+    Get.toNamed(AppRoutes.initial);
   }
 }
