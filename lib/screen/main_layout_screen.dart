@@ -1,10 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mss_e_learning/screen/profile/profile.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-
-import '../config/themes/data/app_colors.dart';
 import 'category/category_screen.dart';
 import 'exam/exam_screen.dart';
 import 'home/home_screen.dart';
@@ -25,6 +22,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     List<Widget> buildScreens() {
       return [
         const HomeScreen(), //Home Page
@@ -33,14 +31,13 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         const ProfileScreen()
       ];
     }
-
     return PersistentTabView(
       context,
       controller: _controller,
       screens: buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: Colors.white70,
+      backgroundColor: theme.colorScheme.background,
       itemAnimationProperties: const ItemAnimationProperties(
         duration: Duration(milliseconds: 200),
         curve: Curves.ease,
@@ -56,14 +53,15 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
-    Color activeColor = AppColors.PRIMARY_COLOR;
-    Color inactiveColor = AppColors.ACCENT_COLOR;
+    ThemeData theme = Theme.of(context);
+    Color activeColor = theme.bottomNavigationBarTheme.selectedItemColor!;
+    Color inactiveColor = theme.bottomNavigationBarTheme.unselectedItemColor!;
     return [
       PersistentBottomNavBarItem(
           icon: Icon(Icons.home, color: activeColor,),
           inactiveIcon: Icon(Icons.home, color: inactiveColor,),
           title: ('Home'),
-          textStyle: TextStyle(fontSize: 10),
+          textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
@@ -72,7 +70,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           icon: Icon(Icons.list_alt, color: activeColor,),
           inactiveIcon: Icon(Icons.list_alt, color: inactiveColor,),
           title: ('Category'),
-          textStyle: TextStyle(fontSize: 10),
+          textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
@@ -81,7 +79,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           icon: Icon(Icons.pending_actions, color: activeColor,),
           inactiveIcon: Icon(Icons.pending_actions, color: inactiveColor,),
           title: ('Exam'),
-          textStyle: TextStyle(fontSize: 10),
+          textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
@@ -90,7 +88,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           icon: Icon(Icons.person, color: activeColor,),
           inactiveIcon: Icon(Icons.person, color: inactiveColor,),
           title: ('profile'.tr()),
-          textStyle: TextStyle(fontSize: 10),
+          textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:

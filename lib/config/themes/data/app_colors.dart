@@ -1,10 +1,14 @@
 import 'dart:ui';
 
 class AppColors {
-  static const Color PRIMARY_COLOR = Color(0xFFFB5943);
-  static const Color ACCENT_COLOR = Color(0xFFFFD001);
-  static const Color DARK_COLOR = Color(0xFF2A2A2A);
-  static const Color PLACEHOLDER_COLOR = Color(0xFFC1BDCA);
-  static const Color DARK_PLACEHOLDER = Color(0xFF373737);
-  static const Color BLACK = Color(0xFF3F3D56);
+  static const Color darkPurple = Color(0xff242038);
+  static const Color slateBlue = Color(0xff725ac1);
+  static const Color tropicalIndigo = Color(0xff8d86c9);
+  static const Color tropicalIndigo2 = Color(0xffa589ff);
+  static const Color tropicalIndigo3 = Color(0xff9074ec);
+  static const Color frenchGray = Color(0xffcac4ce);
+  static const Color linen = Color(0xfff7ece1);
+  static const Color white = Color(0xffffffff);
+  static const Color jet = Color(0xFF2e2e2e);
+  static const Color redCMYK = Color(0xFFE50000);
 }
