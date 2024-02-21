@@ -8,6 +8,7 @@ class AppThemes {
   static ThemeData lightTheme = ThemeData(
       brightness: Brightness.light,
       useMaterial3: true,
+      fontFamily: "Poppins",
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.light,
         seedColor: AppColors.tropicalIndigo,
@@ -34,6 +35,7 @@ class AppThemes {
   static ThemeData darkTheme = ThemeData(
       brightness: Brightness.dark,
       useMaterial3: true,
+      fontFamily: "Poppins",
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
         seedColor: AppColors.tropicalIndigo,
