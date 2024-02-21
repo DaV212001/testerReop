@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mss_e_learning/screen/lesson/lesson_screen.dart';
 
 import '../../controller/post_controller.dart';
 
@@ -21,19 +22,24 @@ class PostList extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 itemCount: controller.getAllPosts.length,
                 separatorBuilder: (_, __) => const Divider(),
-                itemBuilder: (ctx, index) => ListTile(
-                  title: Text(
-                    controller.getAllPosts[index].title,
-                    maxLines: 1,
-                  ),
-                  subtitle: Text(
-                    controller.getAllPosts[index].body,
-                    maxLines: 2,
-                  ),
-                  leading: CircleAvatar(
-                    radius: 30,
-                    child: Text(
-                      controller.getAllPosts[index].id.toString(),
+                itemBuilder: (ctx, index) => GestureDetector(
+                  onTap: (){
+                    Get.to(LessonScreen(lessonId: 1));
+                  },
+                  child: ListTile(
+                    title: Text(
+                      controller.getAllPosts[index].title,
+                      maxLines: 1,
+                    ),
+                    subtitle: Text(
+                      controller.getAllPosts[index].body,
+                      maxLines: 2,
+                    ),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Text(
+                        controller.getAllPosts[index].id.toString(),
+                      ),
                     ),
                   ),
                 ),
