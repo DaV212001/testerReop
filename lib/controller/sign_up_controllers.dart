@@ -1,6 +1,6 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 
-import 'sign_up.dart' show SignUpWidget;
+import '../screen/auth/sign_up.dart' show SignUpWidget;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

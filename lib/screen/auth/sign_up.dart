@@ -12,8 +12,9 @@ import 'package:mss_e_learning/util/app_routes.dart';
 import '../../layout/auth/footer.dart';
 import '../../layout/auth/header.dart';
 import '../../model/user.dart';
-import 'sign_up_model.dart';
-export 'sign_up_model.dart';
+import '../../controller/sign_up_controllers.dart';
+import '../../widget/input_field.dart';
+export '../../controller/sign_up_controllers.dart';
 
 class SignUpWidget extends StatefulWidget {
   const SignUpWidget({super.key});
@@ -156,97 +157,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Container(
-                          width: double.infinity,
-                          constraints: BoxConstraints(
-                            maxWidth: 570,
-                          ),
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 4,
-                                color: Color(0x33000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Padding(
-                              padding: EdgeInsets.all(32),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Header(),
-                                  buildForm(context),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 16),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        UserService userservice = UserService();
-
-                                        User? userResult =
-                                            await userservice.signUserUp(
-                                          _model.firstnameController!.text,
-                                          _model.lastnameController!.text,
-                                          _model.emailAddressController!.text,
-                                          _model.phoneController!.text,
-                                          _model.passwordController!.text,
-                                        );
-
-                                        if (userResult.firstname == _model.firstnameController!.text) {
-                                          Get.toNamed(AppRoutes.initial);
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                            content: Text('Failed to Sign Up'),
-                                            backgroundColor: Colors.red,
-                                          ));
-                                        }
-
-                                        setState(() {});
-                                      },
-                                      text: 'Create Account',
-                                      options: FFButtonOptions(
-                                        width: double.infinity,
-                                        height: 44,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0, 0, 0, 0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: Colors.white,
-                                            ),
-                                        elevation: 3,
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                  ),
-                                  const Footer(),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ).animateOnPageLoad(
-                            animationsMap['containerOnPageLoadAnimation']!),
-                      ),
+                      buildBody(context),
                     ],
                   ),
                 ),
@@ -256,6 +167,100 @@ class _SignUpWidgetState extends State<SignUpWidget>
         ),
       ),
     );
+  }
+
+  Padding buildBody(BuildContext context) {
+    return Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Container(
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          maxWidth: 570,
+                        ),
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context)
+                              .secondaryBackground,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0x33000000),
+                              offset: Offset(0, 2),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Padding(
+                            padding: EdgeInsets.all(32),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Header(),
+                                buildForm(context),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      UserService userservice = UserService();
+
+                                      User? userResult =
+                                          await userservice.signUserUp(
+                                        _model.firstnameController!.text,
+                                        _model.lastnameController!.text,
+                                        _model.emailAddressController!.text,
+                                        _model.phoneController!.text,
+                                        _model.passwordController!.text,
+                                      );
+
+                                      if (userResult.firstname == _model.firstnameController!.text) {
+                                        Get.toNamed(AppRoutes.login);
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text('Failed to Sign Up. Please try again.'),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                      }
+
+                                      setState(() {});
+                                    },
+                                    text: 'Create Account',
+                                    options: FFButtonOptions(
+                                      width: double.infinity,
+                                      height: 44,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 0, 0),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: Colors.white,
+                                          ),
+                                      elevation: 3,
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                ),
+                                const Footer(isLogin: false,),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation']!),
+                    );
   }
 
   Column buildForm(BuildContext context) {
@@ -329,147 +334,3 @@ class _SignUpWidgetState extends State<SignUpWidget>
 }
 
 
-
-class InputFieldWidget extends StatefulWidget {
-
-  final TextEditingController textEditingController;
-  final FocusNode focusNode;
-  final String? Function(String? val) validator;
-   bool obscureText;
-  final String label;
-  final bool passwordinput;
-
-  InputFieldWidget(
-      {super.key,
-      required this.textEditingController,
-      required this.focusNode,
-      required this.obscureText,
-      required this.validator,
-      required this.passwordinput,
-      required this.label});
-
-  @override
-  State<InputFieldWidget> createState() => _InputFieldWidgetState();
-}
-
-class _InputFieldWidgetState extends State<InputFieldWidget> {
-  @override
-  Widget build(BuildContext context) {
-    if (widget.passwordinput) {
-      return Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-        child: Container(
-          width: double.infinity,
-          child: TextFormField(
-            controller: widget.textEditingController,
-            focusNode: widget.focusNode,
-            autofocus: true,
-            autofillHints: [AutofillHints.password],
-            obscureText: !widget.obscureText??false,
-            decoration: InputDecoration(
-              labelText: widget.label,
-              labelStyle: FlutterFlowTheme.of(context).labelLarge,
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primary,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).error,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).error,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              filled: true,
-              fillColor: FlutterFlowTheme.of(context).primaryBackground,
-              suffixIcon: InkWell(
-                onTap: () => setState(
-                  () => widget.obscureText = !widget.obscureText,
-                ),
-                focusNode: FocusNode(skipTraversal: true),
-                child: Icon(
-                  widget.obscureText!
-                      ? Icons.visibility_outlined
-                      : Icons.visibility_off_outlined,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 24,
-                ),
-              ),
-            ),
-            style: FlutterFlowTheme.of(context).bodyLarge,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: widget.validator
-          ),
-        ),
-      );
-    } else {
-      return Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-        child: Container(
-          width: double.infinity,
-          child: TextFormField(
-            controller: widget.textEditingController,
-            focusNode: widget.focusNode,
-            autofocus: true,
-            autofillHints: [AutofillHints.password],
-            obscureText: widget.obscureText!,
-            decoration: InputDecoration(
-              labelText: widget.label,
-              labelStyle: FlutterFlowTheme.of(context).labelLarge,
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primary,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).error,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).error,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              filled: true,
-              fillColor: FlutterFlowTheme.of(context).primaryBackground,
-            ),
-            style: FlutterFlowTheme.of(context).bodyLarge,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: widget.validator,
-          ),
-        ),
-      );
-    }
-  }
-}

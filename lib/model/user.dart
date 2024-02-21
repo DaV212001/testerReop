@@ -4,13 +4,17 @@ class User {
   String? email;
   String? phone;
   int? id;
+  String? profilepicture;
+  int? roleid;
 
   User({
     this.firstname,
     this.lastname,
     this.email,
     this.phone,
-    this.id
+    this.id,
+    this.profilepicture,
+    this.roleid
   });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -19,6 +23,8 @@ class User {
     email = json['email'];
     phone = json['phone'];
     id = json['id'];
+    profilepicture = json.containsKey('profile_picture')? json['profile_picture'] : '';
+    roleid = json.containsKey('role_id')? json['role_id']??'' : '';
   }
 
 
