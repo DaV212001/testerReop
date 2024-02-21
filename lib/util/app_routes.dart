@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:mss_e_learning/screen/main_layout_screen.dart';
 
+import '../screen/auth/sign_up.dart';
 import '../screen/home/home_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
 
   static const initial = '/main_screen';
+  static const signup = '/signup';
   static const home = '/home';
 
   static final pages = [
@@ -18,5 +20,9 @@ class AppRoutes {
       name: home,
       page: () => const HomeScreen(),
     ),
+    GetPage(
+      name: signup,
+      page: () => const SignUpWidget(),
+    )
   ];
 }
