@@ -11,22 +11,27 @@ class AppThemes {
       fontFamily: "Poppins",
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.light,
-        seedColor: AppColors.tropicalIndigo,
-        primary: AppColors.tropicalIndigo,
+        seedColor: AppColors.tropicalIndigo3,
+        primary: AppColors.tropicalIndigo3,
         onPrimary: AppColors.white,
-        secondary: AppColors.tropicalIndigo.withOpacity(0.5),
+        secondary: AppColors.tropicalIndigo3.withOpacity(0.5),
         onSecondary: AppColors.jet,
-        background: AppColors.linen,
+        background: AppColors.white,
         onBackground: AppColors.jet,
         error: AppColors.redCMYK,
         onError: AppColors.white,
       ),
+      // buttonTheme: ButtonThemeData(
+      //   buttonColor: AppColors.tropicalIndigo3,
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius:
+      //         BorderRadius.circular(10), // Set your desired border radius here
+      //   ),
+      // ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColors.linen,
-        selectedItemColor: AppColors.tropicalIndigo,
-        unselectedItemColor: AppColors.jet.withOpacity(0.5)
-      )
-  );
+          backgroundColor: AppColors.linen,
+          selectedItemColor: AppColors.tropicalIndigo3,
+          unselectedItemColor: AppColors.jet.withOpacity(0.5)));
 
   /* <----------------------->
       Dark Themes For this app
@@ -38,20 +43,25 @@ class AppThemes {
       fontFamily: "Poppins",
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
-        seedColor: AppColors.tropicalIndigo,
-        primary: AppColors.tropicalIndigo,
+        seedColor: AppColors.tropicalIndigo3,
+        primary: AppColors.tropicalIndigo3,
         onPrimary: AppColors.white,
         secondary: AppColors.jet.withOpacity(0.5),
-        onSecondary: AppColors.tropicalIndigo,
+        onSecondary: AppColors.tropicalIndigo3,
         background: AppColors.darkPurple,
         onBackground: AppColors.white,
         error: AppColors.redCMYK,
         onError: AppColors.white,
       ),
+      // buttonTheme: ButtonThemeData(
+      //   buttonColor: AppColors.tropicalIndigo3,
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius:
+      //     BorderRadius.circular(10), // Set your desired border radius here
+      //   ),
+      // ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.darkPurple,
           selectedItemColor: AppColors.white,
-          unselectedItemColor: AppColors.white.withOpacity(0.4)
-      )
-  );
+          unselectedItemColor: AppColors.white.withOpacity(0.4)));
 }
