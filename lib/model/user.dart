@@ -24,7 +24,7 @@ class User {
     phone = json['phone'];
     id = json['id'];
     profilepicture = json.containsKey('profile_picture')? json['profile_picture'] : '';
-    roleid = json.containsKey('role_id')? json['role_id']??'' : '';
+    roleid = json.containsKey('role_id')? json['role_id']??-1 : -1;
   }
 
 
