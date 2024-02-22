@@ -21,28 +21,40 @@ class ProfileScreen extends StatelessWidget {
         tiktokLink: "https://www.linkedin.com/",
         twitterLink: "https://www.linkedin.com/",
         linkedInLink: "https://www.linkedin.com/");
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20,),
-        child: ListView(children: [
-          const SizedBox(height: 10),
-          UserScreenHeader(
-            user: user,
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
           ),
-          const Spacer(),
-          const RouteList(),
-          const Spacer(),
-          Container(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-            height: 50,
-            child: Button(
-              text: 'Logout',
-              onPress: () {},
+          child: ListView(children: [
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          const Spacer(),
-          UserScreenFooter(footerData: footerData)
-        ]),
+            UserScreenHeader(
+              user: user,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const RouteList(),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+              height: 50,
+              child: Button(
+                text: 'Logout',
+                onPress: () {},
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            UserScreenFooter(footerData: footerData)
+          ]),
+        ),
       ),
     );
   }

@@ -51,7 +51,8 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
         Column(
           children: [
             Text(formattedName,
-                style: TextStyle(color: theme.primaryColor, fontSize: 20)),
+                style:
+                    TextStyle(color: theme.colorScheme.primary, fontSize: 20)),
             const SizedBox(height: 5),
             Text("${widget.user.email}",
                 style:

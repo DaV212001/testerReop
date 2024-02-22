@@ -51,7 +51,7 @@ class RouteList extends StatelessWidget {
       },
       {
         "title": "More Apps",
-        "leadingIcon": buildIcon(Icons.share, context),
+        "leadingIcon": buildIcon(Icons.android, context),
         "onTap": () {},
         "trailing": arrowIcon
       },
@@ -100,13 +100,27 @@ class RouteList extends StatelessWidget {
       itemCount: itemList.length,
       itemBuilder: (context, index) {
         final item = itemList[index];
-        return ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-          onTap: item["onTap"],
-          leading: item["leadingIcon"],
-          title: Text(item["title"], style: const TextStyle(fontSize: 16)),
-          trailing: item["trailing"],
-        );
+        return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: InkWell(
+              customBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              onTap: item["onTap"],
+              splashColor: theme.colorScheme.primary.withOpacity(0.3),
+              highlightColor: theme.colorScheme.primary.withOpacity(0.25),
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: theme.colorScheme.primary.withOpacity(0.15),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                leading: item["leadingIcon"],
+                title:
+                    Text(item["title"], style: const TextStyle(fontSize: 16)),
+                trailing: item["trailing"],
+              ),
+            ));
       },
     );
   }
