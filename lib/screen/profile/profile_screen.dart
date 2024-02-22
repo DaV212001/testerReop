@@ -11,35 +11,37 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-          child: Column(
-            children: [],
-          )),
+    User user = User(
+        firstName: "Dagim", lastName: "Mebrate", email: "dagimcodes@gmail.com");
+    FooterData footerData = FooterData(
+        copyWriteText: "MSS @ 2024",
+        faceBookLink: "https://www.linkedin.com/",
+        instagramLink: "https://www.linkedin.com/",
+        telegramLink: "https://www.linkedin.com/",
+        tiktokLink: "https://www.linkedin.com/",
+        twitterLink: "https://www.linkedin.com/",
+        linkedInLink: "https://www.linkedin.com/");
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+        child: Column(children: [
+          UserScreenHeader(
+            user: user,
+          ),
+          const Spacer(),
+          const RouteList(),
+          const Spacer(),
+          Container(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+            height: 50,
+            child: Button(
+              text: 'Logout',
+              onPress: () {},
+            ),
+          ),
+          UserScreenFooter(footerData: footerData)
+        ]),
+      ),
     );
-  }
-
-  Widget buildUserScreen(User user, FooterData footerData) {
-    return Center(
-        child: ListView(scrollDirection: Axis.vertical,
-            children: [
-              UserScreenHeader(
-                user: user,
-              ),
-              RouteList(
-                user: user,
-                refresh: () {},
-              ),
-              const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.only(left: 12, right: 12, bottom: 10),
-                height: 50,
-                child: Button(
-                  text: 'Logout',
-                  onPress: () {},
-                ),
-              ),
-              UserScreenFooter(footerData: footerData)
-            ]));
   }
 }

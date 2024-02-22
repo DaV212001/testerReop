@@ -1,3 +1,4 @@
+import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
@@ -11,6 +12,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // init shared preference
   await ConfigPreference.init();
+  // init image caching
+  await FastCachedImageConfig.init(clearCacheAfter: const Duration(days: 15));
 
   runApp(const MssLearnProgramming());
 }

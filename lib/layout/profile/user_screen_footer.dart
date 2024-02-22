@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mss_e_learning/generated/assets.dart';
 import 'package:mss_e_learning/model/footer_data.dart';
 import 'package:mss_e_learning/widget/svg_icon.dart';
@@ -16,31 +15,24 @@ class UserScreenFooter extends StatelessWidget {
     return Column(
       children: [
         Text(footerData.copyWriteText,
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 15.sp)),
+            textAlign: TextAlign.center, style: const TextStyle(fontSize: 15)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (footerData.faceBookLink != "")
-              socialMediaButton(
-                  color, footerData.faceBookLink, Assets.socialFacebook),
-            if (footerData.youtubeLink != "")
-              socialMediaButton(
-                  color, footerData.youtubeLink, Assets.socialYoutube),
-            if (footerData.instagramLink != "")
-              socialMediaButton(
-                  color, footerData.instagramLink, Assets.socialInstagram),
-            if (footerData.linkedInLink != "")
-              socialMediaButton(
-                  color, footerData.linkedInLink, Assets.socialLinkedin),
-            if (footerData.twitterLink != "")
-              socialMediaButton(
-                  color, footerData.twitterLink, Assets.socialTwitter),
-            if (footerData.telegramLink != "")
-              socialMediaButton(
-                  color, footerData.telegramLink, Assets.socialTelegram),
-            if (footerData.tiktokLink != "")
-              socialMediaButton(
-                  color, footerData.tiktokLink, Assets.socialTiktok),
+            socialMediaButton(
+                color, footerData.faceBookLink, Assets.socialFacebook),
+            socialMediaButton(
+                color, footerData.youtubeLink, Assets.socialYoutube),
+            socialMediaButton(
+                color, footerData.instagramLink, Assets.socialInstagram),
+            socialMediaButton(
+                color, footerData.linkedInLink, Assets.socialLinkedin),
+            socialMediaButton(
+                color, footerData.twitterLink, Assets.socialTwitter),
+            socialMediaButton(
+                color, footerData.telegramLink, Assets.socialTelegram),
+            socialMediaButton(
+                color, footerData.tiktokLink, Assets.socialTiktok),
           ],
         )
       ],
@@ -48,7 +40,7 @@ class UserScreenFooter extends StatelessWidget {
   }
 
   Widget socialMediaButton(Color color, String? link, String image) {
-    if (link == null) return const SizedBox.shrink();
+    if (link == null || link == "") return const SizedBox.shrink();
     return Ink(
       child: InkWell(
         onTap: () {
@@ -57,7 +49,7 @@ class UserScreenFooter extends StatelessWidget {
         child: SvgIcon(
           color: color,
           image: image,
-          size: 50,
+          size: 55,
         ),
       ),
     );

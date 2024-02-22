@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mss_e_learning/config/themes/data/app_colors.dart';
 import 'package:mss_e_learning/widget/cached_image.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -23,7 +24,7 @@ class ProfileWidget extends StatelessWidget {
         Center(
           child: Stack(
             children: [
-              buildImage(theme.cardColor),
+              buildImage(theme.colorScheme.onSecondary.withOpacity(0.1)),
               if (hasEditButton && imagePath != null)
                 Positioned(
                   bottom: 0,
@@ -62,8 +63,9 @@ class ProfileWidget extends StatelessWidget {
                       : IconButton(
                           onPressed: onClicked,
                           icon: const Icon(
-                            CupertinoIcons.camera,
-                            size: 50,
+                            color: AppColors.tropicalIndigo3,
+                            CupertinoIcons.profile_circled,
+                            size: 120,
                           ))),
         ),
       ),
