@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mss_e_learning/screen/main_layout_screen.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 
 import 'config/config_preference.dart';
@@ -27,8 +26,8 @@ class MssLearnProgramming extends StatelessWidget {
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeManager.getThemeMode(),
       getPages: AppRoutes.pages,
-      initialRoute: AppRoutes.initial,
-      home: const MainLayoutScreen()
+      initialRoute: AppRoutes.onboarding,
+      // home: const MainLayoutScreen()
     );
   }
 }

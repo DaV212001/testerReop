@@ -1,6 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mss_e_learning/screen/profile/profile.dart';
+import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'category/category_screen.dart';
 import 'exam/exam_screen.dart';
@@ -87,7 +86,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       PersistentBottomNavBarItem(
           icon: Icon(Icons.person, color: activeColor,),
           inactiveIcon: Icon(Icons.person, color: inactiveColor,),
-          title: ('profile'.tr()),
+          title: ('Profile'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
