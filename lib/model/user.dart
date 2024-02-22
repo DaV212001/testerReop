@@ -1,24 +1,31 @@
 class User {
-  int? id;
-  String firstName;
-  String lastName;
+  String? firstname;
+  String? lastname;
   String? email;
-  String? password;
   String? phone;
-  String? profilePicture;
-  String? role;
-  String? createdAt;
-  String? updatedAt;
+  int? id;
+  String? profilepicture;
+  int? roleid;
 
-  User(
-      {required this.firstName,
-      required this.lastName,
-      this.email,
-      this.password,
-      this.phone,
-      this.id,
-      this.profilePicture,
-      this.role,
-      this.createdAt,
-      this.updatedAt});
+  User({
+    this.firstname,
+    this.lastname,
+    this.email,
+    this.phone,
+    this.id,
+    this.profilepicture,
+    this.roleid
+  });
+
+  User.fromJson(Map<String, dynamic> json) {
+    firstname = json['first_name'];
+    lastname = json['last_name'];
+    email = json['email'];
+    phone = json['phone'];
+    id = json['id'];
+    profilepicture = json.containsKey('profile_picture')? json['profile_picture'] : '';
+    roleid = json.containsKey('role_id')? json['role_id']??-1 : -1;
+  }
+
+
 }
