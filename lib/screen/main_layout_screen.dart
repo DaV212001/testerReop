@@ -1,7 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mss_e_learning/screen/profile/profile.dart';
+import 'package:mss_e_learning/screen/profile/profile_screen.dart';
+import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+
 import 'category/category_screen.dart';
 import 'exam/exam_screen.dart';
 import 'home/home_screen.dart';
@@ -16,10 +17,13 @@ class MainLayoutScreen extends StatefulWidget {
 class _MainLayoutScreenState extends State<MainLayoutScreen> {
   late PersistentTabController _controller;
   bool isLoggedIn = false;
+
   @override
   void initState() {
     _controller = PersistentTabController();
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -31,24 +35,27 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         const ProfileScreen()
       ];
     }
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
-      backgroundColor: theme.colorScheme.background,
-      itemAnimationProperties: const ItemAnimationProperties(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+
+    return Scaffold(
+      body: PersistentTabView(
+        context,
+        controller: _controller,
+        screens: buildScreens(),
+        items: _navBarsItems(),
+        confineInSafeArea: true,
+        backgroundColor: theme.colorScheme.background,
+        itemAnimationProperties: const ItemAnimationProperties(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle: NavBarStyle.style6,
+        navBarHeight: 60,
       ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
-      navBarStyle: NavBarStyle.style6,
-      navBarHeight: 60,
     );
   }
 
@@ -58,41 +65,65 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
     Color inactiveColor = theme.bottomNavigationBarTheme.unselectedItemColor!;
     return [
       PersistentBottomNavBarItem(
-          icon: Icon(Icons.home, color: activeColor,),
-          inactiveIcon: Icon(Icons.home, color: inactiveColor,),
+          icon: Icon(
+            Icons.home,
+            color: activeColor,
+          ),
+          inactiveIcon: Icon(
+            Icons.home,
+            color: inactiveColor,
+          ),
           title: ('Home'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
-          const RouteAndNavigatorSettings(initialRoute: '/home')),
+              const RouteAndNavigatorSettings(initialRoute: AppRoutes.home)),
       PersistentBottomNavBarItem(
-          icon: Icon(Icons.list_alt, color: activeColor,),
-          inactiveIcon: Icon(Icons.list_alt, color: inactiveColor,),
+          icon: Icon(
+            Icons.list_alt,
+            color: activeColor,
+          ),
+          inactiveIcon: Icon(
+            Icons.list_alt,
+            color: inactiveColor,
+          ),
           title: ('Category'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
-          routeAndNavigatorSettings:
-          const RouteAndNavigatorSettings(initialRoute: '/category')),
+          routeAndNavigatorSettings: const RouteAndNavigatorSettings(
+              initialRoute: AppRoutes.category)),
       PersistentBottomNavBarItem(
-          icon: Icon(Icons.pending_actions, color: activeColor,),
-          inactiveIcon: Icon(Icons.pending_actions, color: inactiveColor,),
+          icon: Icon(
+            Icons.pending_actions,
+            color: activeColor,
+          ),
+          inactiveIcon: Icon(
+            Icons.pending_actions,
+            color: inactiveColor,
+          ),
           title: ('Exam'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
-          const RouteAndNavigatorSettings(initialRoute: '/exam')),
+              const RouteAndNavigatorSettings(initialRoute: AppRoutes.exam)),
       PersistentBottomNavBarItem(
-          icon: Icon(Icons.person, color: activeColor,),
-          inactiveIcon: Icon(Icons.person, color: inactiveColor,),
-          title: ('profile'.tr()),
+          icon: Icon(
+            Icons.person,
+            color: activeColor,
+          ),
+          inactiveIcon: Icon(
+            Icons.person,
+            color: inactiveColor,
+          ),
+          title: ('Profile'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
-          const RouteAndNavigatorSettings(initialRoute: '/profile')),
+              const RouteAndNavigatorSettings(initialRoute: AppRoutes.profile)),
     ];
   }
 }

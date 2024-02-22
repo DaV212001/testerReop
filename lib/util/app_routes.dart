@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
+import 'package:mss_e_learning/screen/certificate/certificate_screen.dart';
+import 'package:mss_e_learning/screen/exam/exam_screen.dart';
 import 'package:mss_e_learning/screen/home/home_screen.dart';
 import 'package:mss_e_learning/screen/main_layout_screen.dart';
 import '../screen/auth/log_in.dart';
 import '../screen/auth/sign_up.dart';
 import '../screen/home/home_screen.dart';
 import 'package:mss_e_learning/screen/onboarding/onboarding_screen.dart';
+import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
@@ -14,8 +17,17 @@ class AppRoutes {
   static const home = '/home';
   static const login = '/login';
   static const onboarding = '/onboarding';
+  static const home = '/home';
+  static const profile = '/profile';
+  static const category = '/category';
+  static const certificate = '/certificate';
+  static const exam = '/exam';
 
   static final pages = [
+    GetPage(
+        name: onboarding,
+        page: () => const OnboardingScreen()
+    ),
     GetPage(
       name: initial,
       page: () => const MainLayoutScreen()
@@ -25,6 +37,16 @@ class AppRoutes {
       page: () => const HomeScreen(),
     ),
     GetPage(
+        name: exam,
+        page: () => const ExamScreen()
+    ),
+    GetPage(
+        name: certificate,
+        page: () => const CertificateScreen()
+    ),
+    GetPage(
+        name: profile,
+        page: () => const ProfileScreen()
         name: login,
         page: ()=> const LogInWidget()
     ),

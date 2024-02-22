@@ -15,6 +15,8 @@ Future<void> main() async {
   FastCachedImageConfig.init();
   // init shared preference
   await ConfigPreference.init();
+  // init image caching
+  await FastCachedImageConfig.init(clearCacheAfter: const Duration(days: 15));
 
 token = await AuthService.getAuthorizationToken();
 
@@ -33,7 +35,8 @@ class MssLearnProgramming extends StatelessWidget {
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeManager.getThemeMode(),
       getPages: AppRoutes.pages,
-      initialRoute: token == null? AppRoutes.signup : AppRoutes.initial,
+      initialRoute: AppRoutes.onboarding,
+      initialRoute: token == null? AppRoutes.signup : AppRoutes.onboarding,
       home: const MainLayoutScreen()
     );
   }
