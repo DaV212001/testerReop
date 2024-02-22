@@ -27,5 +27,5 @@ class ThemeManager {
   }
 
   /// check if the theme is light or dark
-  bool get getThemeIsLight => ConfigPreference.getThemeIsLight();
+  static bool get getThemeIsLight => ConfigPreference.getThemeIsLight();
 }

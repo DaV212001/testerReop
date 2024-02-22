@@ -23,8 +23,9 @@ class ProfileScreen extends StatelessWidget {
         linkedInLink: "https://www.linkedin.com/");
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-        child: Column(children: [
+        padding: const EdgeInsets.symmetric(horizontal: 20,),
+        child: ListView(children: [
+          const SizedBox(height: 10),
           UserScreenHeader(
             user: user,
           ),
@@ -39,6 +40,7 @@ class ProfileScreen extends StatelessWidget {
               onPress: () {},
             ),
           ),
+          const Spacer(),
           UserScreenFooter(footerData: footerData)
         ]),
       ),
