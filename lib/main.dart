@@ -1,7 +1,6 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mss_e_learning/screen/home/home_screen.dart';
 import 'package:mss_e_learning/screen/main_layout_screen.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
