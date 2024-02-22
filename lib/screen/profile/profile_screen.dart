@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User user = User(
-        firstName: "Dagim", lastName: "Mebrate", email: "dagimcodes@gmail.com");
+        firstname: "Abebe", lastname: "Kebede", email: "dagimcodes@gmail.com");
     FooterData footerData = FooterData(
         copyWriteText: "MSS @ 2024",
         faceBookLink: "https://www.linkedin.com/",

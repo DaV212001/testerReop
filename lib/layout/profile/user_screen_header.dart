@@ -24,15 +24,15 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
 
   @override
   void initState() {
-    profilePicture = widget.user.profilePicture;
+    profilePicture = widget.user.profilepicture ?? "";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    String firstName = widget.user.firstName;
-    String lastName = widget.user.lastName;
+    String firstName = widget.user.firstname ?? "";
+    String lastName = widget.user.lastname ?? "";
     String formattedName =
         "${firstName[0].toUpperCase()}${firstName.substring(1).toLowerCase()}"
         " ${lastName[0].toUpperCase()}${lastName.substring(1).toLowerCase()}";
