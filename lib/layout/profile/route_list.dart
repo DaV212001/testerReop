@@ -12,7 +12,7 @@ class RouteList extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     Icon arrowIcon = Icon(Icons.arrow_right_outlined,
-        color: theme.colorScheme.primary, size: 40);
+        color: theme.colorScheme.primary.withOpacity(0.8), size: 40);
     final List<Map<String, dynamic>> itemList = [
       {
         "title": "Change Profile",
@@ -128,7 +128,7 @@ class RouteList extends StatelessWidget {
   Widget buildIcon(IconData iconData, BuildContext context) {
     return Icon(
       iconData,
-      color: Theme.of(context).colorScheme.primary,
+      color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
       size: 25,
     );
   }
