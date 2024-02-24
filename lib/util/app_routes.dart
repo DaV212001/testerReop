@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mss_e_learning/screen/main_layout_screen.dart';
+import 'package:mss_e_learning/screen/password/forgot_password_screen.dart';
 
 import '../screen/auth/log_in.dart';
 import '../screen/auth/sign_up.dart';
@@ -12,6 +13,7 @@ class AppRoutes {
   static const signup = '/signup';
   static const home = '/home';
   static const login = '/login';
+  static const forgotpass = '/forgotpassword';
   static final pages = [
     GetPage(
       name: initial,
@@ -28,6 +30,10 @@ class AppRoutes {
     GetPage(
       name: signup,
       page: () => const SignUpWidget(),
+    ),
+    GetPage(
+        name: forgotpass,
+        page: () => ForgotPasswordScreen()
     )
   ];
 }
