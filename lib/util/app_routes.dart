@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:mss_e_learning/screen/certificate/certificate_screen.dart';
-import 'package:mss_e_learning/screen/exam/exam_screen.dart';
 import 'package:mss_e_learning/screen/home/home_screen.dart';
 import 'package:mss_e_learning/screen/main_layout_screen.dart';
 import 'package:mss_e_learning/screen/onboarding/onboarding_screen.dart';
 import 'package:mss_e_learning/screen/profile/profile_screen.dart';
+import 'package:mss_e_learning/screen/quiz/quiz_screen.dart';
 
 import '../screen/auth/log_in.dart';
 import '../screen/auth/sign_up.dart';
@@ -20,7 +20,7 @@ class AppRoutes {
   static const profile = '/profile';
   static const category = '/category';
   static const certificate = '/certificate';
-  static const exam = '/exam';
+  static const quiz = '/quiz';
 
   static final pages = [
     GetPage(name: onboarding, page: () => const OnboardingScreen()),
@@ -29,7 +29,7 @@ class AppRoutes {
       name: home,
       page: () => const HomeScreen(),
     ),
-    GetPage(name: exam, page: () => const ExamScreen()),
+    GetPage(name: quiz, page: () => const QuizScreen()),
     GetPage(name: certificate, page: () => const CertificateScreen()),
     GetPage(name: profile, page: () => const ProfileScreen()),
     GetPage(name: login, page: () => const LogInWidget()),
