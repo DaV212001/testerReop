@@ -3,6 +3,7 @@ import 'dart:ui';
 class AppColors {
   static const Color darkPurple = Color(0xff242038);
   static const Color slateBlue = Color(0xff725ac1);
+  static const Color palatinateBlue = Color(0xff4b39ef);
   static const Color tropicalIndigo = Color(0xff8d86c9);
   static const Color tropicalIndigo2 = Color(0xffa589ff);
   static const Color tropicalIndigo3 = Color(0xff9074ec);

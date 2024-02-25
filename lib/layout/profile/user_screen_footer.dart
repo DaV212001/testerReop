@@ -11,7 +11,7 @@ class UserScreenFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Theme.of(context).colorScheme.primary;
+    Color color = Theme.of(context).colorScheme.primary.withOpacity(0.85);
     return Column(
       children: [
         Text(footerData.copyWriteText,
