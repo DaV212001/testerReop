@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mss_e_learning/controller/quiz_controller.dart';
 import 'package:mss_e_learning/layout/quiz/question_choice_list.dart';
 import 'package:mss_e_learning/layout/quiz/question_header.dart';
 import 'package:mss_e_learning/layout/quiz/quiz_progress_indicator.dart';
-import 'package:mss_e_learning/model/question.dart';
-import 'package:mss_e_learning/util/placeHolderData.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Question> questions = PlaceHolderData.questions;
+    Get.put(QuizController());
     ThemeData theme = Theme.of(context);
     return Scaffold(
         appBar: AppBar(
@@ -29,13 +28,13 @@ class QuizScreen extends StatelessWidget {
         ),
         body: Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child: Column(children: [
-              QuizProgressIndicator(items: questions, progress: 1),
-              const SizedBox(height: 30),
-              QuestionHeader(question: questions[0].question),
-              const SizedBox(height: 10),
-              QuestionChoiceList(question: questions[0]),
-              const SizedBox(height: 20)
+            child: const Column(children: [
+              QuizProgressIndicator(),
+              SizedBox(height: 30),
+              QuestionHeader(),
+              SizedBox(height: 10),
+              QuestionChoiceList(),
+              SizedBox(height: 20)
             ])));
   }
 }
