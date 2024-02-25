@@ -18,8 +18,10 @@ class AppThemes {
         onSecondary: AppColors.jet,
         background: AppColors.white,
         onBackground: AppColors.jet,
-        error: AppColors.redCMYK,
+        error: AppColors.offRed,
         onError: AppColors.white,
+        tertiary: AppColors.limeGreen,
+        onTertiary: AppColors.white
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.linen,
@@ -283,8 +285,10 @@ class AppThemes {
         onSecondary: AppColors.palatinateBlue,
         background: AppColors.darkPurple,
         onBackground: AppColors.white,
-        error: AppColors.redCMYK,
+        error: AppColors.offRed,
         onError: AppColors.white,
+        tertiary: AppColors.limeGreen,
+        onTertiary: AppColors.white
       ),
       // buttonTheme: ButtonThemeData(
       //   buttonColor: AppColors.tropicalIndigo3,

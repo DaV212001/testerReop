@@ -11,5 +11,6 @@ class AppColors {
   static const Color linen = Color(0xfff7ece1);
   static const Color white = Color(0xffffffff);
   static const Color jet = Color(0xFF2e2e2e);
-  static const Color redCMYK = Color(0xFFE50000);
+  static const Color offRed = Color(0xFFFA161A);
+  static const Color limeGreen = Color(0xFF57CB02);
 }
