@@ -7,6 +7,7 @@ import 'package:mss_e_learning/util/app_routes.dart';
 import 'config/config_preference.dart';
 import 'config/themes/data/app_themes.dart';
 import 'config/themes/theme_manager.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 String? token;
 
@@ -30,6 +31,8 @@ class MssLearnProgramming extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: FlutterSmartDialog.init(),
+        navigatorObservers: [FlutterSmartDialog.observer],
         theme: AppThemes.lightTheme,
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeManager.getThemeMode(),

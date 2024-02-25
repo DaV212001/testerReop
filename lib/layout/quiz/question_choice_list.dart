@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:mss_e_learning/model/question.dart';
+import 'package:get/get.dart';
 
 class QuestionChoiceList extends StatelessWidget {
   final Question question;
@@ -11,7 +13,6 @@ class QuestionChoiceList extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return Expanded(
       child: ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
           itemCount: question.answers.length,
           itemBuilder: (context, index) {
             return Container(
@@ -31,7 +32,9 @@ class QuestionChoiceList extends StatelessWidget {
                 customBorder: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                onTap: () {},
+                onTap: () {
+                  _show();
+                },
                 splashColor: theme.colorScheme.primary.withOpacity(0.3),
                 highlightColor: theme.colorScheme.primary.withOpacity(0.25),
                 child: ListTile(
@@ -45,5 +48,29 @@ class QuestionChoiceList extends StatelessWidget {
             );
           }),
     );
+  }
+
+  void _show() async {
+    SmartDialog.show(
+        alignment: Alignment.bottomCenter,
+        backDismiss: false,
+        clickMaskDismiss: false,
+        builder: (_) {
+          return Container(
+            height: 200,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Get.theme.colorScheme.background,
+                borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(10))
+            ),
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              onPressed: () => SmartDialog.dismiss(),
+              child: const Text('再会！'),
+            ),
+          );
+        });
   }
 }

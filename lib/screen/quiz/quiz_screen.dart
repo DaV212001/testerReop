@@ -5,7 +5,6 @@ import 'package:mss_e_learning/layout/quiz/question_header.dart';
 import 'package:mss_e_learning/layout/quiz/quiz_progress_indicator.dart';
 import 'package:mss_e_learning/model/question.dart';
 import 'package:mss_e_learning/util/placeHolderData.dart';
-import 'package:mss_e_learning/widget/button.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
@@ -36,7 +35,6 @@ class QuizScreen extends StatelessWidget {
               QuestionHeader(question: questions[0].question),
               const SizedBox(height: 10),
               QuestionChoiceList(question: questions[0]),
-              Button(text: "Check Answer", onPress: () {}),
               const SizedBox(height: 20)
             ])));
   }
