@@ -6,6 +6,7 @@ class InputFieldWidget extends StatefulWidget {
   final FocusNode focusNode;
   final String? Function(String? val) validator;
   bool obscureText;
+  final Widget? prefixIcon;
   final String label;
   final bool passwordinput;
 
@@ -16,7 +17,7 @@ class InputFieldWidget extends StatefulWidget {
         required this.obscureText,
         required this.validator,
         required this.passwordinput,
-        required this.label});
+        required this.label, this.prefixIcon});
 
   @override
   State<InputFieldWidget> createState() => _InputFieldWidgetState();
@@ -101,6 +102,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
             autofillHints: [AutofillHints.password],
             obscureText: widget.obscureText!,
             decoration: InputDecoration(
+              icon: widget.prefixIcon,
               labelText: widget.label,
               labelStyle: FlutterFlowTheme.of(context).labelLarge,
               enabledBorder: OutlineInputBorder(

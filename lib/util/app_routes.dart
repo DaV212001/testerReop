@@ -6,6 +6,8 @@ import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 
 import '../screen/auth/log_in.dart';
 import '../screen/auth/sign_up.dart';
+import '../screen/certificate/certificate_screen.dart';
+import '../screen/exam/exam_screen.dart';
 import '../screen/home/home_screen.dart';
 
 class AppRoutes {

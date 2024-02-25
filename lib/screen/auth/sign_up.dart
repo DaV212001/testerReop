@@ -270,8 +270,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
             textEditingController: _model.firstnameController!,
             focusNode: _model.firstnameFocusNode!,
             validator: (val) {
-              if (val!.length < 6) {
-                return "First name must be atleast 6 characters.";
+              if (val!.length < 2) {
+                return "First name must be atleast 2 characters.";
               }
               return null;
             },
@@ -282,8 +282,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
             textEditingController: _model.lastnameController!,
             focusNode: _model.lastnameFocusNode!,
             validator: (val) {
-              if (val!.length < 6) {
-                return "Last name must be atleast 6 characters.";
+              if (val!.length < 2) {
+                return "Last name must be atleast 2 characters.";
               }
               return null;
             },

@@ -1,8 +1,14 @@
 // forgot_password_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
+import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
+import 'package:mss_e_learning/screen/password/verification_screen.dart';
+import 'package:mss_e_learning/util/app_constants.dart';
+import 'package:mss_e_learning/widget/input_field.dart';
+import 'package:mss_e_learning/widget/svg_icon.dart';
 import '../../controller/forgot_password_controller.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -13,40 +19,7 @@ class ForgotPasswordScreen extends StatefulWidget {
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
 
-final animationsMap = {
-  'textOnPageLoadAnimation': AnimationInfo(
-    trigger: AnimationTrigger.onPageLoad,
-    effects: [
-      VisibilityEffect(duration: 100.ms),
-      FadeEffect(
-        curve: Curves.easeInOut,
-        delay: 100.ms,
-        duration: 600.ms,
-        begin: 0,
-        end: 1,
-      ),
-      MoveEffect(
-        curve: Curves.easeInOut,
-        delay: 100.ms,
-        duration: 600.ms,
-        begin: Offset(0, 170),
-        end: Offset(0, 0),
-      ),
-    ],
-  ),
-  'containerOnPageLoadAnimation1': AnimationInfo(
-    trigger: AnimationTrigger.onPageLoad,
-    effects: [
-      FadeEffect(
-        curve: Curves.easeInOut,
-        delay: 0.ms,
-        duration: 600.ms,
-        begin: 0,
-        end: 1,
-      ),
-    ],
-  ),
-};
+
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
@@ -55,96 +28,110 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: GetBuilder<ForgotPasswordController>(
         init: ForgotPasswordController(),
         builder: (controller) {
-          return Form(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 80.0),
-                    child: Icon(
-                      Icons.lock,
-                      color: Colors.black,
-                      size: 70,
-                    ),
-                  ),
-                  Text(
-                    'Forgot Password?',
-                    style: TextStyle(fontSize: 40, color: Colors.black, fontWeight: FontWeight.bold ),
-                    textAlign: TextAlign.center,
-                  ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation1']!),
-
-                  Text(
-                    'We will send an email to your account',
-                    style: TextStyle(fontSize: 20, color: Colors.black, ),
-                    textAlign: TextAlign.center,
-                  ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation1']!),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 100.0),
-                    child: TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        icon: Icon(
-                            Icons.email,
-                          color: Colors.black,
-                        ),
-                        labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryBackground,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        filled: true,
-                        fillColor: FlutterFlowTheme.of(context).primaryBackground,
+          return  Form(
+            child: Container(
+              height: double.infinity,
+              decoration: AppConstants.KauthContainerGradient,
+              alignment: const AlignmentDirectional(0, -1),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const HeaderImageAndText(
+                          imagePath: 'assets/images/illustrations/forgot_password.svg',
+                          headerText: 'Forgot password?'
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    child: Text('Send Email', style: TextStyle(color: Colors.white),),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      backgroundColor: const Color(0XFF725AC1)
-                    ),
-                    onPressed: () {
-                      // TODO: Implement password reset logic here
-                    },
-                  ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+                const SizedBox(height: 10,),
+                      buildBody(context).animateOnPageLoad(ForgotPasswordController().animationsMap['textOnPageLoadAnimation']!),
 
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
           );
         },
       ),
     );
+  }
+
+  Container buildBody(BuildContext context) {
+    return Container(
+                      width: double.infinity,
+                      constraints: const BoxConstraints(
+                        maxWidth: 570,
+                      ),
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        boxShadow: const [
+                          BoxShadow(
+                            blurRadius: 4,
+                            color: Color(0x33000000),
+                            offset: Offset(0, 2),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Align(
+                        alignment: const AlignmentDirectional(0, 0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(32),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'We will send an email to your account',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ).animateOnPageLoad(ForgotPasswordController().animationsMap['containerOnPageLoadAnimation1']!),
+                              Padding(
+                                padding: EdgeInsets.only(top: 20.0),
+                                child: InputFieldWidget(
+                                    textEditingController: ForgotPasswordController().emailController,
+                                    focusNode: ForgotPasswordController().emailFocusNode,
+                                    obscureText: false,
+                                    validator: (val){
+                                      if(!val!.isEmail){
+                                        return 'Please enter a valid email';
+                                      }
+                                      return null;
+                                    },
+                                    passwordinput: false,
+                                    label: 'Email',
+                                  prefixIcon: Icon(
+                                    Icons.email,
+                                    color: Colors.black,
+                                  ),
+                                )
+                              ),
+                              const SizedBox(height: 20),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    minimumSize: Size.fromHeight(50),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    backgroundColor: FlutterFlowTheme.of(context).primary
+                                ),
+                                onPressed: () {
+                                  // TODO: Implement password reset logic here
+                                  Get.to( () => VerificationScreen());
+                                },
+                                child: const Text(
+                                  'Send Email',
+                                  style: TextStyle(
+                                      color: Colors.white
+                                  ),
+                                ),
+                              ),
+
+                            ]
+                          )
+                        ),
+                    ),
+                    );
   }
 }

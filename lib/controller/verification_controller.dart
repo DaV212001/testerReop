@@ -1,12 +1,11 @@
 // forgot_password_controller.dart
 
 import 'package:flutter/animation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
-class ForgotPasswordController extends GetxController {
+class VerificationController extends GetxController {
   final animationsMap = {
     'textOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -41,8 +40,5 @@ class ForgotPasswordController extends GetxController {
       ],
     ),
   };
-  TextEditingController emailController = TextEditingController();
-  FocusNode emailFocusNode = FocusNode();
-
 // Add your password reset logic here (e.g., API calls, email sending, etc.)
 }
