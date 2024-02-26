@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  badges:
+    dependency: transitive
+    description:
+      name: badges
+      sha256: "727580d938b7a1ff47ea42df730d581415606b4224cfa708671c10287f8d3fe6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   barcode:
     dependency: transitive
     description:
@@ -627,6 +635,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_phoenix:
+    dependency: "direct main"
+    description:
+      name: flutter_phoenix
+      sha256: "39589dac934ea476d0e43fb60c1ddfba58f14960743640c8250dea11c4333378"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -1077,6 +1093,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  overflow_text_animated:
+    dependency: "direct main"
+    description:
+      name: overflow_text_animated
+      sha256: "9ac5935eec58785f8d1ee29d82d73c9631c6b6c850fec1614a5ab29417d854ba"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   package_info_plus:
     dependency: transitive
     description:
@@ -1285,6 +1309,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.7.4"
+  pricing_cards:
+    dependency: "direct main"
+    description:
+      name: pricing_cards
+      sha256: "02bac1947942d3cce2b2cda7eb7793360fab07c9048ec2bba46f0ad97056f957"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   profile:
     dependency: "direct main"
     description:
