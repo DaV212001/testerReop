@@ -1,7 +1,4 @@
-// forgot_password_screen.dart
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
@@ -12,7 +9,6 @@ import '../../controller/reset_password_controller.dart';
 import '../auth/log_in.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  static String id = 'forgot-password';
 
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();

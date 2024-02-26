@@ -1,19 +1,14 @@
-// forgot_password_screen.dart
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
 import 'package:mss_e_learning/screen/password/verification_screen.dart';
 import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/widget/input_field.dart';
-import 'package:mss_e_learning/widget/svg_icon.dart';
 import '../../controller/forgot_password_controller.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  static String id = 'forgot-password';
+
 
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
