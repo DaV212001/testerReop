@@ -1,204 +1,125 @@
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:mss_e_learning/model/lesson.dart';
-import 'package:mss_e_learning/service/lesson_service.dart';
-import 'package:mss_e_learning/controller/lesson_controllers.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
-import '../../layout/lesson/header_image_and_buttons.dart';
-import '../../widget/level_badge.dart';
-export 'package:mss_e_learning/controller/lesson_controllers.dart';
+import '../../controller/lesson_controllers.dart';
+import '../../layout/lesson/lesson_details.dart';
+import 'package:accordion/accordion.dart';
+import 'package:accordion/controllers.dart';
 
-class LessonScreen extends StatefulWidget {
-  final int lessonId;
-  const LessonScreen({super.key, required this.lessonId});
-
-  @override
-  State<LessonScreen> createState() => _LessonScreenState();
-}
-
-class _LessonScreenState extends State<LessonScreen>
-    with TickerProviderStateMixin {
-  late CourseDetailModel _model;
-
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = {
-    'textOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 100.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 100.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 100.ms,
-          duration: 600.ms,
-          begin: Offset(0, 170),
-          end: Offset(0, 0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0, -250),
-          end: Offset(0, 0),
-        ),
-      ],
-    ),
-  };
-  bool loaded = false;
-  @override
-  void initState() {
-    super.initState();
-    getLesson();
-    _model = createModel(context, () => CourseDetailModel());
-  }
-
-  Lesson? lesson;
-
-  void getLesson() async {
-    LessonService lessonService = LessonService();
-    lesson = await lessonService.fetchLesson(widget.lessonId);
-    if (lesson != null) {
-      setState(() {
-        loaded = true;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _model.dispose();
-
-    super.dispose();
-  }
+class LessonScreen extends StatelessWidget {
+  int subCategoryId;
+  String courseName;
+  LessonScreen({super.key, required this.subCategoryId, required this.courseName});
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
+    ThemeData theme = Theme.of(context);
 
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            !loaded
-                ? Padding(
-                    padding: const EdgeInsets.all(50.0),
-                    child: Center(child: CircularProgressIndicator()),
-                  )
-                : Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          buildHeader(context),
-                          Divider(
-                            height: 32,
-                            thickness: 1,
-                            color: FlutterFlowTheme.of(context).alternate,
-                          ),
-                          buildBody(context)
-                        ],
-                      ),
-                    ),
-                  )
-          ],
+    LessonController controller = Get.put(
+        LessonController()
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(courseName),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
-    );
-  }
-
-
-  Column buildHeader(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HeaderImageAndButtons(lesson: lesson).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation1']!),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-          child: Text(
-            lesson!.subcategory.name,
-            style: FlutterFlowTheme.of(context).displaySmall,
-          ),
-        ),
-      ],
-    );
-  }
-
-
-  Column buildBody(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                lesson!.title,
-                textAlign: TextAlign.start,
-                style: FlutterFlowTheme.of(context).headlineMedium,
-              ),
-              LevelBadge(lesson: lesson),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(24, 12, 0, 0),
-          child: Text(
-            'Lesson Details',
-            textAlign: TextAlign.start,
-            style: FlutterFlowTheme.of(context).bodyMedium,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 12),
-          child: Text(
-            lesson!.description,
-            textAlign: TextAlign.start,
-            style: FlutterFlowTheme.of(context).labelMedium,
-          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-        ),
-      ],
-    );
+        body: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            Flexible(
+                child: Obx(() => controller.isLoading
+                    ? const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(50.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                )
+                    : RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    displacement: 100,
+                    onRefresh: () => controller.getLevels(controller.subCategoryId.value),
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: controller.listOfAllLevels.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index1) {
+                        return Accordion(
+                          disableScrolling: false,
+                          flipRightIconIfOpen: true,
+                          headerBorderColor: Colors.blueGrey,
+                          headerBorderColorOpened: Colors.transparent,
+                          headerBorderWidth: 1,
+                          headerBackgroundColorOpened: theme.colorScheme.primary,
+                          contentBackgroundColor: theme.colorScheme.primary,
+                          contentBorderColor: theme.colorScheme.primary,
+                          contentBorderWidth: 3,
+                          contentHorizontalPadding: 20,
+                          scaleWhenAnimating: true,
+                          openAndCloseAnimation: true,
+                          headerPadding:
+                          const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+                          sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+                          sectionClosingHapticFeedback: SectionHapticFeedback.light,
+                          children: [
+                            AccordionSection(
+                              isOpen: index1 == 0 ? true:false,
+                              leftIcon: Icon(Icons.circle, color: theme.colorScheme.primary),
+                              headerBackgroundColor: theme.colorScheme.secondary,
+                              headerBackgroundColorOpened: theme.colorScheme.secondary,
+                              headerBorderColorOpened: theme.colorScheme.secondary,
+                              headerBorderWidth: 5,
+                              contentBackgroundColor: theme.colorScheme.secondary,
+                              contentBorderColor: theme.colorScheme.secondary,
+                              contentBorderWidth: 2,
+                              contentVerticalPadding: 15,
+                              header: Text(controller.listOfAllLevels[index1].name,
+                                  style: theme.textTheme.labelLarge),
+                              content: ListView.builder(
+                                  itemCount: controller.listOfAllLevels[index1].lessons.length,
+                                  scrollDirection: Axis.vertical,
+                                  physics: const BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index2) {
+                                    return GestureDetector(
+                                      onTap: (){
+                                        pushNewScreen(context,
+                                            screen: LessonDetailScreen(lessonId: controller.listOfAllLevels[index1].lessons[index2].id));
+                                      },
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                            child: Flexible(
+                                              child: Text(
+                                                  controller.listOfAllLevels[index1].lessons[index2].title,
+                                                  maxLines: 4,
+                                                  style: theme.textTheme.labelLarge
+                                              ),
+                                            ),
+                                          ),
+                                          const Divider(height: 1,thickness: 1)
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                            )
+                          ],
+                        );
+                      },)
+                ))
+            )
+          ],
+        ));
   }
 }
-

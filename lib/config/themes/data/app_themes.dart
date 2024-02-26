@@ -471,10 +471,10 @@ class AppThemes {
           textBaseline: TextBaseline.alphabetic,
         ),
         labelLarge: TextStyle(
-          color: AppColors.jet,
+          color: Colors.white,
           decoration: TextDecoration.none,
           fontFamily: "Poppins",
-          fontSize: 14,
+          fontSize: 18,
           fontWeight: FontWeight.w500,
           letterSpacing: 1.25,
           inherit: false,

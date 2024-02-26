@@ -16,7 +16,7 @@ class CachedImage extends StatelessWidget {
       errorBuilder: (context, exception, stacktrace) {
         return Container(
           color: Colors.transparent,
-          child: Image.asset(Assets.socialTelegram),
+          child:const Icon(Icons.play_lesson_outlined)
         );
       },
       loadingBuilder: (context, progress) {

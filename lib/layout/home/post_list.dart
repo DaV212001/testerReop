@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mss_e_learning/screen/lesson/lesson_screen.dart';
+import 'package:mss_e_learning/layout/lesson/lesson_details.dart';
 
 import '../../controller/post_controller.dart';
 
@@ -24,7 +24,7 @@ class PostList extends StatelessWidget {
                 separatorBuilder: (_, __) => const Divider(),
                 itemBuilder: (ctx, index) => GestureDetector(
                   onTap: (){
-                    Get.to(LessonScreen(lessonId: 1));
+                    Get.to(LessonDetailScreen(lessonId: 1));
                   },
                   child: ListTile(
                     title: Text(

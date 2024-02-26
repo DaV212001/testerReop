@@ -1,3 +1,3 @@
 class AppConstants {
-  static const String exampleAPI = "https://dummyjson.com";
+  static const String exampleAPI = "https://learning.bhwethiopia.com/api";
 }
