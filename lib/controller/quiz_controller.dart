@@ -3,6 +3,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/model/answer.dart';
 import 'package:mss_e_learning/model/question.dart';
+import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:mss_e_learning/util/placeHolderData.dart';
 import 'package:mss_e_learning/widget/quiz/correct_answer_popup.dart';
 import 'package:mss_e_learning/widget/quiz/incorrect_answer_popup.dart';
@@ -12,10 +13,11 @@ class QuizController extends GetxController {
   final currentQuestionIndex = 0.obs;
   final noOfCorrectQuestions = 0.obs; //for the progress bar
   final wrongQuestionsIndex = <int>[].obs;
+  final quizEndRoute = "".obs;
 
   @override
   void onInit() {
-    questions.addAll(PlaceHolderData.questions);//TODO USE SERVICE LAYER
+    questions.addAll(PlaceHolderData.questions); //TODO USE SERVICE LAYER
     super.onInit();
   }
 
@@ -56,10 +58,11 @@ class QuizController extends GetxController {
     if (!wrongQuestionsIndex.contains(currentQuestionIndex.value)) {
       wrongQuestionsIndex.add(currentQuestionIndex.value);
     }
-    Answer? correctAnswer = questions[currentQuestionIndex.value].answers
+    Answer? correctAnswer = questions[currentQuestionIndex.value]
+        .answers
         .firstWhere((answer) => answer.isCorrectAnswer == true,
-        orElse: () =>
-            Answer(id: -1,
+            orElse: () => Answer(
+                id: -1,
                 answer: "",
                 isCorrectAnswer: true,
                 testQuestionId: "1"));
@@ -82,7 +85,9 @@ class QuizController extends GetxController {
   void nextQuestion() {
     // if all questions are answered
     if (noOfCorrectQuestions.value == questions.length) {
-      SmartDialog.showToast('Finished');
+      SmartDialog.dismiss();
+      quizEndRoute.value = AppRoutes.initial;//set route to next section maybe
+      Get.toNamed(AppRoutes.quizEnd);
       return;
     }
     // if the user has attempted all the questions at least once
