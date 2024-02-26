@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:mss_e_learning/config/config_preference.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:mss_e_learning/widget/button.dart';
 
@@ -140,7 +141,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void onPressedOnLastPage() async {
-    //save in shared pref
+    ConfigPreference.setFirstLaunchCompleted();
     Get.toNamed(AppRoutes.initial);
   }
 }

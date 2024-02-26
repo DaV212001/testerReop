@@ -6,6 +6,7 @@ import 'package:mss_e_learning/screen/onboarding/onboarding_screen.dart';
 import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 import 'package:mss_e_learning/screen/quiz/quiz_end_screen.dart';
 import 'package:mss_e_learning/screen/quiz/quiz_screen.dart';
+import 'package:mss_e_learning/screen/splash/splash_screen.dart';
 
 import '../screen/auth/log_in.dart';
 import '../screen/auth/sign_up.dart';
@@ -13,6 +14,7 @@ import '../screen/auth/sign_up.dart';
 class AppRoutes {
   AppRoutes._();
 
+  static const splash = '/splash_screen';
   static const initial = '/main_screen';
   static const signup = '/signup';
   static const home = '/home';
@@ -25,6 +27,7 @@ class AppRoutes {
   static const quizEnd = '/quizEnd';
 
   static final pages = [
+    GetPage(name: splash, page: () => const SplashScreen()),
     GetPage(name: onboarding, page: () => const OnboardingScreen()),
     GetPage(name: initial, page: () => const MainLayoutScreen()),
     GetPage(
