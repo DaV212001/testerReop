@@ -83,6 +83,10 @@ dependencies:
   dots_indicator: ^2.1.1
   url_launcher: ^6.2.1
   flutter_smart_dialog: ^4.9.6
+  uuid: ^4.3.2
+  accordion: ^2.6.0
+  flutter_expanded_tile: ^0.3.7
+  pod_player: ^0.2.1
 
 dev_dependencies:
   flutter_test:

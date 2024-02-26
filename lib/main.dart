@@ -37,7 +37,7 @@ class MssLearnProgramming extends StatelessWidget {
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeManager.getThemeMode(),
         getPages: AppRoutes.pages,
-        initialRoute: AppRoutes.quiz,
+        initialRoute: token == null ? AppRoutes.signup : AppRoutes.onboarding,
         home: const MainLayoutScreen());
   }
 }

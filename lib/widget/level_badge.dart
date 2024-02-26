@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:mss_e_learning/model/lesson_description.dart';
 import '../model/lesson.dart';
 
 
@@ -10,7 +11,7 @@ class LevelBadge extends StatelessWidget {
     required this.lesson,
   });
 
-  final Lesson? lesson;
+  final LessonDescription? lesson;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class LevelBadge extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            lesson!.level.name,
+            lesson!.title,
             textAlign: TextAlign.start,
             style: FlutterFlowTheme.of(context).bodyLarge,
           ),

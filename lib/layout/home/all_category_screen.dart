@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/category_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import '../../screen/subcategory/sub_category_screen.dart';
 import '../../widget/course_header.dart';
 import '../../widget/home/category_card.dart';
-import '../subcategory/sub_category_screen.dart';
 
-class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key});
+class AllCategoryScreen extends StatelessWidget {
+  const AllCategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,13 @@ class CategoryScreen extends StatelessWidget {
     CategoryController controller = Get.put(CategoryController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of categories",style:theme.textTheme.titleLarge),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Text("All categories",style:theme.textTheme.titleLarge),
       ),
       body: SafeArea(
           child: Flexible(
