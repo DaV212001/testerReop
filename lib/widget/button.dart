@@ -4,14 +4,20 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 class Button extends StatelessWidget {
   final String text;
   final VoidCallback onPress;
+  final bool hasLoader;
 
-  const Button({super.key, required this.text, required this.onPress});
+  const Button(
+      {super.key,
+      required this.text,
+      required this.onPress,
+      this.hasLoader = true});
 
   @override
   Widget build(BuildContext context) {
     return FFButtonWidget(
       onPressed: onPress,
       text: text,
+      showLoadingIndicator: hasLoader,
       options: FFButtonOptions(
         width: double.infinity,
         height: 44,
