@@ -3,8 +3,9 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 class InputFieldWidget extends StatefulWidget {
 
   final TextEditingController textEditingController;
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
   final String? Function(String? val) validator;
+  final String? Function(String? val)? onChanged;
   bool obscureText;
   final Widget? prefixIcon;
   final String label;
@@ -17,7 +18,7 @@ class InputFieldWidget extends StatefulWidget {
         required this.obscureText,
         required this.validator,
         required this.passwordinput,
-        required this.label, this.prefixIcon});
+        required this.label, this.prefixIcon, this.onChanged});
 
   @override
   State<InputFieldWidget> createState() => _InputFieldWidgetState();
@@ -35,6 +36,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
               controller: widget.textEditingController,
               focusNode: widget.focusNode,
               autofocus: true,
+              onChanged: widget.onChanged,
               autofillHints: [AutofillHints.password],
               obscureText: !widget.obscureText??false,
               decoration: InputDecoration(
@@ -99,6 +101,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
             controller: widget.textEditingController,
             focusNode: widget.focusNode,
             autofocus: true,
+            onChanged: widget.onChanged,
             autofillHints: [AutofillHints.password],
             obscureText: widget.obscureText!,
             decoration: InputDecoration(

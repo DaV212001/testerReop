@@ -41,7 +41,9 @@ class ForgotPasswordController extends GetxController {
       ],
     ),
   };
-  TextEditingController emailController = TextEditingController();
+  Rx<String> email = ''.obs;
+
+
   FocusNode emailFocusNode = FocusNode();
 
 // Add your password reset logic here (e.g., API calls, email sending, etc.)

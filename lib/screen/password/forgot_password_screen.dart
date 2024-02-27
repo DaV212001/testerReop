@@ -17,6 +17,9 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  TextEditingController emailController = TextEditingController(text: ForgotPasswordController().email.value);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,9 +88,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Padding(
                                 padding: EdgeInsets.only(top: 20.0),
                                 child: InputFieldWidget(
-                                    textEditingController: ForgotPasswordController().emailController,
+                                    textEditingController: emailController,
                                     focusNode: ForgotPasswordController().emailFocusNode,
                                     obscureText: false,
+                                    onChanged: (val){
+                                      ForgotPasswordController().email.value = val!;
+                                      return null;
+                                    },
                                     validator: (val){
                                       if(!val!.isEmail){
                                         return 'Please enter a valid email';

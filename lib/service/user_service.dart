@@ -62,7 +62,7 @@ print(response.body);
       String? emailorphone,
       String? pass,
       ) async {
-    final String apiUrl = 'https://learning.cheretanet.com/api/login';
+    final String apiUrl = 'https://learning.bhwethiopia.com/api/login';
 
     // Create a Map object with the user data
     final Map<String, dynamic> userData = {
@@ -88,7 +88,7 @@ print(response.body);
       var data = jsonDecode(response.body);
       if(data['success']){
         final User user = User.fromJson(data['data']);
-        AuthService.setAuthorizationToken(data['token']);
+        await AuthService.setAuthorizationToken(data['token']);
         return user;
       }else{
         throw Exception(data['message']);
@@ -96,6 +96,39 @@ print(response.body);
     } else {
       // Throw an exception if the API call failed
       throw Exception('Failed to register user');
+    }
+  }
+
+  final String endpoint = "https://learning.bhwethiopia.com/api/update_user";
+
+  Future<void> updateUser(String firstName, String lastName) async {
+    try {
+      final Map<String, String> data = {
+        "first_name": firstName,
+        "last_name" : lastName
+      };
+print(jsonEncode(data));
+print(await AuthService.getAuthorizationToken());
+      final response = await post(
+        Uri.parse(endpoint),
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": "Bearer ${await AuthService.getAuthorizationToken()}"
+        },
+        body: json.encode(data),
+      );
+      print(response.body);
+var resData = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && resData['success'] == true) {
+        print("User updated successfully!");
+      } else {
+        print("Error updating user: ${response.body}");
+        throw Exception('Failed to update user');
+      }
+    } catch (e) {
+      print("Exception occurred: $e");
+      throw Exception('Failed to update user');
     }
   }
 

@@ -42,8 +42,9 @@ class ResetPasswordController extends GetxController {
     ),
   };
 
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  Rx<String> password = ''.obs;
+  Rx<String> confirmpassword = ''.obs;
+
   FocusNode confirmPasswordFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
 // Add your password reset logic here (e.g., API calls, email sending, etc.)

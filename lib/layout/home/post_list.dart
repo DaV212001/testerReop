@@ -24,7 +24,6 @@ class PostList extends StatelessWidget {
                 separatorBuilder: (_, __) => const Divider(),
                 itemBuilder: (ctx, index) => GestureDetector(
                   onTap: (){
-
                     Get.to( () => const LessonScreen(lessonId: 1));
                   },
                   child: ListTile(

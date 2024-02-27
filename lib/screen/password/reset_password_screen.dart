@@ -18,6 +18,10 @@ bool hidePassword = true;
 bool hideConfirmPassword = true;
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+
+  TextEditingController passwordController = TextEditingController(text: ResetPasswordController().password.value);
+  TextEditingController confirmPasswordController = TextEditingController(text: ResetPasswordController().confirmpassword.value);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,10 +120,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: InputFieldWidget(
-                textEditingController:
-                    ResetPasswordController().passwordController,
+                textEditingController: passwordController,
                 focusNode: ResetPasswordController().passwordFocusNode,
                 obscureText: hidePassword,
+                onChanged: (val) {
+                  ResetPasswordController().password.value = val!;
+                  return null;
+                },
                 validator: (val) {
                   if (val!.length < 8) {
                     return 'Password must be 8 characters.';
@@ -131,12 +138,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: InputFieldWidget(
-                textEditingController:
-                    ResetPasswordController().confirmPasswordController,
+                textEditingController: confirmPasswordController,
                 focusNode: ResetPasswordController().confirmPasswordFocusNode,
                 obscureText: hideConfirmPassword,
+                onChanged: (val) {
+                  ResetPasswordController().confirmpassword.value = val!;
+                  return null;
+                },
                 validator: (val) {
-                  if (val != ResetPasswordController().passwordController.text) {
+                  if (val != passwordController.text) {
                     return 'Passwords must match.';
                   }
                   return null;

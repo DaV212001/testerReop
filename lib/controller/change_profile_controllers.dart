@@ -2,11 +2,14 @@
 
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
-class ChangePasswordController extends GetxController {
+import '../service/user_service.dart';
+
+class ChangeProfileController extends GetxController {
   final animationsMap = {
     'textOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -41,11 +44,29 @@ class ChangePasswordController extends GetxController {
       ],
     ),
   };
-  Rx<String> oldPassword = ''.obs;
-  Rx<String> newPassword = ''.obs;
 
+  Rx<String> firstname = ''.obs;
+  Rx<String> lastname = ''.obs;
 
-  FocusNode newPasswordFocusNode = FocusNode();
-  FocusNode oldPasswordFocusNode = FocusNode();
-// Add your password change logic here (e.g., API calls, email sending, etc.)
+  FocusNode firstNameFocusNode = FocusNode();
+  FocusNode lastNameFocusNode = FocusNode();
+
+  final UserService _userService = UserService();
+
+  Future<void> updateUser(String firstName, String lastName) async {
+    try {
+      await _userService.updateUser(firstName, lastName);
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+        SnackBar(
+          content: Text('Profile updated successfully'),
+        )
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+        SnackBar(
+          content: Text('Failed to update profile'),
+        ),
+      );
+    }
+  }
 }

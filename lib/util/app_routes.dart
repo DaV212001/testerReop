@@ -23,6 +23,7 @@ class AppRoutes {
   static const category = '/category';
   static const certificate = '/certificate';
   static const exam = '/exam';
+  static const changepass = '/changepass';
 
   static final pages = [
     GetPage(name: onboarding, page: () => const OnboardingScreen()),

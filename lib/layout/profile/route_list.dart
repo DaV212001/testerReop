@@ -6,6 +6,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:mss_e_learning/config/themes/theme_manager.dart';
 import 'package:mss_e_learning/screen/password/change_password_screen.dart';
 
+import '../../screen/profile/change_profile_screen.dart';
+
 class RouteList extends StatelessWidget {
   const RouteList({
     super.key,
@@ -20,14 +22,16 @@ class RouteList extends StatelessWidget {
       {
         "title": "Change Profile",
         "leadingIcon": buildIcon(Icons.person_3_sharp, context),
-        "onTap": () {},
+        "onTap": () {
+          Get.to( () => const ChangeProfileScreen());
+        },
         "trailing": arrowIcon
       },
       {
         "title": "Change Password",
         "leadingIcon": buildIcon(Icons.password, context),
         "onTap": () {
-          Get.to(()=>ChangePasswordScreen());
+          Get.to( ()=> const ChangePasswordScreen());
         },
         "trailing": arrowIcon
       },

@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
-import 'package:mss_e_learning/controller/change_profile_controllers.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mss_e_learning/controller/change_password_controller.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
-import 'package:mss_e_learning/screen/main_layout_screen.dart';
 import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/widget/input_field.dart';
-import '../../controller/change_password_controller.dart';
+import '../../controller/change_profile_controllers.dart';
 
-class ChangePasswordScreen extends StatefulWidget {
+class ChangeProfileScreen extends StatefulWidget {
 
 
-  const ChangePasswordScreen({super.key});
+  const ChangeProfileScreen({super.key});
 
   @override
-  _ChangePasswordScreenState createState() => _ChangePasswordScreenState();
+  _ChangeProfileScreenState createState() => _ChangeProfileScreenState();
 }
 
-bool hideOldPassword = true;
-bool hideNewPassword = true;
-
-class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  TextEditingController oldPasswordController = TextEditingController(text: ChangePasswordController().oldPassword.value);
-  TextEditingController newPasswordController = TextEditingController(text: ChangePasswordController().newPassword.value);
-
-ChangePasswordController controller= Get.put(ChangePasswordController());
+class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
+final TextEditingController firstController = TextEditingController(text: ChangeProfileController().firstname.value);
+final TextEditingController lastController = TextEditingController(text: ChangeProfileController().lastname.value);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<ChangePasswordController>(
-        init: ChangePasswordController(),
+
+      body: GetBuilder<ChangeProfileController>(
+        init: ChangeProfileController(),
         builder: (controller) {
           return Form(
             child: Container(
@@ -45,13 +41,13 @@ ChangePasswordController controller= Get.put(ChangePasswordController());
                     children: [
                       const HeaderImageAndText(
                           imagePath:
-                              'assets/images/illustrations/reset_password.svg',
-                          headerText: 'Change password'),
+                          'assets/images/illustrations/change_profile.svg',
+                          headerText: 'Change Profile'),
                       const SizedBox(
                         height: 10,
                       ),
                       buildBody(context).animateOnPageLoad(
-                          ChangePasswordController()
+                          ChangeProfileController()
                               .animationsMap['textOnPageLoadAnimation']!),
                     ],
                   ),
@@ -63,7 +59,8 @@ ChangePasswordController controller= Get.put(ChangePasswordController());
       ),
     );
   }
-
+  bool loading = false;
+ChangeProfileController controller = Get.put(ChangeProfileController());
   Container buildBody(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -90,10 +87,10 @@ ChangePasswordController controller= Get.put(ChangePasswordController());
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Enter both the current and the new password. You will be logged out after you change your password.',
+                    'Enter new first and last names you want shown on your profile.',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).labelMedium,
-                  ).animateOnPageLoad(ChangePasswordController()
+                  ).animateOnPageLoad(ChangeProfileController()
                       .animationsMap['containerOnPageLoadAnimation1']!),
                   buildForm(),
                   const SizedBox(height: 20),
@@ -104,12 +101,17 @@ ChangePasswordController controller= Get.put(ChangePasswordController());
                           borderRadius: BorderRadius.circular(10),
                         ),
                         backgroundColor: FlutterFlowTheme.of(context).primary),
-                    onPressed: () {
-                      // TODO: Implement password reset logic here
-                      Get.to(const MainLayoutScreen());
+                    onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      await ChangeProfileController().updateUser(controller.firstname.value, controller.lastname.value);
+                      setState(() {
+                        loading = false;
+                      });
                     },
-                    child: const Text(
-                      'Confirm',
+                    child: loading ? const CircularProgressIndicator(color: Colors.white,) : const Text(
+                      'Submit',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -124,36 +126,40 @@ ChangePasswordController controller= Get.put(ChangePasswordController());
         Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: InputFieldWidget(
-                textEditingController: oldPasswordController,
+                textEditingController: firstController,
                 focusNode: null,
-                obscureText: hideOldPassword,
+                obscureText: false,
                 onChanged: (val) {
-                  controller.oldPassword.value = val!;
+                  print('CALLED');
+                  controller.firstname.value = val!;
                   return null;
                 },
                 validator: (val) {
-                  return null;
-                },
-                passwordinput: true,
-                label: "Old password")),
-        Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: InputFieldWidget(
-                textEditingController: newPasswordController,
-                focusNode: ChangePasswordController().newPasswordFocusNode,
-                obscureText: hideNewPassword,
-                onChanged: (val) {
-                  ChangePasswordController().newPassword.value = val!;
-                  return null;
-                },
-                validator: (val) {
-                  if (val!.length < 8) {
-                    return 'Password must be 8 characters.';
+                  if (val!.length < 2) {
+                    return 'First name must be at least 2 characters.';
                   }
                   return null;
                 },
-                passwordinput: true,
-                label: "New password")),
+                passwordinput: false,
+                label: "First name")),
+        Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: InputFieldWidget(
+                textEditingController: lastController,
+                focusNode: null,
+                obscureText: false,
+                onChanged: (val) {
+                  controller.lastname.value = val!;
+                  return null;
+                },
+                validator: (val) {
+                  if (val!.length < 2) {
+                    return 'Last name must be at least 2 characters.';
+                  }
+                  return null;
+                },
+                passwordinput: false,
+                label: "Last name")),
       ],
     );
   }
