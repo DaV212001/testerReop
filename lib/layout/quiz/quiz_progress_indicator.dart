@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/quiz_controller.dart';
 
@@ -9,7 +10,7 @@ class QuizProgressIndicator extends GetView<QuizController> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return Obx(
       () => Row(
         children: controller.questions.asMap().entries.map((entry) {
@@ -20,8 +21,8 @@ class QuizProgressIndicator extends GetView<QuizController> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: controller.noOfCorrectQuestions > index
-                    ? theme.colorScheme.primary
-                    : theme.unselectedWidgetColor.withOpacity(0.2),
+                    ? theme.primary
+                    : theme.primaryText.withOpacity(0.25),
               ),
               margin: const EdgeInsets.symmetric(horizontal: 4),
             ),

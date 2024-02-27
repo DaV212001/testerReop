@@ -25,7 +25,7 @@ class ProfileWidget extends StatelessWidget {
           child: Stack(
             children: [
               buildImage(context),
-              if (hasEditButton && imagePath != null)
+              if (hasEditButton && imagePath != null )
                 Positioned(
                   bottom: 0,
                   right: 4,
