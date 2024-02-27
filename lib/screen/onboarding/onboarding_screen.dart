@@ -109,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             if (pages.length > 1)
               DotsIndicator(
                 dotsCount: pages.length,
-                position: _currentPage,
+                position: _currentPage.toDouble(),
                 decorator: DotsDecorator(
                   activeColor:
                       theme.bottomNavigationBarTheme.selectedItemColor!,
@@ -121,12 +121,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             const SizedBox(
               height: 50,
             ),
-            Button(
-                width: 300,
-                text: "Next",
-                onPress: _currentPage == pages.length - 1
-                    ? onPressedOnLastPage
-                    : _animateToNextPage),
+            SizedBox(
+              width: 300,
+              child: Button(
+                  text: "Next",
+                  onPress: _currentPage == pages.length - 1
+                      ? onPressedOnLastPage
+                      : _animateToNextPage),
+            )
+            ,
           ],
         ),
       ),

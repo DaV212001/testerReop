@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mss_e_learning/service/user_service.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
+import 'package:mss_e_learning/widget/button.dart';
 
 
 import '../../layout/auth/footer.dart';
@@ -202,8 +203,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
+                                  child: Button(
+                                    onPress: () async {
                                       UserService userservice = UserService();
 
                                       User? userResult =
@@ -228,29 +229,6 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                       setState(() {});
                                     },
                                     text: 'Create Account',
-                                    options: FFButtonOptions(
-                                      width: double.infinity,
-                                      height: 44,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 0),
-                                      iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              0, 0, 0, 0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: Colors.white,
-                                          ),
-                                      elevation: 3,
-                                      borderSide: const BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
                                   ),
                                 ),
                                 const Footer(isLogin: false,),
