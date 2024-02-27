@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:mss_e_learning/model/user.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
+import 'package:mss_e_learning/util/app_constants.dart';
 
 class UserService{
 
@@ -99,8 +100,6 @@ print(response.body);
     }
   }
 
-  final String endpoint = "https://learning.bhwethiopia.com/api/update_user";
-
   Future<void> updateUser(String firstName, String lastName) async {
     try {
       final Map<String, String> data = {
@@ -110,7 +109,7 @@ print(response.body);
 print(jsonEncode(data));
 print(await AuthService.getAuthorizationToken());
       final response = await post(
-        Uri.parse(endpoint),
+        Uri.parse("${AppConstants.exampleAPI}/update_user"),
         headers: {
           "Content-type": "application/json",
           "Authorization": "Bearer ${await AuthService.getAuthorizationToken()}"
@@ -131,5 +130,7 @@ var resData = jsonDecode(response.body);
       throw Exception('Failed to update user');
     }
   }
+
+
 
 }

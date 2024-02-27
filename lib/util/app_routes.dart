@@ -12,7 +12,6 @@ import 'package:mss_e_learning/screen/splash/splash_screen.dart';
 import '../screen/auth/log_in.dart';
 import '../screen/auth/sign_up.dart';
 import '../screen/certificate/certificate_screen.dart';
-import '../screen/exam/exam_screen.dart';
 import '../screen/home/home_screen.dart';
 
 class AppRoutes {
@@ -29,9 +28,11 @@ class AppRoutes {
   static const certificate = '/certificate';
   static const quiz = '/quiz';
   static const quizEnd = '/quizEnd';
+  static const forgotpass = '/forgotpass';
 
 
   static final pages = [
+    GetPage(name: splash, page: () =>const SplashScreen()),
     GetPage(name: onboarding, page: () => const OnboardingScreen()),
     GetPage(name: initial, page: () => const MainLayoutScreen()),
     GetPage(

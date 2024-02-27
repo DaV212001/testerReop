@@ -19,7 +19,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   TextEditingController emailController = TextEditingController(text: ForgotPasswordController().email.value);
 
-
+ForgotPasswordController controller = Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +81,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'We will send an email to your account',
+                                'Enter your phone number and we will send an code to the email associated with your account',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context).labelMedium,
                               ).animateOnPageLoad(ForgotPasswordController().animationsMap['containerOnPageLoadAnimation1']!),
@@ -89,22 +89,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 padding: EdgeInsets.only(top: 20.0),
                                 child: InputFieldWidget(
                                     textEditingController: emailController,
-                                    focusNode: ForgotPasswordController().emailFocusNode,
+                                    focusNode: null,
                                     obscureText: false,
+                                    hint: '09********',
                                     onChanged: (val){
                                       ForgotPasswordController().email.value = val!;
                                       return null;
                                     },
                                     validator: (val){
-                                      if(!val!.isEmail){
-                                        return 'Please enter a valid email';
+                                      if(val!.length < 10 ){
+                                        return 'Phone number must be at least 10 digits';
+                                      }
+                                      if(val.startsWith('09')){
+                                        return 'Phone number must start with 09';
                                       }
                                       return null;
                                     },
                                     passwordinput: false,
-                                    label: 'Email',
+                                    label: 'Phone number',
                                   prefixIcon: Icon(
-                                    Icons.email,
+                                    Icons.phone,
                                     color: Colors.black,
                                   ),
                                 )

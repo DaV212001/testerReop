@@ -48,7 +48,7 @@ dependencies:
   share_plus: ^7.2.2
   dropdown_button2: ^2.3.9
   image_picker: ^1.0.7
-  file: ^6.0.0
+  file: ^7.0.0
   permission_handler: ^11.3.0
   path_provider: ^2.1.2
   easy_stepper: ^0.8.3
@@ -80,7 +80,7 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
   flutterflow_ui: ^0.2.0+1
-  dots_indicator: ^2.1.1
+  dots_indicator: ^3.0.0
   url_launcher: ^6.2.1
   flutter_smart_dialog: ^4.9.6
   uuid: ^4.3.2

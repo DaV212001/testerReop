@@ -109,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             if (pages.length > 1)
               DotsIndicator(
                 dotsCount: pages.length,
-                position: _currentPageAsDouble,
+                position: _currentPage,
                 decorator: DotsDecorator(
                   activeColor:
                       theme.bottomNavigationBarTheme.selectedItemColor!,

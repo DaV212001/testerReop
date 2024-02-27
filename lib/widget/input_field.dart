@@ -10,6 +10,7 @@ class InputFieldWidget extends StatefulWidget {
   final Widget? prefixIcon;
   final String label;
   final bool passwordinput;
+  final String? hint;
 
   InputFieldWidget(
       {super.key,
@@ -18,7 +19,7 @@ class InputFieldWidget extends StatefulWidget {
         required this.obscureText,
         required this.validator,
         required this.passwordinput,
-        required this.label, this.prefixIcon, this.onChanged});
+        required this.label, this.prefixIcon, this.onChanged, this.hint});
 
   @override
   State<InputFieldWidget> createState() => _InputFieldWidgetState();
@@ -41,6 +42,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
               obscureText: !widget.obscureText??false,
               decoration: InputDecoration(
                 labelText: widget.label,
+                hintText: widget.hint,
                 labelStyle: FlutterFlowTheme.of(context).labelLarge,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -107,6 +109,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
             decoration: InputDecoration(
               icon: widget.prefixIcon,
               labelText: widget.label,
+              hintText: widget.hint,
               labelStyle: FlutterFlowTheme.of(context).labelLarge,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
