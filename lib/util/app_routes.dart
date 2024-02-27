@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:mss_e_learning/screen/certificate/certificate_screen.dart';
 import 'package:mss_e_learning/screen/home/home_screen.dart';
 import 'package:mss_e_learning/screen/main_layout_screen.dart';
+import 'package:mss_e_learning/screen/password/forgot_password_screen.dart';
 import 'package:mss_e_learning/screen/onboarding/onboarding_screen.dart';
 import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 import 'package:mss_e_learning/screen/quiz/quiz_end_screen.dart';
@@ -10,6 +11,8 @@ import 'package:mss_e_learning/screen/splash/splash_screen.dart';
 
 import '../screen/auth/log_in.dart';
 import '../screen/auth/sign_up.dart';
+import '../screen/certificate/certificate_screen.dart';
+import '../screen/home/home_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
@@ -25,9 +28,11 @@ class AppRoutes {
   static const certificate = '/certificate';
   static const quiz = '/quiz';
   static const quizEnd = '/quizEnd';
+  static const forgotpass = '/forgotpass';
+
 
   static final pages = [
-    GetPage(name: splash, page: () => const SplashScreen()),
+    GetPage(name: splash, page: () =>const SplashScreen()),
     GetPage(name: onboarding, page: () => const OnboardingScreen()),
     GetPage(name: initial, page: () => const MainLayoutScreen()),
     GetPage(
@@ -42,6 +47,10 @@ class AppRoutes {
     GetPage(
       name: signup,
       page: () => const SignUpWidget(),
+    ),
+    GetPage(
+        name: forgotpass,
+        page: () => ForgotPasswordScreen()
     )
   ];
 }

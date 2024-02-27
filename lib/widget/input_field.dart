@@ -3,11 +3,14 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 class InputFieldWidget extends StatefulWidget {
 
   final TextEditingController textEditingController;
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
   final String? Function(String? val) validator;
+  final String? Function(String? val)? onChanged;
   bool obscureText;
+  final Widget? prefixIcon;
   final String label;
   final bool passwordinput;
+  final String? hint;
 
   InputFieldWidget(
       {super.key,
@@ -16,7 +19,7 @@ class InputFieldWidget extends StatefulWidget {
         required this.obscureText,
         required this.validator,
         required this.passwordinput,
-        required this.label});
+        required this.label, this.prefixIcon, this.onChanged, this.hint});
 
   @override
   State<InputFieldWidget> createState() => _InputFieldWidgetState();
@@ -34,10 +37,12 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
               controller: widget.textEditingController,
               focusNode: widget.focusNode,
               autofocus: true,
+              onChanged: widget.onChanged,
               autofillHints: [AutofillHints.password],
               obscureText: !widget.obscureText??false,
               decoration: InputDecoration(
                 labelText: widget.label,
+                hintText: widget.hint,
                 labelStyle: FlutterFlowTheme.of(context).labelLarge,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -98,10 +103,13 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
             controller: widget.textEditingController,
             focusNode: widget.focusNode,
             autofocus: true,
+            onChanged: widget.onChanged,
             autofillHints: [AutofillHints.password],
             obscureText: widget.obscureText!,
             decoration: InputDecoration(
+              icon: widget.prefixIcon,
               labelText: widget.label,
+              hintText: widget.hint,
               labelStyle: FlutterFlowTheme.of(context).labelLarge,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(

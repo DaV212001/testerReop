@@ -189,6 +189,7 @@ class _LogInWidgetState extends State<LogInWidget>
               ),
             ),
             buildForm(context),
+
             const Footer(isLogin: true),
           ],
         ),
@@ -217,6 +218,26 @@ class _LogInWidgetState extends State<LogInWidget>
           validator: (val) {
             return null;
           },
+        ),
+        Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed(AppRoutes.forgotpass);
+              },
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 16, 16),
+                child: Text(
+                    'Forgot Password?',
+                    textAlign: TextAlign.end,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Readex Pro',
+                      color: FlutterFlowTheme.of(context).primary,
+                      fontWeight: FontWeight.w500,
+                    )
+                ),
+              ),
+            )
         ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
