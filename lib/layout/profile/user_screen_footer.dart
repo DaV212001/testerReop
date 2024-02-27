@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/generated/assets.dart';
 import 'package:mss_e_learning/model/footer_data.dart';
 import 'package:mss_e_learning/widget/svg_icon.dart';
@@ -11,11 +12,12 @@ class UserScreenFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Theme.of(context).colorScheme.primary.withOpacity(0.85);
+    Color color = FlutterFlowTheme.of(context).primary.withOpacity(0.85);
     return Column(
       children: [
         Text(footerData.copyWriteText,
-            textAlign: TextAlign.center, style: const TextStyle(fontSize: 15)),
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).bodyLarge),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

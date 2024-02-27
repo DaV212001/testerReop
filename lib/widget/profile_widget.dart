@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mss_e_learning/config/themes/data/app_colors.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/widget/cached_image.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -18,13 +18,13 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return Column(
       children: [
         Center(
           child: Stack(
             children: [
-              buildImage(theme.colorScheme.onSecondary.withOpacity(0.1)),
+              buildImage(context),
               if (hasEditButton && imagePath != null)
                 Positioned(
                   bottom: 0,
@@ -32,7 +32,7 @@ class ProfileWidget extends StatelessWidget {
                   child: Ink(
                     child: InkWell(
                         onTap: onClicked,
-                        child: buildEditIcon(theme.primaryColor)),
+                        child: buildEditIcon(theme.primaryText)),
                   ),
                 ),
             ],
@@ -42,10 +42,11 @@ class ProfileWidget extends StatelessWidget {
     );
   }
 
-  Widget buildImage(Color color) {
+  Widget buildImage(BuildContext context) {
+    FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return ClipOval(
       child: Material(
-        color: color,
+        color: theme.primary.withOpacity(0.4),
         child: Ink(
           width: 128,
           height: 128,
@@ -62,8 +63,8 @@ class ProfileWidget extends StatelessWidget {
                         )
                       : IconButton(
                           onPressed: onClicked,
-                          icon: const Icon(
-                            color: AppColors.tropicalIndigo3,
+                          icon: Icon(
+                            color: theme.primaryBtnText,
                             CupertinoIcons.profile_circled,
                             size: 120,
                           ))),
