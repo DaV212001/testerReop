@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mss_e_learning/screen/lesson/lesson_screen.dart';
+import 'package:mss_e_learning/layout/lesson/lesson_details.dart';
 
 import '../../controller/post_controller.dart';
 

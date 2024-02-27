@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigPreference {
@@ -10,6 +9,7 @@ class ConfigPreference {
 
   // STORING KEYS
   static const String _lightThemeKey = 'is_theme_light';
+  static const String _isFirstLaunchKey = 'is_first_launch';
 
   /// init get storage services
   static Future<void> init() async {
@@ -28,6 +28,14 @@ class ConfigPreference {
   static bool getThemeIsLight() =>
       _sharedPreferences.getBool(_lightThemeKey) ?? true;
   // todo set the default theme (true for light, false for dark)
+
+  /// check if the app is first launch
+  static bool isFirstLaunch() =>
+      _sharedPreferences.getBool(_isFirstLaunchKey) ?? true;
+
+  /// est first launch flag to false
+  static Future<void> setFirstLaunchCompleted() =>
+      _sharedPreferences.setBool(_isFirstLaunchKey, false);
 
   /// clear all data from shared pref
   static Future<void> clear() async => await _sharedPreferences.clear();

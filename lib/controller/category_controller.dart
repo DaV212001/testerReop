@@ -1,32 +1,29 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../model/level.dart';
-import '../service/lesson_service.dart';
+import 'package:mss_e_learning/service/category_service.dart';
+
+import '../model/category.dart';
 
 
-class LessonController extends GetxController {
-  final _listOfLevel = <Level>[].obs;
+class CategoryController extends GetxController {
+  final _listOfCategory = <Category>[].obs;
 
-  RxString subCategoryId = RxString("");
-
-  List<Level> get listOfAllLevels => _listOfLevel.value;
+  List<Category> get listOfAllCategories => _listOfCategory.value;
 
   String errorMessage = 'Can\'t proceed request';
   final _isLoading = false.obs;
 
   get isLoading => _isLoading.value;
 
-  getLevels(String subCategoryId) async {
-    print("here==============================================");
-    print(subCategoryId);
-    print("here==============================================");
-
+  getCategories() async {
     try {
-      _listOfLevel.clear();
+      _listOfCategory.clear();
       _isLoading.value = true;
-      final response = await LessonService.fetchLevelsById(subCategoryId);
-      _listOfLevel.addAll(response);
+
+      final response = await CategoryService.fetchCategories();
+      _listOfCategory.addAll(response);
+
     } on HttpException catch (error) {
       if (error.toString().contains('Redirection error')) {
         errorMessage = 'The resource requested has been temporarily moved.';
@@ -65,7 +62,7 @@ class LessonController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // getLevels();
+    getCategories();
   }
 
 }

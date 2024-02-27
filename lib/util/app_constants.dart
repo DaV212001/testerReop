@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 class AppConstants {
+  static const String exampleAPI = "https://learning.bhwethiopia.com/api";
   static const String exampleAPI = "https://dummyjson.com";
   static var KauthContainerGradient = BoxDecoration(
     gradient: LinearGradient(

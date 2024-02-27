@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mss_e_learning/screen/profile/profile_screen.dart';
+import 'package:mss_e_learning/screen/quiz/quiz_screen.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import 'category/category_screen.dart';
-import 'exam/exam_screen.dart';
 import 'home/home_screen.dart';
 
 class MainLayoutScreen extends StatefulWidget {
@@ -31,9 +31,10 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       return [
         const HomeScreen(), //Home Page
         const CategoryScreen(), //Category Page
-        const ExamScreen(), //Cart Page
+        const QuizScreen(), //Cart Page
         const ProfileScreen()
       ];
+
     }
 
     return Scaffold(
@@ -103,12 +104,12 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
             Icons.pending_actions,
             color: inactiveColor,
           ),
-          title: ('Exam'),
+          title: ('Quiz'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
-              const RouteAndNavigatorSettings(initialRoute: AppRoutes.exam)),
+              const RouteAndNavigatorSettings(initialRoute: AppRoutes.quiz)),
       PersistentBottomNavBarItem(
           icon: Icon(
             Icons.person,

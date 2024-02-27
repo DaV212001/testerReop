@@ -1,5 +1,6 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:mss_e_learning/model/lesson_description.dart';
 
 import '../../model/lesson.dart';
 
@@ -10,7 +11,7 @@ class HeaderImageAndButtons extends StatelessWidget {
     required this.lesson,
   });
 
-  final Lesson? lesson;
+  final LessonDescription? lesson;
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +49,21 @@ class HeaderImageAndButtons extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  buttonSize: 40,
-                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  icon: Icon(
-                    Icons.arrow_back_ios_rounded,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    size: 20,
-                  ),
-                  onPressed: () async {
-                    Navigator.pop(context);
-                  },
-                ),
+                // FlutterFlowIconButton(
+                //   borderColor: Colors.transparent,
+                //   borderRadius: 30,
+                //   borderWidth: 1,
+                //   buttonSize: 40,
+                //   fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                //   icon: Icon(
+                //     Icons.arrow_back_ios_rounded,
+                //     color: FlutterFlowTheme.of(context).primaryText,
+                //     size: 20,
+                //   ),
+                //   onPressed: () async {
+                //     Navigator.pop(context);
+                //   },
+                // ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
