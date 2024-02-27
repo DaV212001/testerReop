@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 import 'package:mss_e_learning/screen/quiz/quiz_screen.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
@@ -26,7 +27,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     List<Widget> buildScreens() {
       return [
         const HomeScreen(), //Home Page
@@ -44,7 +45,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         screens: buildScreens(),
         items: _navBarsItems(),
         confineInSafeArea: true,
-        backgroundColor: theme.colorScheme.background,
+        backgroundColor: theme.primaryBackground,
         itemAnimationProperties: const ItemAnimationProperties(
           duration: Duration(milliseconds: 200),
           curve: Curves.ease,
@@ -61,9 +62,9 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
-    ThemeData theme = Theme.of(context);
-    Color activeColor = theme.bottomNavigationBarTheme.selectedItemColor!;
-    Color inactiveColor = theme.bottomNavigationBarTheme.unselectedItemColor!;
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
+    Color activeColor = theme.primary;
+    Color inactiveColor = theme.primaryText.withOpacity(0.5);
     return [
       PersistentBottomNavBarItem(
           icon: Icon(

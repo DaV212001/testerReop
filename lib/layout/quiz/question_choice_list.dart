@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/quiz_controller.dart';
 
@@ -14,7 +15,7 @@ class _QuestionChoiceListState extends State<QuestionChoiceList> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     final controller = Get.find<QuizController>();
     return Expanded(
       child: Obx(
@@ -39,19 +40,19 @@ class _QuestionChoiceListState extends State<QuestionChoiceList> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: isSelected
-                        ? theme.colorScheme.primary.withOpacity(0.9)
-                        : theme.colorScheme.onBackground.withOpacity(0.2),
+                        ? theme.primary.withOpacity(0.9)
+                        : theme.primaryText.withOpacity(0.2),
                   ),
                   borderRadius: BorderRadius.circular(10),
                   color: isSelected
-                      ? theme.colorScheme.primary.withOpacity(0.9)
+                      ? theme.primary.withOpacity(0.9)
                       : Colors.transparent,
                 ),
                 child: ListTile(
                   title: Text(
                     answer.answer,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: isSelected ? theme.colorScheme.onPrimary : null,
+                    style: theme.bodyMedium.copyWith(
+                      color: isSelected ? theme.primaryBtnText : null,
                     ),
                   ),
                 ),

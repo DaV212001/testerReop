@@ -1,20 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:mss_e_learning/config/themes/data/app_colors.dart';
 
 class CorrectAnswerPopup extends StatelessWidget {
   final Function() next;
+
   const CorrectAnswerPopup({super.key, required this.next});
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return Container(
       height: 150,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-          color: theme.colorScheme.background,
+          color: theme.primaryBackground,
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(10), topLeft: Radius.circular(10))),
       alignment: Alignment.center,
@@ -24,16 +27,17 @@ class CorrectAnswerPopup extends StatelessWidget {
           const Spacer(),
           Row(
             children: [
-              Icon(
+              const Icon(
                 CupertinoIcons.check_mark_circled_solid,
-                color: theme.colorScheme.tertiary,
+                color: AppColors.limeGreen,
                 size: 30,
               ),
               const SizedBox(width: 10,),
               Text(
                 "Correct",
-                style: theme.textTheme.headlineSmall?.copyWith(
-                    color: theme.colorScheme.tertiary, fontWeight: FontWeight.w700),
+                style: theme.headlineSmall.copyWith(
+                    color: AppColors.limeGreen,
+                    fontWeight: FontWeight.w700),
               ),
             ],
           ),
@@ -44,7 +48,7 @@ class CorrectAnswerPopup extends StatelessWidget {
             height: 50,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: theme.buttonTheme.colorScheme?.tertiary,
+                backgroundColor: AppColors.limeGreen,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
@@ -53,8 +57,8 @@ class CorrectAnswerPopup extends StatelessWidget {
               ),
               child: Text(
                 "Continue",
-                style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.buttonTheme.colorScheme?.onTertiary),
+                style: theme.bodyLarge.copyWith(
+                    color: AppColors.white),
               ),
               onPressed: () => {next(), SmartDialog.dismiss()},
             ),

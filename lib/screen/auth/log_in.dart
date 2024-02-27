@@ -8,6 +8,7 @@ import 'package:mss_e_learning/layout/auth/footer.dart';
 import 'package:mss_e_learning/service/user_service.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:mss_e_learning/controller/log_in_controllers.dart';
+import 'package:mss_e_learning/widget/button.dart';
 import '../../model/user.dart';
 import '../../widget/input_field.dart';
 export 'package:mss_e_learning/controller/log_in_controllers.dart';
@@ -241,8 +242,8 @@ class _LogInWidgetState extends State<LogInWidget>
         ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-          child: FFButtonWidget(
-            onPressed: () async {
+          child: Button(
+            onPress: () async {
               UserService userservice = UserService();
 
               try {
@@ -259,23 +260,6 @@ class _LogInWidgetState extends State<LogInWidget>
 
             },
             text: 'Sign In',
-            options: FFButtonOptions(
-              width: double.infinity,
-              height: 44,
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-              iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-              color: FlutterFlowTheme.of(context).primary,
-              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                    fontFamily: 'Readex Pro',
-                    color: Colors.white,
-                  ),
-              elevation: 3,
-              borderSide: const BorderSide(
-                color: Colors.transparent,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(12),
-            ),
           ),
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/quiz_controller.dart';
 import 'package:mss_e_learning/layout/quiz/question_choice_list.dart';
@@ -11,9 +12,11 @@ class QuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(QuizController());
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return Scaffold(
+        backgroundColor: theme.primaryBackground,
         appBar: AppBar(
+          backgroundColor: theme.primaryBackground,
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -22,7 +25,7 @@ class QuizScreen extends StatelessWidget {
               },
               icon: Icon(Icons.close,
                   size: 35,
-                  color: theme.colorScheme.onBackground.withOpacity(0.5)),
+                  color: theme.primaryText.withOpacity(0.5)),
             ),
           ],
         ),
