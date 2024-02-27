@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/category_controller.dart';
 import 'package:mss_e_learning/screen/subcategory/sub_category_screen.dart';
@@ -11,12 +12,15 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     CategoryController controller = Get.put(CategoryController());
     return Scaffold(
-      appBar: AppBar(
-        title: Text("List of categories", style: theme.textTheme.titleLarge),
-      ),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar:AppBar(
+      backgroundColor: Colors.transparent,
+      title: Text("List of categories",
+        style: TextStyle(color: theme.primaryText))
+    ),
       body: SafeArea(
           child: Obx(() => controller.isLoading
               ? const Center(

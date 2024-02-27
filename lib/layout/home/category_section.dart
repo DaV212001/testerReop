@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/category_controller.dart';
 import 'package:mss_e_learning/layout/home/all_category_screen.dart';
@@ -13,6 +14,7 @@ class CategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     CategoryController controller = Get.put(CategoryController());
     return Obx(() => controller.isLoading
         ? const Center(
@@ -22,7 +24,7 @@ class CategorySection extends StatelessWidget {
                   ),
         )
         : RefreshIndicator(
-        color: Theme.of(context).primaryColor,
+        color: FlutterFlowTheme.of(context).primaryBackground,
         displacement: 100,
         onRefresh: () => controller.getCategories(),
         child: Column(

@@ -2,12 +2,15 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:mss_e_learning/layout/lesson/lesson_pdf.dart';
 import 'package:mss_e_learning/layout/lesson/lesson_video.dart';
 import 'package:mss_e_learning/model/lesson_description.dart';
 import 'package:mss_e_learning/service/lesson_service.dart';
 import 'package:mss_e_learning/controller/lesson_description_controllers.dart';
 
+import '../../controller/lesson_controllers.dart';
 import 'header_image_and_buttons.dart';
 export 'package:mss_e_learning/controller/lesson_description_controllers.dart';
 
@@ -94,7 +97,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     if (isiOS) {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
@@ -103,6 +106,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         ),
       );
     }
+    LessonController controller = Get.put(
+        LessonController()
+    );
 
     return DefaultTabController(
         length: 3,
@@ -117,18 +123,37 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                 headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     SliverAppBar(
-                        title: Text(lesson!.title),
+                      backgroundColor: Colors.transparent,
+
+                        actions: [
+                      if(controller.isBookmarkLoading == true)
+                        const CircularProgressIndicator(),
+                      if(controller.isBookmarkLoading == false)
+                        IconButton(
+                            onPressed: ()async{
+                              controller.bookmarkLesson(lesson!.id);
+                            },icon:
+                        Icon(Icons.bookmark_border,color: theme.primaryText,))
+                    ],
+                        title: Text(lesson!.title,
+                        style: TextStyle(color: theme.primaryText)),
                         pinned: true,
                         floating: true,
                         bottom: TabBar(
                             isScrollable: true,
                             tabs: [
                               Tab(child: Text('Lessons',
-                                  style: theme.textTheme.labelLarge)),
+                                  style: TextStyle(fontSize: 16,
+                                      color: theme.primary
+                                  ))),
                               Tab(child: Text('PDFs',
-                                  style: theme.textTheme.labelLarge)),
+                                  style: TextStyle(fontSize: 16,
+                                      color: theme.primary
+                                  ))),
                               Tab(child: Text('Videos',
-                                  style: theme.textTheme.labelLarge))
+                                  style: TextStyle(fontSize: 16,
+                                      color: theme.primary
+                                  )))
                             ]
                         )
                     )
@@ -192,9 +217,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           child: Text(
             lesson!.title,
             style: FlutterFlowTheme.of(context).displaySmall,
-          ),
-        ),
-      ],
+          )
+        )
+      ]
     );
   }
 

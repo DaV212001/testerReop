@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/category_controller.dart';
 import 'package:mss_e_learning/model/sub_category.dart';
@@ -16,12 +17,16 @@ class SubCategoryScreen extends StatelessWidget {
   SubCategoryScreen({super.key, required this.subCategory, required this.subCategoryName});
   @override
   Widget build(BuildContext context) {
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     CategoryController controller = Get.put(CategoryController());
     return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        title: Text(subCategoryName),
+        backgroundColor: Colors.transparent,
+        title: Text(subCategoryName,
+            style: TextStyle(color: theme.primaryText),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: theme.primaryText,),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -30,47 +35,45 @@ class SubCategoryScreen extends StatelessWidget {
       body: SafeArea(
           child: ListView (
             children: [
-              Flexible(
-                  child: Obx(() => controller.isLoading
-                      ? const SizedBox(
-                      width: 50, height: 50, child: CircularProgressIndicator())
-                      : RefreshIndicator(
-                      color: Theme.of(context).primaryColor,
-                      displacement: 100,
-                      onRefresh: () => controller.getCategories(),
-                      child: Column(
-                          children: [
-                            MasonryGridView.count(
-                                itemCount: subCategory.length,
-                                physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 4,
-                                crossAxisSpacing: 4,
-                                shrinkWrap: true,
-                                padding: EdgeInsets.all(10),
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: (){
-                                      LessonController levelController = Get.put(LessonController());
-                                      levelController.subCategoryId.value = subCategory[index].id.toString();
-                                      print(levelController.subCategoryId.value);
-                                      levelController.getLevels(subCategory[index].id.toString());
-                                      pushNewScreen(context,
-                                          screen: LessonScreen(subCategoryId: subCategory[index].id,
-                                              courseName:subCategory[index].name));
-                                    },
-                                    child: SubCategoryCard(
-                                        name: subCategory[index].name,
-                                        image: subCategory[index].image
-                                    ),
-                                  );
-                                }
-                            )
-                          ]
-                      )
-                  ))
-              )
+              Obx(() => controller.isLoading
+                  ? const SizedBox(
+                  width: 50, height: 50, child: CircularProgressIndicator())
+                  : RefreshIndicator(
+                  color: Theme.of(context).primaryColor,
+                  displacement: 100,
+                  onRefresh: () => controller.getCategories(),
+                  child: Column(
+                      children: [
+                        MasonryGridView.count(
+                            itemCount: subCategory.length,
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 4,
+                            crossAxisSpacing: 4,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.all(10),
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: (){
+                                  LessonController levelController = Get.put(LessonController());
+                                  levelController.subCategoryId.value = subCategory[index].id.toString();
+                                  print(levelController.subCategoryId.value);
+                                  levelController.getLevels(subCategory[index].id.toString());
+                                  pushNewScreen(context,
+                                      screen: LessonScreen(subCategoryId: subCategory[index].id,
+                                          courseName:subCategory[index].name));
+                                },
+                                child: SubCategoryCard(
+                                    name: subCategory[index].name,
+                                    image: subCategory[index].image
+                                ),
+                              );
+                            }
+                        )
+                      ]
+                  )
+              ))
             ],
           )
       ),
