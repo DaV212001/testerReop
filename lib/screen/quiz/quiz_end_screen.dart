@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/quiz_controller.dart';
 import 'package:mss_e_learning/generated/assets.dart';
+import 'package:mss_e_learning/widget/button.dart';
 
 class QuizEndScreen extends StatelessWidget {
   const QuizEndScreen({
@@ -11,18 +13,22 @@ class QuizEndScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     final controller = Get.find<QuizController>();
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false, actions: [
-        IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(Icons.close,
-              size: 35, color: theme.colorScheme.onBackground.withOpacity(0.5)),
-        )
-      ]),
+      backgroundColor: theme.primaryBackground,
+      appBar: AppBar(
+          backgroundColor: theme.primaryBackground,
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.close,
+                  size: 35, color: theme.primaryText.withOpacity(0.5)),
+            )
+          ]),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -30,7 +36,7 @@ class QuizEndScreen extends StatelessWidget {
           horizontal: 20,
         ),
         decoration: BoxDecoration(
-          color: theme.colorScheme.background,
+          color: theme.primaryBackground,
         ),
         alignment: Alignment.center,
         child: Column(
@@ -40,8 +46,8 @@ class QuizEndScreen extends StatelessWidget {
             const Spacer(),
             Text(
               "Successfully Completed",
-              style: theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground.withOpacity(0.8)),
+              style: theme.titleLarge.copyWith(
+                  color: theme.primaryText.withOpacity(0.8)),
             ),
             const Spacer(),
             SvgPicture.asset(
@@ -54,21 +60,9 @@ class QuizEndScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               width: double.infinity,
               height: 50,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: theme.buttonTheme.colorScheme?.primary,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        10), // Set your desired border radius here
-                  ),
-                ),
-                child: Text(
-                  "Continue",
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.buttonTheme.colorScheme?.onTertiary),
-                ),
-                onPressed: () => {Get.toNamed(controller.quizEndRoute.value)},
+              child: Button(
+                text: "Continue",
+                onPress: () => {Get.toNamed(controller.quizEndRoute.value)},
               ),
             ),
             const Spacer(),
