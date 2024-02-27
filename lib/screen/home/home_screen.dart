@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
           child: Center(
             child: ListView (
-              children: [
+              children: const [
                 HeaderSample(),
                 Divider(),
                 CategorySection()

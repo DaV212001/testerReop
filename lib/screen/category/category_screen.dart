@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/category_controller.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:mss_e_learning/screen/subcategory/sub_category_screen.dart';
+import 'package:mss_e_learning/widget/home/category_card.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import '../../widget/course_header.dart';
-import '../../widget/home/category_card.dart';
-import '../subcategory/sub_category_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -17,24 +15,23 @@ class CategoryScreen extends StatelessWidget {
     CategoryController controller = Get.put(CategoryController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of categories",style:theme.textTheme.titleLarge),
+        title: Text("List of categories", style: theme.textTheme.titleLarge),
       ),
       body: SafeArea(
-          child: Flexible(
-              child: Obx(() => controller.isLoading
-                  ? const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(50.0),
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-              )
-                  : RefreshIndicator(
+          child: Obx(() => controller.isLoading
+              ? const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(50.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                )
+              : RefreshIndicator(
                   color: Theme.of(context).primaryColor,
                   displacement: 100,
                   onRefresh: () => controller.getCategories(),
                   child: MasonryGridView.count(
                       itemCount: controller.listOfAllCategories.length,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       crossAxisCount: 2,
                       mainAxisSpacing: 4,
@@ -42,31 +39,29 @@ class CategoryScreen extends StatelessWidget {
                       shrinkWrap: true,
                       padding: const EdgeInsets.all(10),
                       itemBuilder: (context, index) {
-
                         return GestureDetector(
                             onTap: () {
                               pushNewScreen(context,
                                   screen: SubCategoryScreen(
-                                      subCategory: controller.listOfAllCategories[index]
+                                      subCategory: controller
+                                          .listOfAllCategories[index]
                                           .subcategory,
-                                      subCategoryName: controller.listOfAllCategories[index].name));
+                                      subCategoryName: controller
+                                          .listOfAllCategories[index]
+                                          .name));
                             },
                             child: CategoryCard(
-                              name:
-                              controller.listOfAllCategories[index].name,
-                              image:
-                              controller.listOfAllCategories[index].image,
-                              numberOfCourses: controller.listOfAllCategories[index]
+                              name: controller
+                                  .listOfAllCategories[index].name,
+                              image: controller
+                                  .listOfAllCategories[index].image,
+                              numberOfCourses: controller
+                                  .listOfAllCategories[index]
                                   .subcategory
                                   .length
                                   .toString(),
                             ));
-                      }
-                  )
-              ))
-          )
-      ),
+                      })))),
     );
   }
 }
-

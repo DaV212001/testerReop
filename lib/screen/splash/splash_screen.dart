@@ -18,8 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<Widget> futureCall() async {
     bool isFirstLaunch = ConfigPreference.isFirstLaunch();
     String? token = await AuthService.getAuthorizationToken();
-    //this way the image loads for sum reason(instead of using durationInSeconds)
-    await Future.delayed(const Duration(seconds: 3));
     return isFirstLaunch
         ? Future.value(const OnboardingScreen())
         : token != null
@@ -36,7 +34,9 @@ class _SplashScreenState extends State<SplashScreen> {
       title: null,
       backgroundColor: theme.colorScheme.background,
       showLoader: false,
-      loadingText: Text("Loading...", style: theme.textTheme.bodyLarge),
+      loadingText: Text("Loading...",
+          style: theme.textTheme.bodyLarge
+              ?.copyWith(color: theme.colorScheme.primary)),
       futureNavigator: futureCall(),
       durationInSeconds: 0,
     );
