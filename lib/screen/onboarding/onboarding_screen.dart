@@ -67,10 +67,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Text(
                 item['title'],
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 25,
-                ),
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 25,
+                    color: theme.primaryText),
               ),
               const SizedBox(
                 height: 20,
@@ -78,10 +78,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Text(
                 item['description'],
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                ),
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    color: theme.primaryText),
               ),
             ],
           ),
