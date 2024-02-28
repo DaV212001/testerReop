@@ -26,8 +26,8 @@ class Question {
     return Question(
       id: json['id'] as int,
       question: json['question'] as String,
-      subcategoryId: json['subcategory_id'] as int,
-      levelId: json['level_id'] as int,
+      subcategoryId: int.parse(json['subcategory_id']),
+      levelId: int.parse(json['level_id']),
       answers: answersList,
     );
   }

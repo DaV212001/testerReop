@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/model/answer.dart';
+import 'package:mss_e_learning/model/error_data.dart';
 import 'package:mss_e_learning/model/question.dart';
+import 'package:mss_e_learning/service/quiz_service.dart';
+import 'package:mss_e_learning/util/api_call_status.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
-import 'package:mss_e_learning/util/placeHolderData.dart';
+import 'package:mss_e_learning/util/error_util.dart';
 import 'package:mss_e_learning/widget/quiz/correct_answer_popup.dart';
 import 'package:mss_e_learning/widget/quiz/incorrect_answer_popup.dart';
 
@@ -18,8 +21,27 @@ class QuizController extends GetxController {
 
   @override
   void onInit() {
-    questions.addAll(PlaceHolderData.questions); //TODO USE SERVICE LAYER
+    getQuestions("1");//TODO REPLACE STATIC DATA
     super.onInit();
+  }
+
+  final errorData = ErrorData(title: "", body: "", image: "").obs;
+  final status = ApiCallStatus.holding.obs;
+
+
+  getQuestions(String levelID) async {
+    try {
+      questions.clear();
+      status.value = ApiCallStatus.loading;
+
+      final response = await QuizService.fetchQuestionsByLevelId(levelID);
+      questions.addAll(response);
+
+      status.value = ApiCallStatus.success;
+    } on Exception catch (fetchError) {
+      status.value = ApiCallStatus.error;
+      errorData.value = ErrorUtil.getErrorData(fetchError.toString());
+    }
   }
 
   void selectAnswer(Answer answer) {
