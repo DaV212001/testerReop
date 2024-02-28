@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mss_e_learning/main.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
+import 'package:mss_e_learning/util/firebase_options.dart';
 
 class FirebaseService {
   /// Using firebase doc
@@ -14,13 +16,16 @@ class FirebaseService {
   ///https://www.youtube.com/watch?v=BVZ160KG5Kc&list=PLFyjjoCMAPtzvnHnby5Yu9idvwqXI-ujn&index=6
   final _firebaseMessaging = FirebaseMessaging.instance;
   final _androidChannel = const AndroidNotificationChannel(
-      "high_importance_channel",
-      'High Importance Notifications',
+      "high_importance_channel", 'High Importance Notifications',
       description: "This channel is used for important notifications",
       importance: Importance.high);
   final _localNotifications = FlutterLocalNotificationsPlugin();
 
   Future init() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
     NotificationSettings settings = await _firebaseMessaging.requestPermission(
       alert: true,
       announcement: false,
@@ -37,6 +42,7 @@ class FirebaseService {
     // print('User granted permission: ${settings.authorizationStatus}');
     FirebaseMessaging.instance.getToken().then((token) {
       print("FCM Token: $token");
+
       /// Store the token on your server for sending targeted messages
     });
 
@@ -53,22 +59,20 @@ class FirebaseService {
       if (notification == null) return;
       // print("Forground Notification IS NOT NULL}");
 
-      ///There is something not working with local notifications
       Future.delayed(Duration.zero, () {
         _localNotifications.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-                _androidChannel.id, _androidChannel.name,
-                channelDescription: _androidChannel.description,
-                importance: Importance.high,
-                priority: Priority.max,
-                icon: '@drawable/ic_launcher'),
-          ),
-          payload: jsonEncode(message.toMap())
-        );
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                  _androidChannel.id, _androidChannel.name,
+                  channelDescription: _androidChannel.description,
+                  importance: Importance.high,
+                  priority: Priority.max,
+                  icon: '@drawable/ic_launcher'),
+            ),
+            payload: jsonEncode(message.toMap()));
       });
     });
 
