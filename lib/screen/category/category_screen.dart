@@ -23,55 +23,54 @@ class CategoryScreen extends StatelessWidget {
           title: Text("List of categories",
               style: TextStyle(color: theme.primaryText))),
       body: SafeArea(
-          child: Obx(() => controller.status.value == ApiCallStatus.loading
-              ? const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(50.0),
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
-                )
-              : controller.status.value == ApiCallStatus.error
-                  ? ErrorCard(
-                      errorData: controller.errorData.value,
-                      refresh: () => controller.getCategories(),
-                    )
-                  : RefreshIndicator(
-                      color: theme.primary,
-                      displacement: 100,
-                      onRefresh: () => controller.getCategories(),
-                      child: MasonryGridView.count(
-                          itemCount: controller.listOfAllCategories.length,
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 4,
-                          crossAxisSpacing: 4,
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(10),
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                                onTap: () {
-                                  pushNewScreen(context,
-                                      screen: SubCategoryScreen(
-                                          subCategory: controller
-                                              .listOfAllCategories[index]
-                                              .subcategory,
-                                          subCategoryName: controller
-                                              .listOfAllCategories[index]
-                                              .name));
-                                },
-                                child: CategoryCard(
-                                  name: controller
-                                      .listOfAllCategories[index].name,
-                                  image: controller
-                                      .listOfAllCategories[index].image,
-                                  numberOfCourses: controller
-                                      .listOfAllCategories[index]
-                                      .subcategory
-                                      .length
-                                      .toString(),
-                                ));
-                          })))),
+          child: Center(
+        child: Obx(() => controller.status.value == ApiCallStatus.loading
+            ? const Padding(
+                padding: EdgeInsets.all(50.0),
+                child: Center(child: CircularProgressIndicator()),
+              )
+            : controller.status.value == ApiCallStatus.error
+                ? ErrorCard(
+                    errorData: controller.errorData.value,
+                    refresh: () => controller.getCategories(),
+                  )
+                : RefreshIndicator(
+                    color: theme.primary,
+                    displacement: 100,
+                    onRefresh: () => controller.getCategories(),
+                    child: MasonryGridView.count(
+                        itemCount: controller.listOfAllCategories.length,
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 4,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(10),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              onTap: () {
+                                pushNewScreen(context,
+                                    screen: SubCategoryScreen(
+                                        subCategory: controller
+                                            .listOfAllCategories[index]
+                                            .subcategory,
+                                        subCategoryName: controller
+                                            .listOfAllCategories[index].name));
+                              },
+                              child: CategoryCard(
+                                name:
+                                    controller.listOfAllCategories[index].name,
+                                image:
+                                    controller.listOfAllCategories[index].image,
+                                numberOfCourses: controller
+                                    .listOfAllCategories[index]
+                                    .subcategory
+                                    .length
+                                    .toString(),
+                              ));
+                        }))),
+      )),
     );
   }
 }
