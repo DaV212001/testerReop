@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -14,8 +13,8 @@ class FirebaseService {
   ///https://firebase.google.com/docs/cloud-messaging/flutter/receive
   ///https://www.youtube.com/watch?v=BVZ160KG5Kc&list=PLFyjjoCMAPtzvnHnby5Yu9idvwqXI-ujn&index=6
   final _firebaseMessaging = FirebaseMessaging.instance;
-  final _androidChannel = AndroidNotificationChannel(
-      Random.secure().nextInt(1000000).toString(),
+  final _androidChannel = const AndroidNotificationChannel(
+      "high_importance_channel",
       'High Importance Notifications',
       description: "This channel is used for important notifications",
       importance: Importance.high);
@@ -53,6 +52,7 @@ class FirebaseService {
       final notification = message.notification;
       print("Forground Notification ${notification?.title}");
       if (notification == null) return;
+      print("Forground Notification IS NOT NULL}");
 
       ///There is something not working with local notifications
       //TODO : fIX LOCAL NOTIFICATIONS
@@ -83,7 +83,7 @@ class FirebaseService {
 
   Future initLocalNotifications() async {
     const iOS = DarwinInitializationSettings();
-    const android = AndroidInitializationSettings('@drawable/ic_launcher');
+    const android = AndroidInitializationSettings('ic_launcher');
     const setting = InitializationSettings(
       android: android,
       iOS: iOS,
