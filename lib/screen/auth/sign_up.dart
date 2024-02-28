@@ -127,7 +127,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                       FlutterFlowTheme.of(context).primary,
                       FlutterFlowTheme.of(context).tertiary
                     ],
-                    stops: [0, 1],
+                    stops: const [0, 1],
                     begin: const AlignmentDirectional(0.87, -1),
                     end: const AlignmentDirectional(-0.87, 1),
                   ),
@@ -181,8 +181,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context)
                               .secondaryBackground,
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const [
+                            BoxShadow(
                               blurRadius: 4,
                               color: Color(0x33000000),
                               offset: Offset(0, 2),

@@ -13,7 +13,7 @@ class LessonService {
 
   static Future<List<Level>> fetchLevelsById(String subCategoryId) async {
     final response = await http.get(
-        Uri.parse('${AppConstants.exampleAPI}/sub_category/$subCategoryId?populate=true'));
+        Uri.parse('${AppConstants.api}/sub_category/$subCategoryId?populate=true'));
     print(response.body);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = json.decode(response.body);
@@ -28,7 +28,7 @@ class LessonService {
 
   Future<LessonDescription> fetchLessonById(String levelId) async {
     final response = await http.get(
-        Uri.parse('${AppConstants.exampleAPI}/post/$levelId?populate=true'));
+        Uri.parse('${AppConstants.api}/post/$levelId?populate=true'));
     print(response.body);
     print(response.statusCode);
     if (response.statusCode == 200) {
@@ -46,7 +46,7 @@ class LessonService {
     String? token = await AuthService.getAuthorizationToken();
     print(token);
     final response = await http.post(
-        Uri.parse('${AppConstants.exampleAPI}/book_mark'),
+        Uri.parse('${AppConstants.api}/book_mark'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer 5|wrjSTopObsSpWq8oDUyYBoHaL31716yezsuTwowE804015a2'
@@ -66,7 +66,7 @@ class LessonService {
     String? token = await AuthService.getAuthorizationToken();
     print(token);
     final response = await http.delete(
-        Uri.parse('${AppConstants.exampleAPI}/book_mark'),
+        Uri.parse('${AppConstants.api}/book_mark'),
         headers: {
           'Content-type': 'application/json',
           "Authorization": "Bearer $token"

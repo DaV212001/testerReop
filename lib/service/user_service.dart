@@ -16,7 +16,8 @@ class UserService{
       String? pass,
       ) async {
 
-    final String apiUrl = 'https://learning.cheretanet.com/api/register';
+
+    const String apiUrl = '${AppConstants.api}/register';
 
     final Map<String, dynamic> userData = {
       'first_name': firstn,
@@ -63,7 +64,7 @@ print(response.body);
       String? emailorphone,
       String? pass,
       ) async {
-    final String apiUrl = 'https://learning.bhwethiopia.com/api/login';
+    const String apiUrl = '${AppConstants.api}/login';
 
     // Create a Map object with the user data
     final Map<String, dynamic> userData = {
@@ -109,7 +110,7 @@ print(response.body);
 print(jsonEncode(data));
 print(await AuthService.getAuthorizationToken());
       final response = await post(
-        Uri.parse("${AppConstants.exampleAPI}/update_user"),
+        Uri.parse("${AppConstants.api}/update_user"),
         headers: {
           "Content-type": "application/json",
           "Authorization": "Bearer ${await AuthService.getAuthorizationToken()}"

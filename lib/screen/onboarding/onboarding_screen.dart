@@ -146,6 +146,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void onPressedOnLastPage() async {
     ConfigPreference.setFirstLaunchCompleted();
-    Get.offAllNamed(AppRoutes.initial);
+    Get.offAllNamed(AppRoutes.signup);
   }
 }

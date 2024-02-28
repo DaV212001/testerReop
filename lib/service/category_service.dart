@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class CategoryService{
   static Future<List<Category>> fetchCategories() async {
     final response = await http.get(
-        Uri.parse('${AppConstants.exampleAPI}/category?populate=true'));
+        Uri.parse('${AppConstants.api}/category?populate=true'));
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = json.decode(response.body);
       final List<dynamic> categoriesJson = jsonData["data"]["data"];
