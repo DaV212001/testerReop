@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 import '../cached_image.dart';
 
@@ -10,14 +11,16 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-    return Card(
-      child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-          decoration: const BoxDecoration(
-            color: Colors.white70,
-            borderRadius: BorderRadius.all(Radius.circular(2)),
-          ),
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        decoration: BoxDecoration(
+          color: theme.primary.withOpacity(0.25),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          border: Border.all(color: theme.primary, width: 0.5)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -42,15 +45,20 @@ class CategoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(name,
-                        style: theme.textTheme.titleLarge),
+                        style: TextStyle(fontSize: 16,
+                        color: theme.primaryText
+                        )),
                     Text("Number of courses $numberOfCourses",
-                        style: theme.textTheme.bodySmall)
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w300,
+                            color: theme.primaryText))
                   ],
                 ),
               ),
             ],
-          )
-      ),
+          ),
+        )
     );
   }
 }

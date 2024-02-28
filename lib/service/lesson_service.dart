@@ -7,6 +7,7 @@ import '../model/lesson.dart';
 import '../model/lesson_description.dart';
 import '../model/level.dart';
 import '../model/sub_category.dart';
+import 'authorization_service.dart';
 
 class LessonService {
 
@@ -37,5 +38,43 @@ class LessonService {
     } else {
       throw Exception('Failed to fetch categories');
     }
+  }
+  static Future<http.Response> addBookmarkLesson(int lessonId) async{
+    print(jsonEncode({
+      "post_id": lessonId
+    }));
+    String? token = await AuthService.getAuthorizationToken();
+    print(token);
+    final response = await http.post(
+        Uri.parse('${AppConstants.exampleAPI}/book_mark'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 5|wrjSTopObsSpWq8oDUyYBoHaL31716yezsuTwowE804015a2'
+        },
+        body: jsonEncode({
+          "post_id": lessonId
+        })
+    );
+    print(response.body);
+    print(response.statusCode);
+    return response;
+  }
+  static Future<http.Response> deleteBookmarkLesson(int lessonId) async{
+    print(jsonEncode({
+      "post_id": lessonId
+    }));
+    String? token = await AuthService.getAuthorizationToken();
+    print(token);
+    final response = await http.delete(
+        Uri.parse('${AppConstants.exampleAPI}/book_mark'),
+        headers: {
+          'Content-type': 'application/json',
+          "Authorization": "Bearer $token"
+        },
+        body: jsonEncode({
+          "post_id": lessonId
+        })
+    );
+    return response;
   }
 }
