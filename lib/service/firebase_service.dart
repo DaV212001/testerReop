@@ -34,10 +34,9 @@ class FirebaseService {
         .setForegroundNotificationPresentationOptions(
             alert: true, badge: true, sound: true);
 
-    print('User granted permission: ${settings.authorizationStatus}');
+    // print('User granted permission: ${settings.authorizationStatus}');
     FirebaseMessaging.instance.getToken().then((token) {
       print("FCM Token: $token");
-
       /// Store the token on your server for sending targeted messages
     });
 
@@ -50,12 +49,11 @@ class FirebaseService {
     /// To handle messages while your application is in the foreground, listen to the onMessage stream.
     FirebaseMessaging.onMessage.listen((message) {
       final notification = message.notification;
-      print("Forground Notification ${notification?.title}");
+      // print("Forground Notification ${notification?.title}");
       if (notification == null) return;
-      print("Forground Notification IS NOT NULL}");
+      // print("Forground Notification IS NOT NULL}");
 
       ///There is something not working with local notifications
-      //TODO : fIX LOCAL NOTIFICATIONS
       Future.delayed(Duration.zero, () {
         _localNotifications.show(
           notification.hashCode,
