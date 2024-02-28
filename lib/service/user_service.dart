@@ -106,8 +106,9 @@ print(response.body);
         "first_name": firstName,
         "last_name" : lastName
       };
-print(jsonEncode(data));
-print(await AuthService.getAuthorizationToken());
+    print(jsonEncode(data));
+    print(await AuthService.getAuthorizationToken());
+
       final response = await post(
         Uri.parse("${AppConstants.exampleAPI}/update_user"),
         headers: {
@@ -116,8 +117,10 @@ print(await AuthService.getAuthorizationToken());
         },
         body: json.encode(data),
       );
+
       print(response.body);
-var resData = jsonDecode(response.body);
+
+      var resData = jsonDecode(response.body);
 
       if (response.statusCode == 200 && resData['success'] == true) {
         print("User updated successfully!");
@@ -131,6 +134,75 @@ var resData = jsonDecode(response.body);
     }
   }
 
+  Future<void> sendOTP(String emailOrPhone) async {
+    try {
+      final Map<String, String> data = {
+        "email_or_phone": emailOrPhone
+      };
+      print(jsonEncode(data));
+      print(await AuthService.getAuthorizationToken());
+      final response = await post(
+        Uri.parse("${AppConstants.exampleAPI}/send_otp"),
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: json.encode(data),
+      );
+      print(response.body);
+      var resData = jsonDecode(response.body);
 
+      if (response.statusCode == 201 && resData['success'] == true) {
+        print("OTP sent successfully!");
+      } else {
+        print("Error sending OTP: ${response.body}");
+        throw Exception('Failed to send OTP');
+      }
+    } catch (e) {
+      print("Exception occurred: $e");
+      throw Exception('Failed to send OTP');
+    }
+  }
+
+  Future<void> resetPassword (String otp, String newPass, String phone) async {
+    try {
+      final Map<String, String> data = {
+        "otp": otp,
+        "password": newPass,
+        "phone_number": phone
+      };
+
+      print(jsonEncode(data));
+      print(await AuthService.getAuthorizationToken());
+
+      final response = await post(
+        Uri.parse("https://learning.bhwethiopia.com/api/reset_password"),
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: json.encode(data),
+      );
+
+      print(response.statusCode);
+      print(response.body);
+
+      var resData = jsonDecode(response.body);
+
+      if (response.statusCode == 201 && resData['success'] == true) {
+        print("Password reset successfully!");
+
+      } else {
+        if(resData['message'] == 'Invalid OTP'){
+          throw Exception('Invalid OTP');
+        }
+
+        print("Error resetting password: ${response.body}");
+        throw Exception('Failed to reset password');
+      }
+
+    } catch (e) {
+      print("Exception occurred: $e");
+      throw Exception('Failed to reset password');
+    }
+  }
 
 }

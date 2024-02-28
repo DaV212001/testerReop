@@ -83,12 +83,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   ).animateOnPageLoad(VerificationController()
                       .animationsMap['containerOnPageLoadAnimation1']!),
                   const SizedBox(height: 20),
-                  CustomSixDigitVerificationCodeInput(
-                      onCodeChanged: (code) {
-                        // TODO: Handle the updated verification code (e.g., validate it)
-                        print("New code: $code");
-                      },
-                      isValid: false),
+                  // CustomSixDigitVerificationCodeInput(
+                  //     onCodeChanged: (code) {
+                  //       // TODO: Handle the updated verification code (e.g., validate it)
+                  //       print("New code: $code");
+                  //     },
+                  //     isValid: false),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(

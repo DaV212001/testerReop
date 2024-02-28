@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
+import 'package:mss_e_learning/screen/password/reset_password_screen.dart';
 import 'package:mss_e_learning/screen/password/verification_screen.dart';
 import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/widget/input_field.dart';
@@ -54,7 +55,7 @@ ForgotPasswordController controller = Get.put(ForgotPasswordController());
       ),
     );
   }
-
+bool loading = false;
   Container buildBody(BuildContext context) {
     return Container(
                       width: double.infinity,
@@ -81,7 +82,7 @@ ForgotPasswordController controller = Get.put(ForgotPasswordController());
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'Enter your phone number and we will send an code to the email associated with your account',
+                                'Enter your email or phone number and we will send a 6 digit code to your account ',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context).labelMedium,
                               ).animateOnPageLoad(ForgotPasswordController().animationsMap['containerOnPageLoadAnimation1']!),
@@ -91,24 +92,24 @@ ForgotPasswordController controller = Get.put(ForgotPasswordController());
                                     textEditingController: emailController,
                                     focusNode: null,
                                     obscureText: false,
-                                    hint: '09********',
+                                    // hint: '09********',
                                     onChanged: (val){
-                                      ForgotPasswordController().email.value = val!;
+                                      controller.email.value = val!;
                                       return null;
                                     },
                                     validator: (val){
-                                      if(val!.length < 10 ){
-                                        return 'Phone number must be at least 10 digits';
-                                      }
-                                      if(val.startsWith('09')){
-                                        return 'Phone number must start with 09';
-                                      }
+                                      // if(val!.length < 10 ){
+                                      //   return 'Phone number must be at least 10 digits';
+                                      // }
+                                      // if(val.startsWith('09')){
+                                      //   return 'Phone number must start with 09';
+                                      // }
                                       return null;
                                     },
                                     passwordinput: false,
-                                    label: 'Phone number',
+                                    label: 'Email or phone number',
                                   prefixIcon: Icon(
-                                    Icons.phone,
+                                    Icons.perm_contact_cal_rounded,
                                     color: Colors.black,
                                   ),
                                 )
@@ -122,9 +123,15 @@ ForgotPasswordController controller = Get.put(ForgotPasswordController());
                                     ),
                                     backgroundColor: FlutterFlowTheme.of(context).primary
                                 ),
-                                onPressed: () {
-                                  // TODO: Implement password reset logic here
-                                  Get.to( () => VerificationScreen());
+                                onPressed: () async {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  await controller.sendOtp(controller.email.value);
+                                  setState(() {
+                                    loading = false;
+                                  });
+                                  Get.to(() => ResetPasswordScreen());
                                 },
                                 child: const Text(
                                   'Send Email',

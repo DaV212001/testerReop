@@ -11,6 +11,7 @@ class InputFieldWidget extends StatefulWidget {
   final String label;
   final bool passwordinput;
   final String? hint;
+  final int? maxlength;
 
   InputFieldWidget(
       {super.key,
@@ -19,7 +20,7 @@ class InputFieldWidget extends StatefulWidget {
         required this.obscureText,
         required this.validator,
         required this.passwordinput,
-        required this.label, this.prefixIcon, this.onChanged, this.hint});
+        required this.label, this.prefixIcon, this.onChanged, this.hint, this.maxlength});
 
   @override
   State<InputFieldWidget> createState() => _InputFieldWidgetState();
@@ -36,7 +37,8 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
           child: TextFormField(
               controller: widget.textEditingController,
               focusNode: widget.focusNode,
-              autofocus: true,
+              autofocus: false,
+              maxLength: widget.maxlength,
               onChanged: widget.onChanged,
               autofillHints: [AutofillHints.password],
               obscureText: !widget.obscureText??false,
@@ -102,7 +104,8 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
           child: TextFormField(
             controller: widget.textEditingController,
             focusNode: widget.focusNode,
-            autofocus: true,
+            autofocus: false,
+            maxLength: widget.maxlength,
             onChanged: widget.onChanged,
             autofillHints: [AutofillHints.password],
             obscureText: widget.obscureText!,

@@ -32,6 +32,7 @@ class AppRoutes {
 
 
   static final pages = [
+    GetPage(name: certificate, page: ()=> CertificatesListScreen()),
     GetPage(name: splash, page: () =>const SplashScreen()),
     GetPage(name: onboarding, page: () => const OnboardingScreen()),
     GetPage(name: initial, page: () => const MainLayoutScreen()),
@@ -41,7 +42,7 @@ class AppRoutes {
     ),
     GetPage(name: quiz, page: () => const QuizScreen()),
     GetPage(name: quizEnd, page: () => const QuizEndScreen()),
-    GetPage(name: certificate, page: () => const CertificateScreen()),
+    GetPage(name: certificate, page: () =>  CertificatesListScreen()),
     GetPage(name: profile, page: () => const ProfileScreen()),
     GetPage(name: login, page: () => const LogInWidget()),
     GetPage(

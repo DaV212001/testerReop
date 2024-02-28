@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/widget/input_field.dart';
 import '../../controller/forgot_password_controller.dart';
 import '../../controller/reset_password_controller.dart';
+import '../../widget/verification_code_entry_widget.dart';
 import '../auth/log_in.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -18,10 +20,13 @@ bool hidePassword = true;
 bool hideConfirmPassword = true;
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-
+TextEditingController phoneController = TextEditingController(text: ResetPasswordController().phonenumber.value);
   TextEditingController passwordController = TextEditingController(text: ResetPasswordController().password.value);
   TextEditingController confirmPasswordController = TextEditingController(text: ResetPasswordController().confirmpassword.value);
-
+String verificationCode = '';
+ResetPasswordController controller = Get.put(ResetPasswordController());
+Color color = Colors.grey;
+bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +91,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Enter a new password to get access to your account',
+                    'Enter the verification code we sent to your email and your new password along with your phone number.',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).labelMedium,
                   ).animateOnPageLoad(ResetPasswordController()
@@ -100,11 +105,26 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         backgroundColor: FlutterFlowTheme.of(context).primary),
-                    onPressed: () {
-                      // TODO: Implement password reset logic here
-                      Get.to(const LogInWidget());
+                    onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      print(loading);
+                      if(errormessage != 'full'){
+                        if(errormessage == ''){
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please enter verification code')));
+                          return;
+                        }
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errormessage)));
+                        return;
+                      }
+                      await controller.resetPassword(verificationCode, controller.password.value, controller.phonenumber.value);
+                      setState(() {
+                        loading = false;
+                      });
+                      print(loading);
                     },
-                    child: Text(
+                    child:loading? CircularProgressIndicator(color: Colors.white,): Text(
                       'Confirm',
                       style: TextStyle(color: Colors.white),
                     ),
@@ -113,18 +133,34 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       ),
     );
   }
-
+String errormessage = '';
   Column buildForm() {
     return Column(
       children: [
+        CustomSixDigitVerificationCodeInput(
+            onCodeChanged: (code) {
+              if(code.length == 6){
+                setState(() {
+                  errormessage = 'full';
+                });
+                verificationCode = code;
+              } else {
+                setState(() {
+                  errormessage = 'Verification code needs to be 6 digits';
+                });
+              }
+              print("New code: $code");
+            },
+          color: controller.color.value,),
+        if(errormessage != 'full')Text(errormessage, style: TextStyle(color: Colors.red),),
         Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: InputFieldWidget(
                 textEditingController: passwordController,
-                focusNode: ResetPasswordController().passwordFocusNode,
+                focusNode: null,
                 obscureText: hidePassword,
                 onChanged: (val) {
-                  ResetPasswordController().password.value = val!;
+                  controller.password.value = val!;
                   return null;
                 },
                 validator: (val) {
@@ -134,7 +170,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   return null;
                 },
                 passwordinput: true,
-                label: "New password")),
+                label: "New password")
+        ),
         Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: InputFieldWidget(
@@ -142,7 +179,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 focusNode: ResetPasswordController().confirmPasswordFocusNode,
                 obscureText: hideConfirmPassword,
                 onChanged: (val) {
-                  ResetPasswordController().confirmpassword.value = val!;
+                  controller.confirmpassword.value = val!;
                   return null;
                 },
                 validator: (val) {
@@ -152,7 +189,29 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   return null;
                 },
                 passwordinput: true,
-                label: "Confirm password")),
+                label: "Confirm password")
+        ),
+        Padding(
+            padding: EdgeInsets.only(top: 20.0),
+            child: InputFieldWidget(
+                textEditingController: phoneController,
+                focusNode: null,
+                obscureText: hideConfirmPassword,
+                hint: '09********',
+                maxlength: 10,
+                onChanged: (val) {
+                  controller.phonenumber.value = val!;
+                  return null;
+                },
+                validator: (val) {
+                  if (val!.length<10) {
+                    return 'Phone number needs to be atleast 10 digits.';
+                  }
+                  return null;
+                },
+                passwordinput: false,
+                label: "Enter phone number")
+        ),
       ],
     );
   }
