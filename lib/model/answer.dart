@@ -15,8 +15,8 @@ class Answer {
     return Answer(
       id: json['id'] as int,
       answer: json['answer'] as String,
-      isCorrectAnswer: json['is_correct_answer'] ?? false,
-      testQuestionId: json['test_question_id'] ,
+      isCorrectAnswer: json['is_correct_answer'] == "1" ? true : false,
+      testQuestionId: json['test_question_id'],
     );
   }
 }
