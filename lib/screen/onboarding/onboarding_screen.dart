@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/config/config_preference.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
@@ -50,13 +51,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
 
     final List<Widget> pages = [];
     for (var item in pagesData) {
       Widget page = Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0,vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -66,10 +67,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Text(
                 item['title'],
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 25,
-                ),
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 25,
+                    color: theme.primaryText),
               ),
               const SizedBox(
                 height: 20,
@@ -77,10 +78,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Text(
                 item['description'],
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                ),
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    color: theme.primaryText),
               ),
             ],
           ),
@@ -89,48 +90,51 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       pages.add(page);
     }
     return Scaffold(
+        backgroundColor: theme.primaryBackground,
         body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 100),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                physics: const BouncingScrollPhysics(),
-                controller: _pageController,
-                children: pages,
-                onPageChanged: (page) {
-                  setState(() {
-                    _currentPage = page;
-                  });
-                },
-              ),
-            ),
-            if (pages.length > 1)
-              DotsIndicator(
-                dotsCount: pages.length,
-                position: _currentPage,
-                decorator: DotsDecorator(
-                  activeColor:
-                      theme.bottomNavigationBarTheme.selectedItemColor!,
-                  color: theme.bottomNavigationBarTheme.unselectedItemColor!,
-                  activeSize: const Size(15, 15),
-                  size: const Size(10, 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 100),
+            child: Column(
+              children: [
+                Expanded(
+                  child: PageView(
+                    physics: const BouncingScrollPhysics(),
+                    controller: _pageController,
+                    children: pages,
+                    onPageChanged: (page) {
+                      setState(() {
+                        _currentPage = page;
+                      });
+                    },
+                  ),
                 ),
-              ),
-            const SizedBox(
-              height: 50,
+                if (pages.length > 1)
+                  DotsIndicator(
+                    dotsCount: pages.length,
+                    position: _currentPage,
+                    decorator: DotsDecorator(
+                      activeColor: theme.primary,
+                      color: theme.primaryText.withOpacity(0.25),
+                      activeSize: const Size(15, 15),
+                      size: const Size(10, 10),
+                    ),
+                  ),
+                const SizedBox(
+                  height: 50,
+                ),
+                SizedBox(
+                  width: 300,
+                  child: Button(
+                      text: "Next",
+                      hasLoader: _currentPage == pages.length - 1,
+                      onPress: _currentPage == pages.length - 1
+                          ? onPressedOnLastPage
+                          : _animateToNextPage),
+                ),
+              ],
             ),
-            Button(
-                width: 300,
-                text: "Next",
-                onPress: _currentPage == pages.length - 1
-                    ? onPressedOnLastPage
-                    : _animateToNextPage),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   Future<void> _animateToNextPage() async {
@@ -142,6 +146,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void onPressedOnLastPage() async {
     ConfigPreference.setFirstLaunchCompleted();
-    Get.toNamed(AppRoutes.initial);
+    Get.offAllNamed(AppRoutes.signup);
   }
 }

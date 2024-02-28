@@ -7,7 +7,7 @@ import '../util/app_constants.dart';
 
 class PostService {
   static Future<List<Post>> fetchPosts() async {
-    final response = await http.get(Uri.parse('${AppConstants.exampleAPI}/posts'));
+    final response = await http.get(Uri.parse('${AppConstants.api}/posts'));
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = json.decode(response.body);
       final List<dynamic> postsJson = jsonData["posts"];

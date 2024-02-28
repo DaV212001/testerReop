@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mss_e_learning/model/user.dart';
 import 'package:mss_e_learning/widget/profile_widget.dart';
@@ -24,13 +25,13 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
 
   @override
   void initState() {
-    profilePicture = widget.user.profilepicture ?? "";
+    profilePicture = widget.user.profilepicture;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     String firstName = widget.user.firstname ?? "";
     String lastName = widget.user.lastname ?? "";
     String formattedName =
@@ -47,16 +48,18 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
           isFile: isFile,
           onClicked: showOptions,
         ),
-        const Spacer(),
+        const SizedBox(width: 20,),
         Column(
           children: [
             Text(formattedName,
-                style:
-                    TextStyle(color: theme.colorScheme.primary, fontSize: 20)),
+                style:theme.titleLarge.copyWith(
+                    color: theme.primary
+                )),
             const SizedBox(height: 5),
             Text("${widget.user.email}",
-                style:
-                    TextStyle(color: theme.colorScheme.tertiary, fontSize: 15)),
+                style: theme.bodyMedium.copyWith(
+                  color: theme.tertiary
+                )),
           ],
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 class CourseHeader extends StatelessWidget {
   final String title;
@@ -16,7 +17,7 @@ class CourseHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return Container(
       margin: const EdgeInsets.only(top: 5),
       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -27,7 +28,8 @@ class CourseHeader extends StatelessWidget {
           FittedBox(
             child: Text(
               title,
-              style: theme.textTheme.titleLarge
+              style: TextStyle(fontSize: 16,
+                  color: theme.primaryText)
             ),
           ),
           Visibility(
@@ -41,14 +43,14 @@ class CourseHeader extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: theme.colorScheme.primary),
+                          color: theme.primary),
                     ),
                     SizedBox(
                       width: 2,
                     ),
                     Icon(
                       CupertinoIcons.arrow_right,
-                      color: theme.colorScheme.primary,
+                      color: theme.primary,
                       size: 20,
                     )
                   ],

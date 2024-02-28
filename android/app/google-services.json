@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "777335671979",
+    "project_id": "mss-e-learning",
+    "storage_bucket": "mss-e-learning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777335671979:android:9022bae0d5e699d2e73bee",
+        "android_client_info": {
+          "package_name": "com.example.mss_e_learning_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgw-goabkeXz4Lli3Kg9Pm2QYwHQsKeqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

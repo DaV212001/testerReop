@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mss_e_learning/config/themes/theme_manager.dart';
@@ -15,9 +16,9 @@ class RouteList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     Icon arrowIcon = Icon(Icons.arrow_right_outlined,
-        color: theme.colorScheme.primary.withOpacity(0.8), size: 40);
+        color: theme.primary.withOpacity(0.8), size: 40);
     final List<Map<String, dynamic>> itemList = [
       {
         "title": "Change Profile",
@@ -116,13 +117,13 @@ class RouteList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               onTap: item["onTap"],
-              splashColor: theme.colorScheme.primary.withOpacity(0.3),
-              highlightColor: theme.colorScheme.primary.withOpacity(0.25),
+              splashColor: theme.primary.withOpacity(0.3),
+              highlightColor: theme.primary.withOpacity(0.25),
               child: ListTile(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                tileColor: theme.colorScheme.primary.withOpacity(0.15),
+                tileColor: theme.primary.withOpacity(0.15),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 leading: item["leadingIcon"],
                 title:
@@ -137,7 +138,7 @@ class RouteList extends StatelessWidget {
   Widget buildIcon(IconData iconData, BuildContext context) {
     return Icon(
       iconData,
-      color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+      color: FlutterFlowTheme.of(context).primary.withOpacity(0.8),
       size: 25,
     );
   }

@@ -24,7 +24,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
           return Form(
             child: Container(
               height: double.infinity,
-              decoration: AppConstants.KauthContainerGradient,
+              decoration: AppConstants.kAuthContainerGradient,
               alignment: const AlignmentDirectional(0, -1),
               child: SingleChildScrollView(
                 child: Padding(

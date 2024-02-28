@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/layout/profile/route_list.dart';
 import 'package:mss_e_learning/layout/profile/user_screen_footer.dart';
 import 'package:mss_e_learning/layout/profile/user_screen_header.dart';
@@ -22,6 +23,7 @@ class ProfileScreen extends StatelessWidget {
         twitterLink: "https://www.linkedin.com/",
         linkedInLink: "https://www.linkedin.com/");
     return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -41,13 +43,9 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Container(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-              height: 50,
-              child: Button(
-                text: 'Logout',
-                onPress: () {},
-              ),
+            Button(
+              text: 'Logout',
+              onPress: () {},
             ),
             const SizedBox(
               height: 5,
