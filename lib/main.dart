@@ -1,15 +1,18 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/screen/splash/splash_screen.dart';
-import 'package:mss_e_learning/service/authorization_service.dart';
+import 'package:mss_e_learning/service/firebase_service.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
+import 'package:mss_e_learning/util/firebase_options.dart';
 import 'config/config_preference.dart';
 import 'config/themes/data/app_themes.dart';
 import 'config/themes/theme_manager.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
-String? token;
+final navigatorKey = GlobalKey<NavigatorState>();
+
 
 Future<void> main() async {
   // wait for bindings
@@ -19,7 +22,12 @@ Future<void> main() async {
   // init image caching
   await FastCachedImageConfig.init(clearCacheAfter: const Duration(days: 15));
 
-  token = await AuthService.getAuthorizationToken();
+  // init firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseService().init();
+
 
   runApp(const MssLearnProgramming());
 }
