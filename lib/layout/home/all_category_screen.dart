@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/category_controller.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+
 import '../../screen/subcategory/sub_category_screen.dart';
-import '../../widget/course_header.dart';
 import '../../widget/home/category_card.dart';
 
 class AllCategoryScreen extends StatelessWidget {
@@ -16,63 +15,52 @@ class AllCategoryScreen extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     CategoryController controller = Get.put(CategoryController());
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            Navigator.of(context).pop();
-          },
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          title: Text("All categories", style: theme.textTheme.titleLarge),
         ),
-        title: Text("All categories",style:theme.textTheme.titleLarge),
-      ),
-      body: SafeArea(
-          child: Flexible(
-              child: Obx(() => controller.isLoading
-                  ? const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(50.0),
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-              )
-                  : RefreshIndicator(
-                  color: Theme.of(context).primaryColor,
-                  displacement: 100,
-                  onRefresh: () => controller.getCategories(),
-                  child: MasonryGridView.count(
-                      itemCount: controller.listOfAllCategories.length,
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 4,
-                      crossAxisSpacing: 4,
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(10),
-                      itemBuilder: (context, index) {
-
-                        return GestureDetector(
-                            onTap: () {
-                              pushNewScreen(context,
-                                  screen: SubCategoryScreen(
-                                      subCategory: controller.listOfAllCategories[index]
-                                          .subcategory,
-                                      subCategoryName: controller.listOfAllCategories[index].name));
-                            },
-                            child: CategoryCard(
-                              name:
-                              controller.listOfAllCategories[index].name,
-                              image:
-                              controller.listOfAllCategories[index].image,
-                              numberOfCourses: controller.listOfAllCategories[index]
-                                  .subcategory
-                                  .length
-                                  .toString(),
-                            ));
-                      }
-                  )
-              ))
-          )
-      ),
-    );
+        body: SafeArea(
+            child: Flexible(
+                child: RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    displacement: 100,
+                    onRefresh: () => controller.getCategories(),
+                    child: MasonryGridView.count(
+                        itemCount: controller.listOfAllCategories.length,
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 4,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(10),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              onTap: () {
+                                pushNewScreen(context,
+                                    screen: SubCategoryScreen(
+                                        subCategory: controller
+                                            .listOfAllCategories[index]
+                                            .subcategory,
+                                        subCategoryName: controller
+                                            .listOfAllCategories[index].name));
+                              },
+                              child: CategoryCard(
+                                name:
+                                    controller.listOfAllCategories[index].name,
+                                image:
+                                    controller.listOfAllCategories[index].image,
+                                numberOfCourses: controller
+                                    .listOfAllCategories[index]
+                                    .subcategory
+                                    .length
+                                    .toString(),
+                              ));
+                        })))));
   }
 }
-

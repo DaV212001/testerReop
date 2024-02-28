@@ -15,7 +15,7 @@ class CategoryService{
         return Category.fromJson(item);
       }).toList();
     } else {
-      throw Exception('Failed to fetch categories');
+      throw Exception(response.statusCode.toString());
     }
   }
 }
