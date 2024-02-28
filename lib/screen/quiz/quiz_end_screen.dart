@@ -46,10 +46,18 @@ class QuizEndScreen extends StatelessWidget {
             const Spacer(),
             Text(
               "Successfully Completed",
-              style: theme.titleLarge.copyWith(
-                  color: theme.primaryText.withOpacity(0.8)),
+              style: theme.titleLarge
+                  .copyWith(color: theme.primaryText.withOpacity(0.8)),
             ),
-            const Spacer(),
+            const SizedBox(height: 10,),
+            controller.practiceMode.value
+                ? const SizedBox.shrink()
+                : Text(
+                    "${controller.noOfCorrectQuestions} / ${controller.questions.length}",
+                    style: theme.displaySmall
+                        .copyWith(color: theme.primary.withOpacity(0.8)),
+                  ),
+            const SizedBox(height: 10,),
             SvgPicture.asset(
               width: 300,
               height: 300,

@@ -44,7 +44,7 @@ class MssLearnProgramming extends StatelessWidget {
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeManager.getThemeMode(),
         getPages: AppRoutes.pages,
-        initialRoute: AppRoutes.login,
+        initialRoute: AppRoutes.splash,
         home: const SplashScreen(),
     );
   }
