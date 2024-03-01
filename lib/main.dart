@@ -1,5 +1,4 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/screen/splash/splash_screen.dart';
@@ -14,7 +13,6 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 
 Future<void> main() async {
-  print("INITIALIZEDDDDDD");
   // wait for bindings
   WidgetsFlutterBinding.ensureInitialized();
   // init shared preference
@@ -22,9 +20,10 @@ Future<void> main() async {
   // init image caching
   await FastCachedImageConfig.init(clearCacheAfter: const Duration(days: 15));
   // init firebase
-  // await Firebase.initializeApp();
-  // init firebase messaging
-  // await FirebaseService().init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseService().init();
 
 
   runApp(const MssLearnProgramming());
@@ -43,7 +42,7 @@ class MssLearnProgramming extends StatelessWidget {
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeManager.getThemeMode(),
         getPages: AppRoutes.pages,
-        initialRoute: AppRoutes.splash,
+        initialRoute: AppRoutes.login,
         home: const SplashScreen(),
     );
   }

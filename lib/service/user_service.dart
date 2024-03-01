@@ -5,18 +5,14 @@ import 'package:mss_e_learning/model/user.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
 import 'package:mss_e_learning/util/app_constants.dart';
 
-class UserService{
-
-
+class UserService {
   Future<User> signUserUp(
-      String? firstn,
-      String? lastn,
-      String? email,
-      String? phone,
-      String? pass,
-      ) async {
-
-
+    String? firstn,
+    String? lastn,
+    String? email,
+    String? phone,
+    String? pass,
+  ) async {
     const String apiUrl = '${AppConstants.api}/register';
 
     final Map<String, dynamic> userData = {
@@ -27,31 +23,22 @@ class UserService{
       'password': pass,
     };
 
-print(jsonEncode(userData));
+    print(jsonEncode(userData));
 
-
-    final Response response = await post(
-        Uri.parse(apiUrl),
+    final Response response = await post(Uri.parse(apiUrl),
         body: jsonEncode(userData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-    );
-
+        headers: {'Content-Type': 'application/json'});
 
     print(response.statusCode);
-print(response.body);
+    print(response.body);
 
     if (response.statusCode == 200) {
-
       var data = jsonDecode(response.body);
 
-      if(data['success']){
-
-      final User user = User.fromJson(data['data']);
-      return user;
-
-      } else{
+      if (data['success']) {
+        final User user = User.fromJson(data['data']);
+        return user;
+      } else {
         throw Exception(data['message']);
       }
     } else {
@@ -59,11 +46,10 @@ print(response.body);
     }
   }
 
-
   Future<User> logUserIn(
-      String? emailorphone,
-      String? pass,
-      ) async {
+    String? emailorphone,
+    String? pass,
+  ) async {
     const String apiUrl = '${AppConstants.api}/login';
 
     // Create a Map object with the user data
@@ -74,25 +60,20 @@ print(response.body);
 
     print(jsonEncode(userData));
 
-    final Response response = await post(
-        Uri.parse(apiUrl),
+    final Response response = await post(Uri.parse(apiUrl),
         body: jsonEncode(userData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-    );
+        headers: {'Content-Type': 'application/json'});
 
     print(response.statusCode);
     print(response.body);
 
     if (response.statusCode == 200) {
-
       var data = jsonDecode(response.body);
-      if(data['success']){
+      if (data['success']) {
         final User user = User.fromJson(data['data']);
         await AuthService.setAuthorizationToken(data['token']);
         return user;
-      }else{
+      } else {
         throw Exception(data['message']);
       }
     } else {
@@ -105,10 +86,10 @@ print(response.body);
     try {
       final Map<String, String> data = {
         "first_name": firstName,
-        "last_name" : lastName
+        "last_name": lastName
       };
-    print(jsonEncode(data));
-    print(await AuthService.getAuthorizationToken());
+      print(jsonEncode(data));
+      print(await AuthService.getAuthorizationToken());
 
       final response = await post(
         Uri.parse("${AppConstants.api}/update_user"),
@@ -137,9 +118,7 @@ print(response.body);
 
   Future<void> sendOTP(String emailOrPhone) async {
     try {
-      final Map<String, String> data = {
-        "email_or_phone": emailOrPhone
-      };
+      final Map<String, String> data = {"email_or_phone": emailOrPhone};
       print(jsonEncode(data));
       print(await AuthService.getAuthorizationToken());
       final response = await post(
@@ -164,7 +143,7 @@ print(response.body);
     }
   }
 
-  Future<void> resetPassword (String otp, String newPass, String phone) async {
+  Future<void> resetPassword(String otp, String newPass, String phone) async {
     try {
       final Map<String, String> data = {
         "otp": otp,
@@ -190,20 +169,17 @@ print(response.body);
 
       if (response.statusCode == 201 && resData['success'] == true) {
         print("Password reset successfully!");
-
       } else {
-        if(resData['message'] == 'Invalid OTP'){
+        if (resData['message'] == 'Invalid OTP') {
           throw Exception('Invalid OTP');
         }
 
         print("Error resetting password: ${response.body}");
         throw Exception('Failed to reset password');
       }
-
     } catch (e) {
       print("Exception occurred: $e");
       throw Exception('Failed to reset password');
     }
   }
-
 }

@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mss_e_learning/main.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
-import 'package:mss_e_learning/util/firebase_options.dart';
 
 class FirebaseService {
   /// Using firebase doc
@@ -22,11 +19,7 @@ class FirebaseService {
   final _localNotifications = FlutterLocalNotificationsPlugin();
 
   Future init() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    NotificationSettings settings = await _firebaseMessaging.requestPermission(
+    await _firebaseMessaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,

@@ -20,7 +20,7 @@ class QuizProgressIndicator extends GetView<QuizController> {
               height: 7,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: controller.noOfCorrectQuestions > index
+                color: controller.progress > index
                     ? theme.primary
                     : theme.primaryText.withOpacity(0.25),
               ),

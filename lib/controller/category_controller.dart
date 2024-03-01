@@ -1,7 +1,8 @@
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mss_e_learning/model/error_data.dart';
 import 'package:mss_e_learning/service/category_service.dart';
+import 'package:mss_e_learning/util/api_call_status.dart';
+import 'package:mss_e_learning/util/error_util.dart';
 
 import '../model/category.dart';
 
@@ -9,54 +10,25 @@ import '../model/category.dart';
 class CategoryController extends GetxController {
   final _listOfCategory = <Category>[].obs;
 
-  List<Category> get listOfAllCategories => _listOfCategory.value;
+  List<Category> get listOfAllCategories => _listOfCategory;
 
-  String errorMessage = 'Can\'t proceed request';
-  final _isLoading = false.obs;
+  final errorData = ErrorData(title: "", body: "", image: "").obs;
+  final status = ApiCallStatus.holding.obs;
 
-  get isLoading => _isLoading.value;
 
   getCategories() async {
     try {
       _listOfCategory.clear();
-      _isLoading.value = true;
+      status.value = ApiCallStatus.loading;
 
       final response = await CategoryService.fetchCategories();
       _listOfCategory.addAll(response);
 
-    } on HttpException catch (error) {
-      if (error.toString().contains('Redirection error')) {
-        errorMessage = 'The resource requested has been temporarily moved.';
-      } else if (error.toString().contains('Bad Request Format')) {
-        errorMessage = 'Your client has issued a malformed or illegal request.';
-      } else if (error.toString().contains('Internal Server Error')) {
-        errorMessage =
-        'The server encountered an error and could not complete your request.';
-      } else if (error.toString().contains('No Internet Found')) {
-        errorMessage =
-        'There is no or poor internet connect. Please try again later';
-      }
-      showSnackBar(errorMessage);
+      status.value = ApiCallStatus.success;
+    } on Exception catch (fetchError) {
+      status.value = ApiCallStatus.error;
+      errorData.value = ErrorUtil.getErrorData(fetchError.toString());
     }
-    _isLoading.value = false;
-  }
-
-  showSnackBar(var message) {
-    Get.snackbar(
-      'Error',
-      message,
-      backgroundColor: Colors.black,
-      colorText: Colors.white,
-    );
-  }
-
-  showSuccessSnackBar(var message) {
-    Get.snackbar(
-      'Success',
-      message,
-      backgroundColor: Colors.black,
-      colorText: Colors.white,
-    );
   }
 
   @override

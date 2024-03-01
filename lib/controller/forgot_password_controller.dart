@@ -26,8 +26,8 @@ class ForgotPasswordController extends GetxController {
           curve: Curves.easeInOut,
           delay: 100.ms,
           duration: 600.ms,
-          begin: Offset(0, 170),
-          end: Offset(0, 0),
+          begin: const Offset(0, 170),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -52,13 +52,13 @@ class ForgotPasswordController extends GetxController {
     try {
       await _userService.sendOTP(emailOrPhone);
       ScaffoldMessenger.of(Get.context!).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('OTP sent, please check your email'),
           )
       );
     } catch (e) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to send OTP'),
         ),
       );
