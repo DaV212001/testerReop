@@ -143,7 +143,7 @@ print(response.body);
       print(jsonEncode(data));
       print(await AuthService.getAuthorizationToken());
       final response = await post(
-        Uri.parse("${AppConstants.exampleAPI}/send_otp"),
+        Uri.parse("${AppConstants.api}/send_otp"),
         headers: {
           "Content-type": "application/json",
         },
