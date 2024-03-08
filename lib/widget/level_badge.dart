@@ -33,7 +33,7 @@ class LevelBadge extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            lesson!.title,
+            lesson!.title!,
             textAlign: TextAlign.start,
             style: FlutterFlowTheme.of(context).bodyLarge,
           ),

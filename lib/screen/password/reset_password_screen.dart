@@ -47,7 +47,7 @@ bool loading = false;
                       const HeaderImageAndText(
                           imagePath:
                               'assets/images/illustrations/reset_password.svg',
-                          headerText: 'Reset Password'),
+                          headerText: 'Reset Password', showbackButton: false,),
                       const SizedBox(
                         height: 10,
                       ),

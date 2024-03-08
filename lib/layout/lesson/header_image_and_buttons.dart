@@ -23,7 +23,7 @@ class HeaderImageAndButtons extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           image: Image.network(
-            lesson!.image,
+            lesson!.image!,
           ).image,
         ),
         boxShadow: [

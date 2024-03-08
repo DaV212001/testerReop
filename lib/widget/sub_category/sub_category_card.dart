@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 import '../cached_image.dart';
 
 class SubCategoryCard extends StatelessWidget {
-  String name;
-  String image;
-  SubCategoryCard({super.key, required this.name,required this.image});
+  final String name;
+  final String image;
+  const SubCategoryCard({super.key, required this.name,required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -14,41 +16,32 @@ class SubCategoryCard extends StatelessWidget {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: BoxDecoration(
-            color: theme.primary.withOpacity(0.25),
+            color: FlutterFlowTheme.of(context).primaryBackground,
             borderRadius: BorderRadius.all(Radius.circular(15)),
-            border: Border.all(color: theme.primary, width: 0.5)
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(0.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                   width: double.infinity,
-                  height: 110,
-                  child: Center(
-                    child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(2)),
-                        child: CachedImage(
-                          url: image,
-                          fit: BoxFit.contain,
-                        )
-                    ),
+                  height: MediaQuery.of(context).size.width*0.3,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      child: CachedImage(
+                        url: image,
+                        fit: BoxFit.fill,
+                      )
                   )),
               Container(
                 width: double.infinity,
-                margin: const EdgeInsets.only(left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(name,
-                        style: TextStyle(fontSize: 17,
-                            color: theme.primaryText
-                        )),
-                  ],
-                ),
+                margin: const EdgeInsets.only(top: 5, left: 7),
+                child: Text(name,
+                    style: TextStyle(
+                        color: theme.primaryText
+                    )),
               ),
             ],
           ),

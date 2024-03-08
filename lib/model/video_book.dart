@@ -1,3 +1,5 @@
+import 'package:mss_e_learning/util/app_constants.dart';
+
 class Video {
   int id;
   String title;
@@ -23,7 +25,7 @@ class Video {
       title: json['title'],
       file: json['file'],
       url: json['url'],
-      image: json['image'],
+      image: AppConstants.imagebaseurl+(json['image']??""),
       subcategoryId: json['subcategory_id'],
       levelId: json['level_id'],
     );
@@ -56,7 +58,7 @@ class Book {
       title: json['title'] ?? "",
       file: json['file'] ?? "",
       url: json['url'] ?? "",
-      image: json['image'] ?? "",
+      image: AppConstants.imagebaseurl+(json['image'] ?? ""),
       subcategoryId: json['subcategory_id'] ?? "",
       levelId: json['level_id'] ?? "",
     );

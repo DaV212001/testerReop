@@ -19,15 +19,18 @@ class CourseHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return Container(
-      margin: const EdgeInsets.only(top: 5),
       padding: EdgeInsets.symmetric(horizontal: 10),
       child:  Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          FittedBox(
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.4,
+            height: 50,
             child: Text(
               title,
+              maxLines: 2,
+              softWrap: true,
               style: TextStyle(fontSize: 16,
                   color: theme.primaryText)
             ),

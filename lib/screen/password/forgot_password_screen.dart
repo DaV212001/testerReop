@@ -21,6 +21,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   TextEditingController emailController = TextEditingController(text: ForgotPasswordController().email.value);
 
 ForgotPasswordController controller = Get.put(ForgotPasswordController());
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +42,7 @@ ForgotPasswordController controller = Get.put(ForgotPasswordController());
                     children: [
                       const HeaderImageAndText(
                           imagePath: 'assets/images/illustrations/forgot_password.svg',
-                          headerText: 'Forgot password?'
+                          headerText: 'Forgot password?', showbackButton: true,
                       ),
                 const SizedBox(height: 10,),
                       buildBody(context).animateOnPageLoad(ForgotPasswordController().animationsMap['textOnPageLoadAnimation']!),
@@ -133,7 +135,7 @@ bool loading = false;
                                   });
                                   Get.to(() => ResetPasswordScreen());
                                 },
-                                child: const Text(
+                                child: loading? CircularProgressIndicator() : const Text(
                                   'Send Email',
                                   style: TextStyle(
                                       color: Colors.white

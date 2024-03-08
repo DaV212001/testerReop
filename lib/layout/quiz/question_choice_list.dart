@@ -20,12 +20,9 @@ class _QuestionChoiceListState extends State<QuestionChoiceList> {
     return Expanded(
       child: Obx(
         () => ListView.builder(
-          itemCount: controller
-              .questions[controller.currentQuestionIndex.value].answers.length,
+          itemCount: controller.questions[controller.currentQuestionIndex.value].answers.length,
           itemBuilder: (context, index) {
-            final answer = controller
-                .questions[controller.currentQuestionIndex.value]
-                .answers[index];
+            final answer = controller.questions[controller.currentQuestionIndex.value].answers[index];
             final isSelected = selectedAnswerId == answer.id;
             return GestureDetector(
               onTap: () => {

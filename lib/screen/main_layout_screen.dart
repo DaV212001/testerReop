@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:mss_e_learning/screen/certificate/certificate_screen.dart';
 import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 import 'package:mss_e_learning/screen/quiz/quiz_screen.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'category/category_screen.dart';
 import 'home/home_screen.dart';
 
@@ -28,11 +30,12 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   @override
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
+
     List<Widget> buildScreens() {
       return [
         const HomeScreen(), //Home Page
         const CategoryScreen(), //Category Page
-        const QuizScreen(), //Cart Page
+         CertificatesListScreen(), //Cart Page
         const ProfileScreen()
       ];
 
@@ -55,7 +58,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           curve: Curves.ease,
           duration: Duration(milliseconds: 200),
         ),
-        navBarStyle: NavBarStyle.style6,
+        navBarStyle: NavBarStyle.style8,
         navBarHeight: 60,
       ),
     );
@@ -68,11 +71,11 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
     return [
       PersistentBottomNavBarItem(
           icon: Icon(
-            Icons.home,
+            FontAwesomeIcons.house,
             color: activeColor,
           ),
           inactiveIcon: Icon(
-            Icons.home,
+            FontAwesomeIcons.house,
             color: inactiveColor,
           ),
           title: ('Home'),
@@ -83,11 +86,11 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
               const RouteAndNavigatorSettings(initialRoute: AppRoutes.home)),
       PersistentBottomNavBarItem(
           icon: Icon(
-            Icons.list_alt,
+            FontAwesomeIcons.list,
             color: activeColor,
           ),
           inactiveIcon: Icon(
-            Icons.list_alt,
+            FontAwesomeIcons.list,
             color: inactiveColor,
           ),
           title: ('Category'),
@@ -98,26 +101,26 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
               initialRoute: AppRoutes.category)),
       PersistentBottomNavBarItem(
           icon: Icon(
-            Icons.pending_actions,
+            FontAwesomeIcons.certificate,
             color: activeColor,
           ),
           inactiveIcon: Icon(
-            Icons.pending_actions,
+            FontAwesomeIcons.certificate,
             color: inactiveColor,
           ),
-          title: ('Quiz'),
+          title: ('Certficates'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
-              const RouteAndNavigatorSettings(initialRoute: AppRoutes.quiz)),
+              const RouteAndNavigatorSettings(initialRoute: AppRoutes.certificate)),
       PersistentBottomNavBarItem(
           icon: Icon(
-            Icons.person,
+            Icons.person_2_rounded,
             color: activeColor,
           ),
           inactiveIcon: Icon(
-            Icons.person,
+            Icons.person_2_rounded,
             color: inactiveColor,
           ),
           title: ('Profile'),

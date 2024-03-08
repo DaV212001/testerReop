@@ -36,7 +36,7 @@ class Assets {
   static const String illustrationsWinnersPana = 'assets/images/illustrations/Winners-pana.svg';
   static const String imagesIllustrationsTooManyRequests = 'assets/images/illustrations/too_many_requests.svg';
   static const String imagesIllustrationsWinnersPana = 'assets/images/illustrations/Winners-pana.svg';
-  static const String imagesPlaceholderLogo = 'assets/images/placeholder-logo.png';
+  static const String imagesPlaceholderLogo = 'assets/icon/icon.png';
   static const String socialFacebook = 'assets/images/social/facebook.svg';
   static const String socialInstagram = 'assets/images/social/instagram.svg';
   static const String socialLinkedin = 'assets/images/social/linkedin.svg';

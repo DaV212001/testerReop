@@ -14,7 +14,7 @@ class Level {
   factory Level.fromJson(Map<String, dynamic> json) {
 
     List<Lesson> lessonsList = [];
-    if (json['lessons'] != []) {
+    if (json['lessons'] != [] && json.containsKey('lessons')) {
       json['lessons'].forEach((lessonJson) {
         lessonsList.add(Lesson.fromJson(lessonJson));
       });

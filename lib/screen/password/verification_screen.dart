@@ -35,7 +35,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       const HeaderImageAndText(
                         headerText: 'Verify',
                         imagePath:
-                            'assets/images/illustrations/enter_verification_code.svg',
+                            'assets/images/illustrations/enter_verification_code.svg', showbackButton: true,
                       ),
                       buildBody(context).animateOnPageLoad(
                           VerificationController()

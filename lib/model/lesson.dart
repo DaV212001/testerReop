@@ -1,3 +1,5 @@
+import 'package:mss_e_learning/util/app_constants.dart';
+
 class Lesson {
   int id;
   String image;
@@ -19,7 +21,7 @@ class Lesson {
 
     return Lesson(
         id: json['id'],
-        image: json['image'],
+        image: AppConstants.imagebaseurl+json['image'],
         title: json['title'],
         description: json['description'],
         subcategoryId: json['subcategory_id'],

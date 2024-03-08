@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:mss_e_learning/util/app_constants.dart';
 
+import '../model/lesson.dart';
 import '../model/lesson_description.dart';
 import '../model/level.dart';
 import 'authorization_service.dart';
@@ -40,7 +42,7 @@ class LessonService {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Bearer 5|wrjSTopObsSpWq8oDUyYBoHaL31716yezsuTwowE804015a2'
+              'Bearer $token'
         },
         body: jsonEncode({"post_id": lessonId}));
     print(response.body);
@@ -50,6 +52,10 @@ class LessonService {
     }
     return response;
   }
+
+
+
+
 
   static Future<http.Response> deleteBookmarkLesson(int lessonId) async {
     String? token = await AuthService.getAuthorizationToken();

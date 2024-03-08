@@ -15,31 +15,28 @@ class CategoryCard extends StatelessWidget {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: BoxDecoration(
-          color: theme.primary.withOpacity(0.25),
+          color: FlutterFlowTheme.of(context).primaryBackground,
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          border: Border.all(color: theme.primary, width: 0.5)
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                   width: double.infinity,
-                  height: 110,
-                  child: Center(
-                    child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(2)),
-                        child: CachedImage(
-                          url: image,
-                          fit: BoxFit.contain,
-                        )
-                    ),
+                  height: MediaQuery.of(context).size.width*0.3,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      child: CachedImage(
+                        url: image,
+                        fit: BoxFit.fill,
+                      )
                   )),
               Container(
                 width: double.infinity,
-                margin: const EdgeInsets.only(left: 20),
+                margin: const EdgeInsets.only(left: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -48,11 +45,11 @@ class CategoryCard extends StatelessWidget {
                         style: TextStyle(fontSize: 16,
                         color: theme.primaryText
                         )),
-                    Text("Number of courses $numberOfCourses",
+                    Text("${int.parse(numberOfCourses) >1?"$numberOfCourses courses":"$numberOfCourses course"} ",
                         style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w300,
-                            color: theme.primaryText))
+                            color: theme.secondaryText))
                   ],
                 ),
               ),

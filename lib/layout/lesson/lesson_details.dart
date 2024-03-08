@@ -9,7 +9,7 @@ import 'package:mss_e_learning/layout/lesson/lesson_video.dart';
 import 'package:mss_e_learning/model/lesson_description.dart';
 import 'package:mss_e_learning/service/lesson_service.dart';
 import 'package:mss_e_learning/controller/lesson_description_controllers.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../controller/lesson_controllers.dart';
 import 'header_image_and_buttons.dart';
 export 'package:mss_e_learning/controller/lesson_description_controllers.dart';
@@ -69,11 +69,16 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
       ],
     ),
   };
+  LessonController controller = Get.put(
+      LessonController()
+  );
   bool loaded = false;
   @override
   void initState() {
     super.initState();
+    controller.checkIfBookMarked(widget.lessonId);
     getLesson();
+
   }
 
   LessonDescription? lesson;
@@ -90,7 +95,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   @override
   void dispose() {
-    _model.dispose();
 
     super.dispose();
   }
@@ -106,9 +110,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         ),
       );
     }
-    LessonController controller = Get.put(
-        LessonController()
-    );
+
 
     return DefaultTabController(
         length: 3,
@@ -118,12 +120,13 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           child: Center(child: CircularProgressIndicator()),
         )
             :Scaffold(
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: NestedScrollView(
                 physics: const BouncingScrollPhysics(),
                 headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     SliverAppBar(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
 
                         actions: [
                       if(controller.isBookmarkLoading == true)
@@ -131,11 +134,20 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                       if(controller.isBookmarkLoading == false)
                         IconButton(
                             onPressed: ()async{
-                              controller.bookmarkLesson(lesson!.id);
+                              controller.isBookMarked.value?
+                              controller.bookmarkLesson(lesson!.id!)
+                              :
+                                  controller.unBookmarkLesson(lesson!.id!)
+                              ;
                             },icon:
-                        Icon(Icons.bookmark_border,color: theme.primaryText,))
+                        Icon(
+                          controller.isBookMarked.value?
+                          FontAwesomeIcons.solidBookmark
+                              :
+                          Icons.bookmark_outline,
+                          color: theme.primaryText,))
                     ],
-                        title: Text(lesson!.title,
+                        title: Text(lesson!.title!,
                         style: TextStyle(color: theme.primaryText)),
                         pinned: true,
                         floating: true,
@@ -215,7 +227,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
           child: Text(
-            lesson!.title,
+            lesson!.title!,
             style: FlutterFlowTheme.of(context).displaySmall,
           )
         )
@@ -235,7 +247,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                lesson!.title,
+                lesson!.title!,
                 textAlign: TextAlign.start,
                 style: FlutterFlowTheme.of(context).headlineMedium,
               )
@@ -253,7 +265,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 12),
           child: Text(
-            lesson!.description,
+            lesson!.description!,
             textAlign: TextAlign.start,
             style: FlutterFlowTheme.of(context).labelMedium,
           ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),

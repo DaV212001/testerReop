@@ -10,7 +10,7 @@ class ProfileWidget extends StatelessWidget {
   final bool hasEditButton;
 
   const ProfileWidget(
-      {super.key,
+      {
       required this.imagePath,
       required this.onClicked,
       required this.isFile,
@@ -20,6 +20,7 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return Column(
+
       children: [
         Center(
           child: Stack(
@@ -46,10 +47,7 @@ class ProfileWidget extends StatelessWidget {
     FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     return ClipOval(
       child: Material(
-        color: theme.primary.withOpacity(0.4),
         child: Ink(
-          width: 128,
-          height: 128,
           child: InkWell(
               child: isFile
                   ? Image.file(
@@ -57,17 +55,29 @@ class ProfileWidget extends StatelessWidget {
                       fit: BoxFit.cover,
                     )
                   : imagePath != null
-                      ? CachedImage(
-                          url: imagePath!,
-                          fit: BoxFit.cover,
-                        )
-                      : IconButton(
-                          onPressed: onClicked,
-                          icon: Icon(
-                            color: theme.primaryBtnText,
-                            CupertinoIcons.profile_circled,
-                            size: 120,
-                          ))),
+                      ? Container(
+                        width: MediaQuery.of(context).size.width/5,
+                        height: MediaQuery.of(context).size.width/5,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width/5),
+                          child: CachedImage(
+                              url: imagePath!,
+                              fit: BoxFit.cover,
+                            ),
+                        ),
+                      )
+                      : Center(
+                        child: IconButton(
+                            onPressed: onClicked,
+                            icon: Icon(
+                              color: theme.primary,
+                              CupertinoIcons.profile_circled,
+                              size: MediaQuery.of(context).size.width / 6,
+                            )),
+                      )),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
@@ -15,10 +16,10 @@ class QuizEndScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     final controller = Get.find<QuizController>();
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: theme.primary));
     return Scaffold(
       backgroundColor: theme.primaryBackground,
       appBar: AppBar(
-          backgroundColor: theme.primaryBackground,
           automaticallyImplyLeading: false,
           actions: [
             IconButton(

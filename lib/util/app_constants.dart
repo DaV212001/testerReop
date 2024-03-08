@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppConstants {
   static const String api = "https://learning.bhwethiopia.com/api";
+  static const String imagebaseurl = "https://learning.bhwethiopia.com/public/storage/";
   static var kAuthContainerGradient = const BoxDecoration(
     gradient: LinearGradient(
       colors: [

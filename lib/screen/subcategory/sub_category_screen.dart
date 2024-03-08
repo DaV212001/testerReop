@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
@@ -23,10 +24,11 @@ class SubCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     CategoryController controller = Get.put(CategoryController());
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: theme.primary));
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title: Text(
           subCategoryName,
           style: TextStyle(color: theme.primaryText),
@@ -80,14 +82,15 @@ class SubCategoryScreen extends StatelessWidget {
                                           subCategory[index].id.toString());
                                       pushNewScreen(context,
                                           screen: LessonScreen(
+                                            subCategoryImage: subCategory[index].image!,
                                               subCategoryId:
-                                                  subCategory[index].id,
+                                                  subCategory[index].id!,
                                               courseName:
-                                                  subCategory[index].name));
+                                                  subCategory[index].name!));
                                     },
                                     child: SubCategoryCard(
-                                        name: subCategory[index].name,
-                                        image: subCategory[index].image),
+                                        name: subCategory[index].name!,
+                                        image: subCategory[index].image!),
                                   );
                                 })
                           ]))

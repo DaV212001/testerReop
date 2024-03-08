@@ -10,7 +10,7 @@ import 'package:mss_e_learning/widget/profile_widget.dart';
 class UserScreenHeader extends StatefulWidget {
   final User user;
 
-  const UserScreenHeader({super.key, required this.user});
+  const UserScreenHeader({ required this.user});
 
   @override
   State<UserScreenHeader> createState() => _UserScreenHeaderState();
@@ -39,7 +39,7 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
         " ${lastName[0].toUpperCase()}${lastName.substring(1).toLowerCase()}";
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ProfileWidget(
@@ -50,15 +50,16 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
         ),
         const SizedBox(width: 20,),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(formattedName,
-                style:theme.titleLarge.copyWith(
+                style:theme.headlineSmall.copyWith(
                     color: theme.primary
                 )),
             const SizedBox(height: 5),
             Text("${widget.user.email}",
                 style: theme.bodyMedium.copyWith(
-                  color: theme.tertiary
+                  color: theme.secondary
                 )),
           ],
         ),

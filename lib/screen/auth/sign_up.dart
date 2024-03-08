@@ -207,6 +207,17 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                     onPress: () async {
                                       UserService userservice = UserService();
 
+                                      if(_model.firstnameController!.text.length < 2 ||
+                                          _model.lastnameController!.text.length < 2 ||
+                                          !_model.emailAddressController!.text.isEmail ||
+                                          _model.passwordController!.text.length < 8 ||
+                                          _model.phoneController!.text.length < 10){
+                                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                          content: Text('Please fill in all fields correctly.'),
+                                        ));
+                                        return;
+                                      }
+
                                       User? userResult =
                                           await userservice.signUserUp(
                                         _model.firstnameController!.text,

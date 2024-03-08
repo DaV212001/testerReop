@@ -5,8 +5,9 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mss_e_learning/config/themes/theme_manager.dart';
+import 'package:mss_e_learning/screen/bookmarks/bookmark_screen.dart';
 import 'package:mss_e_learning/screen/password/change_password_screen.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../screen/profile/change_profile_screen.dart';
 
 class RouteList extends StatelessWidget {
@@ -33,6 +34,14 @@ class RouteList extends StatelessWidget {
         "leadingIcon": buildIcon(Icons.password, context),
         "onTap": () {
           Get.to( ()=> const ChangePasswordScreen());
+        },
+        "trailing": arrowIcon
+      },
+      {
+        "title": "Bookmarks",
+        "leadingIcon": buildIcon(FontAwesomeIcons.bookmark, context),
+        "onTap": () {
+          Get.to( () => const BookMarkScreen());
         },
         "trailing": arrowIcon
       },
@@ -122,8 +131,12 @@ class RouteList extends StatelessWidget {
               child: ListTile(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(
+                    color: theme.primary.withOpacity(0.15),
+                    width: 1
+                  )
                 ),
-                tileColor: theme.primary.withOpacity(0.15),
+                tileColor: theme.primaryBackground,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 leading: item["leadingIcon"],
                 title:

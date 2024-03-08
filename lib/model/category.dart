@@ -1,4 +1,5 @@
 import 'package:mss_e_learning/model/sub_category.dart';
+import 'package:mss_e_learning/util/app_constants.dart';
 
 class Category {
   int id;
@@ -23,7 +24,7 @@ class Category {
     return Category(
       id: json['id'],
       name: json['name'],
-      image: json['image'],
+      image: AppConstants.imagebaseurl + json['image'],
       subcategory: subcategories,
     );
   }

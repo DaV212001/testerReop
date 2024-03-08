@@ -28,15 +28,13 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return Container(
-        child: PodVideoPlayer(
-          podProgressBarConfig: PodProgressBarConfig(
-              playingBarColor: theme.colorScheme.primary,
-              circleHandlerColor: theme.colorScheme.primary,
-              bufferedBarColor: theme.colorScheme.primary),
-          controller: controller,
-          backgroundColor: theme.colorScheme.tertiary
-        )
+    return PodVideoPlayer(
+      podProgressBarConfig: PodProgressBarConfig(
+          playingBarColor: theme.colorScheme.primary,
+          circleHandlerColor: theme.colorScheme.primary,
+          bufferedBarColor: theme.colorScheme.primary),
+      controller: controller,
+      backgroundColor: theme.colorScheme.tertiary
     );
   }
 

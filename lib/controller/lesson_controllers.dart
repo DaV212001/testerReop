@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:mss_e_learning/model/error_data.dart';
+import 'package:mss_e_learning/service/bookmark_services.dart';
 import 'package:mss_e_learning/util/api_call_status.dart';
 import 'package:mss_e_learning/util/error_util.dart';
 import 'package:mss_e_learning/widget/custom_snackbar.dart';
 
+import '../model/bookmark.dart';
 import '../model/level.dart';
 import '../service/lesson_service.dart';
 
@@ -18,6 +20,25 @@ class LessonController extends GetxController {
   final status = ApiCallStatus.holding.obs;
 
   final _isBookmarkLoading = false.obs;
+  Rx<bool> isBookMarked=false.obs;
+
+
+  checkIfBookMarked(int lessonId) async {
+    try {
+      List<BookMark> bookmarks = await BookMarkServices.fetchBookmarksAllAtOnce();
+      print('AMOUNT OF BOOKMARKS: ${bookmarks.length}');
+      bookmarks.forEach((element) {
+        if(element.lessons?.id == lessonId){
+          isBookMarked.value = true;
+        }
+      });
+    } on Exception catch (error) {
+      errorData.value = ErrorUtil.getErrorData(error.toString());
+      CustomSnackBar.showCustomErrorSnackBar(
+          title: 'Error Occured', message: 'Could not check if lesson was bookmarked');
+    }
+  }
+
 
   get isBookmarkLoading => _isBookmarkLoading.value;
 
@@ -40,6 +61,7 @@ class LessonController extends GetxController {
     try {
       _isBookmarkLoading.value = true;
       var response = await LessonService.addBookmarkLesson(lessonId);
+      isBookMarked.value = true;
       return response.statusCode == 200;
     } on Exception catch (error) {
       errorData.value = ErrorUtil.getErrorData(error.toString());
@@ -49,6 +71,23 @@ class LessonController extends GetxController {
       return false;
     }
   }
+
+  Future<bool> unBookmarkLesson(int lessonId) async {
+    try {
+      _isBookmarkLoading.value = true;
+      var response = await LessonService.deleteBookmarkLesson(lessonId);
+      isBookMarked.value = false;
+      return response.statusCode == 200;
+    } on Exception catch (error) {
+      errorData.value = ErrorUtil.getErrorData(error.toString());
+      CustomSnackBar.showCustomErrorSnackBar(
+          title: errorData.value.title, message: errorData.value.body);
+      _isBookmarkLoading.value = false;
+      return false;
+    }
+  }
+
+
 
   @override
   void onInit() {

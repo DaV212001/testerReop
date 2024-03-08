@@ -9,8 +9,11 @@ import '../../controller/verification_controller.dart';
 class HeaderImageAndText extends StatelessWidget {
   final String imagePath;
   final String headerText;
+  final bool showbackButton;
+  final Color? color;
+  final bool? isChangeProfile;
   const HeaderImageAndText({
-    super.key, required this.imagePath, required this.headerText,
+    super.key, required this.imagePath, required this.headerText, required this.showbackButton, this.color, this.isChangeProfile,
   });
 
   @override
@@ -19,7 +22,7 @@ class HeaderImageAndText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Padding(
+        if(showbackButton)Padding(
           padding: const EdgeInsets.only(top: 60.0),
           child: Row(
             children: [
@@ -42,18 +45,18 @@ class HeaderImageAndText extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
+        if(isChangeProfile == null)Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: SvgPicture.asset(
               imagePath,
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.2,
             )
         ).animateOnPageLoad(VerificationController().animationsMap['containerOnPageLoadAnimation1']!),
         Text(
           headerText,
           style: FlutterFlowTheme.of(context).displaySmall.override(
             fontFamily: 'Outfit',
-            color: Colors.white,),
+            color: color??Colors.white,),
           textAlign: TextAlign.center,
         ).animateOnPageLoad(VerificationController().animationsMap['containerOnPageLoadAnimation1']!),
         SizedBox(height: 10,),

@@ -46,7 +46,7 @@ ChangePasswordController controller= Get.put(ChangePasswordController());
                       const HeaderImageAndText(
                           imagePath:
                               'assets/images/illustrations/reset_password.svg',
-                          headerText: 'Change password'),
+                          headerText: 'Change password', showbackButton: true,),
                       const SizedBox(
                         height: 10,
                       ),

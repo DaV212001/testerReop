@@ -1,9 +1,11 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/screen/splash/splash_screen.dart';
 import 'package:mss_e_learning/service/firebase_service.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
+import 'package:mss_e_learning/util/firebase_options.dart';
 import 'config/config_preference.dart';
 import 'config/themes/data/app_themes.dart';
 import 'config/themes/theme_manager.dart';
@@ -42,7 +44,6 @@ class MssLearnProgramming extends StatelessWidget {
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeManager.getThemeMode(),
         getPages: AppRoutes.pages,
-        initialRoute: AppRoutes.login,
         home: const SplashScreen(),
     );
   }

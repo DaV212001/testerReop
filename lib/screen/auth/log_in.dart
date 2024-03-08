@@ -251,8 +251,8 @@ class _LogInWidgetState extends State<LogInWidget>
                 Get.toNamed(AppRoutes.initial);
               } on Exception catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Something went wrong. please try again.'),
+                  SnackBar(
+                    content: Text(e.toString().replaceFirst('Exception: ', 'Error: ')),
                   )
                 );
               }

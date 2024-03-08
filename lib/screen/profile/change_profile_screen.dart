@@ -1,12 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mss_e_learning/controller/change_password_controller.dart';
+import 'package:mss_e_learning/controller/user_controller.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
+import 'package:mss_e_learning/layout/profile/user_screen_header.dart';
+import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/widget/input_field.dart';
 import '../../controller/change_profile_controllers.dart';
+import '../../widget/profile_widget.dart';
 
 class ChangeProfileScreen extends StatefulWidget {
 
@@ -20,9 +27,10 @@ class ChangeProfileScreen extends StatefulWidget {
 class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
 final TextEditingController firstController = TextEditingController(text: ChangeProfileController().firstname.value);
 final TextEditingController lastController = TextEditingController(text: ChangeProfileController().lastname.value);
-
+final UserController uController = Get.find(tag: 'User');
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: FlutterFlowTheme.of(context).primary));
     return Scaffold(
 
       body: GetBuilder<ChangeProfileController>(
@@ -40,9 +48,18 @@ final TextEditingController lastController = TextEditingController(text: ChangeP
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const HeaderImageAndText(
+                        isChangeProfile: true,
                           imagePath:
                           'assets/images/illustrations/change_profile.svg',
-                          headerText: 'Change Profile'),
+                          headerText: 'Change Profile', showbackButton: true,),
+                      Obx(()=>CircleAvatar(
+                        radius: 50,
+                        backgroundImage: controller.profilePicture.value == null ? null : FileImage(controller.profilePicture.value!),
+                        child: controller.profilePicture.value == null ?IconButton(
+                          icon: Icon(Icons.camera_alt),
+                          onPressed: controller.pickProfilePicture,
+                        ):Container(color: Colors.transparent,),
+                      )),
                       const SizedBox(
                         height: 10,
                       ),
@@ -105,7 +122,11 @@ ChangeProfileController controller = Get.put(ChangeProfileController());
                       setState(() {
                         loading = true;
                       });
-                      await ChangeProfileController().updateUser(controller.firstname.value, controller.lastname.value);
+                      await ChangeProfileController().updateUser(
+                          controller.firstname.value,
+                          controller.lastname.value,
+                        controller.profilePicture.value!,
+                      );
                       setState(() {
                         loading = false;
                       });
@@ -141,7 +162,7 @@ ChangeProfileController controller = Get.put(ChangeProfileController());
                   return null;
                 },
                 passwordinput: false,
-                label: "First name")),
+                label: UserController.user.value?.firstname ?? 'First name')),
         Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: InputFieldWidget(
@@ -159,7 +180,7 @@ ChangeProfileController controller = Get.put(ChangeProfileController());
                   return null;
                 },
                 passwordinput: false,
-                label: "Last name")),
+                label: UserController.user.value?.lastname ?? 'Last name')),
       ],
     );
   }

@@ -1,7 +1,9 @@
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:get/get.dart';
 import 'package:mss_e_learning/config/config_preference.dart';
+import 'package:mss_e_learning/controller/user_controller.dart';
 import 'package:mss_e_learning/generated/assets.dart';
 import 'package:mss_e_learning/screen/auth/sign_up.dart';
 import 'package:mss_e_learning/screen/main_layout_screen.dart';
@@ -19,6 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<Widget> futureCall() async {
     bool isFirstLaunch = ConfigPreference.isFirstLaunch();
     String? token = await AuthService.getAuthorizationToken();
+    UserController controller = Get.put(UserController(), tag: 'User');
+    if(token != null)
+      {
+        await controller.fetchUser(token);
+      }
+
     return isFirstLaunch
         ? Future.value(const OnboardingScreen())
         : token != null
