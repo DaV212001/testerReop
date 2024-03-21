@@ -10,6 +10,10 @@ import '../model/level.dart';
 import '../service/lesson_service.dart';
 
 class LessonController extends GetxController {
+  final String? subcategoryId;
+  LessonController({this.subcategoryId = '1'});
+
+
   final _listOfLevel = <Level>[].obs;
 
   RxString subCategoryId = RxString("");
@@ -92,6 +96,6 @@ class LessonController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // getLevels();
+    getLevels(subcategoryId??"1");
   }
 }

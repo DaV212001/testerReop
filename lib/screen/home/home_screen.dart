@@ -123,12 +123,9 @@ class CategoryHorizontalList extends StatelessWidget {
             return GestureDetector(
               onTap: (){
                 pushNewScreen(context,
-                    screen: SubCategoryScreen(
-                        subCategory: controller
-                            .listOfAllCategories[iindex]
-                            .subcategory,
-                        subCategoryName: controller
-                            .listOfAllCategories[iindex].name));
+                    screen: CategoryDetailScreen(
+                      categoryId: controller
+                        .listOfAllCategories[iindex].id,));
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),

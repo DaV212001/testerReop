@@ -16,6 +16,7 @@ class UserController extends GetxController {
           user.value = User(firstname: 'Guest');
         }
         user.value = userResponse;
+        print('here 2');
         hasFetchedUser = true;
       } catch (e) {
         // Handle API call error (show error message, etc.)

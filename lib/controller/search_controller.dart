@@ -1,49 +1,25 @@
-// sub_category_controller.dart
-
 import 'package:get/get.dart';
-import 'package:mss_e_learning/service/sub_category_service.dart';
+import 'package:mss_e_learning/model/category.dart';
+import 'package:mss_e_learning/model/lesson.dart';
+import 'package:mss_e_learning/model/sub_category.dart';
+import '../service/search_services.dart';
 
-import '../model/error_data.dart';
-import '../model/sub_category.dart';
-import '../util/api_call_status.dart';
-import '../util/error_util.dart';
+class SearchControllerr extends GetxController {
+  final SearchService _searchService = SearchService();
 
-class SubCategoryController extends GetxController {
-  final SubCategoryService _subCategoryService = SubCategoryService();
-  final RxList<SubCategory> subCategories = <SubCategory>[].obs;
-  final RxList<SubCategory> filteredSubCategories = <SubCategory>[].obs;
-  final errorData = ErrorData(title: "", body: "", image: "").obs;
-  final status = ApiCallStatus.holding.obs;
+  final categories = <Category>[].obs;
+  final subcategories = <SubCategory>[].obs;
+  final lessons = <Lesson>[].obs;
 
-
-  @override
-  void onInit() {
-    super.onInit();
-    fetchSubCategories();
-  }
-
-  Future<void> fetchSubCategories() async {
-    print('CALLEDDDD');
-    status.value = ApiCallStatus.loading;
-    try {
-      final List<SubCategory> fetchedSubCategories = await _subCategoryService.getSubCategories();
-      subCategories.assignAll(fetchedSubCategories);
-      filteredSubCategories.assignAll(fetchedSubCategories); // Initialize filtered list
-      status.value = ApiCallStatus.success;
-    } on Exception catch (fetchError) {
-      status.value = ApiCallStatus.error;
-      errorData.value = ErrorUtil.getErrorData(fetchError.toString());
+  Future<void> getSearchData(String searchName) async {
+    // try {
+      final List searchData = await _searchService.getSearchData(searchName);
+      categories.assignAll(searchData[0] as List<Category>);
+      subcategories.assignAll(searchData[1] as List<SubCategory>);
+      lessons.assignAll(searchData[2] as List<Lesson>);
     }
-  }
+    // catch (e) {
+    //   print('Error fetching search data: $e');
+    // }
 
-  void filterSubCategories(String query) {
-    if (query.isEmpty) {
-      filteredSubCategories.assignAll(subCategories);
-    } else {
-      filteredSubCategories.assignAll(subCategories
-          .where((subCategory) =>
-          subCategory.name!.toLowerCase().contains(query.toLowerCase()))
-          .toList());
-    }
-  }
 }

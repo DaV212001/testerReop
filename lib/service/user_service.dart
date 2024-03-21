@@ -85,7 +85,9 @@ class UserService {
               'Authorization': 'Bearer ${await AuthService.getAuthorizationToken()}',
             },
             body: json.encode(body));
-    if (response.statusCode != 200 || response.statusCode != 201) {
+    print(response.statusCode);
+    print(response.body);
+    if (response.statusCode != 200) {
       throw Exception(jsonDecode(response.body)['message']?? "Failed to register token");
     }
 
@@ -218,12 +220,7 @@ print(request.fields);
       ) async {
     const String apiUrl = '${AppConstants.api}/user';
 
-    // Create a Map object with the user data
-    final Map<String, dynamic> userData = {
 
-    };
-
-    print(jsonEncode(userData));
 
     final Response response = await get(Uri.parse(apiUrl),
         headers: {

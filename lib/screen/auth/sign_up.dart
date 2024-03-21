@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:mss_e_learning/screen/app_documentation/terms_and_conditions_screen.dart';
 import 'package:mss_e_learning/service/user_service.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:mss_e_learning/widget/button.dart';
@@ -94,7 +95,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
 
     super.dispose();
   }
-
+bool agreedToTerms = false;
   @override
   Widget build(BuildContext context) {
     if (isiOS) {
@@ -201,43 +202,96 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                 const Header(),
                                 buildForm(context),
                                 Padding(
+                                  padding: const EdgeInsets.only(top: 18.0),
+                                  child: CheckboxListTile(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    value: agreedToTerms,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        agreedToTerms = value!;
+                                      });
+                                    },
+                                    title: const Text("I agree with the terms and conditions",
+                                        style: TextStyle(color: Colors.black)),
+                                    controlAffinity: ListTileControlAffinity.leading, // add this line
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => TermAndConditionScreen()));
+                                    },
+                                    child: const Center(
+                                      child: Text(
+                                          "Terms and Conditions",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(color: Colors.blue),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
                                   child: Button(
+                                    agreedToTerms: agreedToTerms,
                                     onPress: () async {
-                                      UserService userservice = UserService();
+                                      if(agreedToTerms) {
+                                        UserService userservice = UserService();
 
-                                      if(_model.firstnameController!.text.length < 2 ||
-                                          _model.lastnameController!.text.length < 2 ||
-                                          !_model.emailAddressController!.text.isEmail ||
-                                          _model.passwordController!.text.length < 8 ||
-                                          _model.phoneController!.text.length < 10){
-                                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                          content: Text('Please fill in all fields correctly.'),
-                                        ));
-                                        return;
-                                      }
+                                        if (_model.firstnameController!.text
+                                            .length < 2 ||
+                                            _model.lastnameController!.text
+                                                .length < 2 ||
+                                            !_model.emailAddressController!.text
+                                                .isEmail ||
+                                            _model.passwordController!.text
+                                                .length < 8 ||
+                                            _model.phoneController!.text
+                                                .length < 10) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                            content: Text(
+                                                'Please fill in all fields correctly.'),
+                                          ));
+                                          return;
+                                        }
 
-                                      User? userResult =
-                                          await userservice.signUserUp(
-                                        _model.firstnameController!.text,
-                                        _model.lastnameController!.text,
-                                        _model.emailAddressController!.text,
-                                        _model.phoneController!.text,
-                                        _model.passwordController!.text,
-                                      );
+                                        User? userResult =
+                                        await userservice.signUserUp(
+                                          _model.firstnameController!.text,
+                                          _model.lastnameController!.text,
+                                          _model.emailAddressController!.text,
+                                          _model.phoneController!.text,
+                                          _model.passwordController!.text,
+                                        );
 
-                                      if (userResult.firstname == _model.firstnameController!.text) {
-                                        Get.toNamed(AppRoutes.login);
+                                        if (userResult.firstname == _model
+                                            .firstnameController!.text) {
+                                          Get.toNamed(AppRoutes.login);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                            content: Text(
+                                                'Failed to Sign Up. Please try again.'),
+                                            backgroundColor: Colors.red,
+                                          ));
+                                        }
+
+                                        setState(() {});
                                       } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                          content: Text('Failed to Sign Up. Please try again.'),
-                                          backgroundColor: Colors.red,
+                                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                          content: Text(
+                                              'Please agree to the terms and conditions.'
+                                          )
                                         ));
                                       }
-
-                                      setState(() {});
                                     },
                                     text: 'Create Account',
                                   ),

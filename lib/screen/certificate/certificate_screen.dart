@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
-
 import '../../controller/certificate_controller.dart';
 import 'package:get/get.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../widget/certificate/certificate_card.dart';
 import '../../widget/load_more_button.dart';
 

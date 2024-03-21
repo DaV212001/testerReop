@@ -51,12 +51,9 @@ class CategoryScreen extends StatelessWidget {
                             return GestureDetector(
                                 onTap: () {
                                   pushNewScreen(context,
-                                      screen: SubCategoryScreen(
-                                          subCategory: controller
-                                              .listOfAllCategories[index]
-                                              .subcategory,
-                                          subCategoryName: controller
-                                              .listOfAllCategories[index].name));
+                                      screen: CategoryDetailScreen(
+                                          categoryId: controller
+                                          .listOfAllCategories[index].id,));
                                 },
                                 child: CategoryCard(
                                   name:
@@ -65,7 +62,7 @@ class CategoryScreen extends StatelessWidget {
                                       controller.listOfAllCategories[index].image,
                                   numberOfCourses: controller
                                       .listOfAllCategories[index]
-                                      .subcategory
+                                      .subcategories
                                       .length
                                       .toString(),
                                 ));

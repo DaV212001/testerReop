@@ -8,6 +8,9 @@ import 'package:mss_e_learning/config/themes/theme_manager.dart';
 import 'package:mss_e_learning/screen/bookmarks/bookmark_screen.dart';
 import 'package:mss_e_learning/screen/password/change_password_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mss_e_learning/screen/app_documentation/privacy_policy_screen.dart';
+import '../../screen/app_documentation/faq_screen.dart';
+import '../../screen/app_documentation/terms_and_conditions_screen.dart';
 import '../../screen/profile/change_profile_screen.dart';
 
 class RouteList extends StatelessWidget {
@@ -83,19 +86,25 @@ class RouteList extends StatelessWidget {
       {
         "title": "Privacy Policy",
         "leadingIcon": buildIcon(Icons.privacy_tip_outlined, context),
-        "onTap": () {},
+        "onTap": () {
+          Get.to(()=> const PrivacyPolicyScreen());
+        },
         "trailing": arrowIcon
       },
       {
         "title": "FAQ",
         "leadingIcon": buildIcon(Icons.question_mark, context),
-        "onTap": () {},
+        "onTap": () {
+          Get.to(()=> FAQScreen());
+        },
         "trailing": arrowIcon
       },
       {
         "title": "Terms And Conditions",
         "leadingIcon": buildIcon(Icons.error, context),
-        "onTap": () {},
+        "onTap": () {
+          Get.to(()=>  TermAndConditionScreen());
+        },
         "trailing": arrowIcon
       },
       {

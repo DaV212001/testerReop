@@ -13,24 +13,25 @@ import '../../controller/lesson_controllers.dart';
 import '../../widget/sub_category/sub_category_card.dart';
 import '../lesson/lesson_screen.dart';
 
-class SubCategoryScreen extends StatelessWidget {
-  List<SubCategory> subCategory;
-  String subCategoryName;
+class CategoryDetailScreen extends StatelessWidget {
+  int categoryId;
 
-  SubCategoryScreen(
-      {super.key, required this.subCategory, required this.subCategoryName});
+  CategoryDetailScreen(
+      {super.key, required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     CategoryController controller = Get.put(CategoryController());
     // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: theme.primary));
+    List<SubCategory> subCategories = controller.listOfAllCategories.firstWhere((element) => element.id == categoryId).subcategories;
+    String categoryName= controller.listOfAllCategories.firstWhere((element) => element.id == categoryId).name;
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title: Text(
-          subCategoryName,
+          categoryName,
           style: TextStyle(color: theme.primaryText),
         ),
         leading: IconButton(
@@ -61,7 +62,7 @@ class SubCategoryScreen extends StatelessWidget {
                           onRefresh: () => controller.getCategories(),
                           child: Column(children: [
                             MasonryGridView.count(
-                                itemCount: subCategory.length,
+                                itemCount: subCategories.length,
                                 physics: const BouncingScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 crossAxisCount: 2,
@@ -73,24 +74,26 @@ class SubCategoryScreen extends StatelessWidget {
                                   return GestureDetector(
                                     onTap: () {
                                       LessonController levelController =
-                                          Get.put(LessonController());
+                                          Get.put(LessonController(subcategoryId: subCategories[index].id.toString()));
                                       levelController.subCategoryId.value =
-                                          subCategory[index].id.toString();
+                                          subCategories[index].id.toString();
                                       print(
                                           levelController.subCategoryId.value);
                                       levelController.getLevels(
-                                          subCategory[index].id.toString());
+                                          subCategories[index].id.toString());
                                       pushNewScreen(context,
-                                          screen: LessonScreen(
-                                            subCategoryImage: subCategory[index].image!,
+                                          screen: SubCategoryDetailScreen(
+                                            subCategoryImage: subCategories[index].image!,
                                               subCategoryId:
-                                                  subCategory[index].id!,
+                                                  subCategories[index].id!,
                                               courseName:
-                                                  subCategory[index].name!));
+                                                  subCategories[index].name!));
                                     },
                                     child: SubCategoryCard(
-                                        name: subCategory[index].name!,
-                                        image: subCategory[index].image!),
+                                      name: subCategories[index].name!,
+                                      image: subCategories[index].image!,
+                                      price: subCategories[index].price!.toString(),
+                                    ),
                                   );
                                 })
                           ]))

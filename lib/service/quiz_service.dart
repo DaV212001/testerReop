@@ -29,7 +29,7 @@ class QuizService {
     const String apiUrl = '${AppConstants.api}/test_result';
     String? token = await AuthService.getAuthorizationToken();
 
-    try {
+    // try {
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: {
@@ -43,7 +43,8 @@ class QuizService {
           'number_of_questions': numberOfQuestions,
         }),
       );
-
+      print(response.statusCode);
+print(response.body);
       final responseData = jsonDecode(response.body);
       final bool success = responseData['success'];
       final dynamic message = responseData['message'];
@@ -53,9 +54,9 @@ class QuizService {
       } else {
         throw Exception(message);
       }
-    } catch (e) {
-      throw Exception('Error sending test result: $e');
-    }
+    // } catch (e) {
+    //   throw Exception('Error sending test result: $e');
+    // }
   }
 
 

@@ -80,6 +80,7 @@ class _AdsCarouselState extends State<AdsCarousel> {
                                   child: CachedImage(
                                     url: promotion.image!,
                                     fit: BoxFit.fill,
+                                    fromCarousel: true,
                                   ),
                                 ),
                               ),

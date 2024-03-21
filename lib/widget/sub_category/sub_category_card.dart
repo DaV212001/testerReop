@@ -8,7 +8,8 @@ import '../cached_image.dart';
 class SubCategoryCard extends StatelessWidget {
   final String name;
   final String image;
-  const SubCategoryCard({super.key, required this.name,required this.image});
+  final String price;
+  const SubCategoryCard({super.key, required this.name,required this.image, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,14 @@ class SubCategoryCard extends StatelessWidget {
                 width: double.infinity,
                 margin: const EdgeInsets.only(top: 5, left: 7),
                 child: Text(name,
+                    style: TextStyle(
+                        color: theme.primaryText
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 5, left: 7),
+                child: Text('$price ETB',
                     style: TextStyle(
                         color: theme.primaryText
                     )),

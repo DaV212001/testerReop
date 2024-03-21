@@ -4,9 +4,9 @@ import 'level.dart';
 
 class TestResult{
   int? id;
-  String? userid;
-  String? rank;
-  String? noOfQuestions;
+  int? userid;
+  int? rank;
+  int? noOfQuestions;
   Level? level;
   SubCategory? subCategory;
 
@@ -21,12 +21,12 @@ class TestResult{
 
   factory TestResult.fromJson(Map<String, dynamic> json) {
     return TestResult(
-      id: json['id'],
-      userid: json['user_id'],
-      rank: json['rank'],
-      noOfQuestions: json['number_of_questions'],
-      level: Level.fromJson(json['level']),
-      subCategory: SubCategory.fromJson(json['subcategory']),
+      id: json['id'] is String? int.parse(json['id']):json['id'],
+      userid: json['user_id'] is String? int.parse(json['user_id']):json['user_id'],
+      rank: json['rank'] is String? int.parse(json['rank']):json['rank'],
+      noOfQuestions: json['number_of_questions'] is String? int.parse(json['number_of_questions']):json['number_of_questions'],
+      level: json.containsKey('level')?Level.fromJson(json['level']):null,
+      subCategory: json.containsKey('subcategory')?SubCategory.fromJson(json['subcategory']):null,
     );
   }
 }

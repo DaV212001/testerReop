@@ -191,13 +191,15 @@ class CertificateController extends GetxController {
   }
 
   Future<void> fetchCertificates() async {
+    isLoading.value = true;
     try {
       final certs = await CertificateServices.fetchCertificates(currentPage);
-      if (certs.isEmpty) {
+      if (certs[1]) {
+        print('here');
         hasMorePages.value = false; // No more pages
         return;
       } else {
-        certificates.addAll(certs);
+        certificates.addAll(certs[0]);
         currentPage++;
       }
     } catch (e) {

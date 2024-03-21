@@ -47,7 +47,7 @@ class SubCatGrid extends StatelessWidget {
                           MasonryGridView.count(
                               itemCount: controller
                                   .listOfAllCategories[iindex]
-                                  .subcategory.length,
+                                  .subcategories.length,
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               crossAxisCount: 2,
@@ -61,22 +61,24 @@ class SubCatGrid extends StatelessWidget {
                                     LessonController levelController =
                                     Get.put(LessonController());
                                     levelController.subCategoryId.value =
-                                        controller.listOfAllCategories[iindex].subcategory[index].id.toString();
+                                        controller.listOfAllCategories[iindex].subcategories[index].id.toString();
                                     print(
                                         levelController.subCategoryId.value);
                                     levelController.getLevels(
-                                        controller.listOfAllCategories[iindex].subcategory[index].id.toString());
+                                        controller.listOfAllCategories[iindex].subcategories[index].id.toString());
                                     pushNewScreen(context,
-                                        screen: LessonScreen(
-                                          subCategoryImage: controller.listOfAllCategories[iindex].subcategory[index].image!,
+                                        screen: SubCategoryDetailScreen(
+                                          subCategoryImage: controller.listOfAllCategories[iindex].subcategories[index].image!,
                                             subCategoryId:
-                                            controller.listOfAllCategories[iindex].subcategory[index].id!,
+                                            controller.listOfAllCategories[iindex].subcategories[index].id!,
                                             courseName:
-                                            controller.listOfAllCategories[iindex].subcategory[index].name!));
+                                            controller.listOfAllCategories[iindex].subcategories[index].name!));
                                   },
                                   child: SubCategoryCard(
-                                      name:  controller.listOfAllCategories[iindex].subcategory[index].name!,
-                                      image:  controller.listOfAllCategories[iindex].subcategory[index].image!),
+                                      name:  controller.listOfAllCategories[iindex].subcategories[index].name!,
+                                      image:  controller.listOfAllCategories[iindex].subcategories[index].image!,
+                                      price: controller.listOfAllCategories[iindex].subcategories[index].price!.toString(),
+                                  ),
                                 );
                               })
                         ],

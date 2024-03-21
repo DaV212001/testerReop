@@ -5,12 +5,12 @@ class Button extends StatelessWidget {
   final String text;
   final VoidCallback onPress;
   final bool hasLoader;
-
+  final bool? agreedToTerms;
   const Button(
       {super.key,
       required this.text,
       required this.onPress,
-      this.hasLoader = true});
+      this.hasLoader = true, this.agreedToTerms});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class Button extends StatelessWidget {
         height: 44,
         padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        color: FlutterFlowTheme.of(context).primary,
+        color: agreedToTerms != null? agreedToTerms == true? FlutterFlowTheme.of(context).primary : Colors.grey : FlutterFlowTheme.of(context).primary,
         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
               fontFamily: 'Poppins',
               color: Colors.white,

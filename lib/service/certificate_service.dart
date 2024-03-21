@@ -8,7 +8,8 @@ import '../model/certificate.dart';
 import '../util/certificate_placeholder.dart';
 
 class CertificateServices {
-  static Future<List<Certificates>> fetchCertificates(int page) async {
+  static Future<List<dynamic>> fetchCertificates(int page) async {
+    bool endingPage = false;
     final response = await get(
         Uri.parse(
             '${AppConstants.api}/certificate?page=$page&populate=true&paginate=10'),
@@ -19,12 +20,14 @@ class CertificateServices {
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       List<dynamic> certificateList = jsonData['data']['data'];
-
+      if(jsonData['data']['next_page_url'] == null){
+        endingPage = true;
+      }
       final List<dynamic> placeholderEnabler = ['Certificates(subcategory'];
       // Parse the certificateList and return a list of Certificates
       var certificates =
           certificateList.map((json) => Certificates.fromJson(json)).toList();
-      return certificates;
+      return [certificates, endingPage];
     } else {
       throw Exception('Failed to load certificates');
     }

@@ -18,17 +18,17 @@ import '../../controller/user_controller.dart';
 import '../../layout/lesson/lesson_details.dart';
 import '../quiz/quiz_screen.dart';
 
-class LessonScreen extends StatefulWidget {
+class SubCategoryDetailScreen extends StatefulWidget {
   final int subCategoryId;
   final String subCategoryImage;
   final String courseName;
-  const LessonScreen({super.key, required this.subCategoryId, required this.subCategoryImage, required this.courseName});
+  const SubCategoryDetailScreen({super.key, required this.subCategoryId, required this.subCategoryImage, required this.courseName});
 
   @override
-  State<LessonScreen> createState() => _LessonScreenState();
+  State<SubCategoryDetailScreen> createState() => _SubCategoryDetailScreenState();
 }
 
-class _LessonScreenState extends State<LessonScreen> {
+class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
 
 
 
@@ -36,26 +36,10 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
 
-    LessonController controller = Get.put(LessonController());
+    LessonController controller = Get.put(LessonController(subcategoryId: widget.subCategoryId.toString()));
     return Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        // appBar: AppBar(
-        //   backgroundColor: Colors.white,
-        //   // systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.dark, systemStatusBarContrastEnforced: true),
-        //   title: Text(
-        //     courseName,
-        //     style: TextStyle(color: theme.primaryText),
-        //   ),
-        //   leading: IconButton(
-        //     icon: Icon(
-        //       Icons.arrow_back,
-        //       color: theme.primaryText,
-        //     ),
-        //     onPressed: () {
-        //       Navigator.of(context).pop();
-        //     },
-        //   ),
-        // ),
+
         body: Obx(() => controller.status.value == ApiCallStatus.loading
             ? const Padding(
           padding: EdgeInsets.all(50.0),
@@ -109,14 +93,14 @@ class _LessonScreenState extends State<LessonScreen> {
                               errorBuilder:  (context, url, error) => Icon(Icons.play_lesson_outlined, color: FlutterFlowTheme.of(context).primary),
                             ).image,
                           ),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               blurRadius: 2,
                               color: Color(0x17202529),
                               offset: Offset(0, 1),
                             )
                           ],
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(0),
                             bottomRight: Radius.circular(0),
                             topLeft: Radius.circular(0),
@@ -124,7 +108,7 @@ class _LessonScreenState extends State<LessonScreen> {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 36, 16, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(16, 36, 16, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,

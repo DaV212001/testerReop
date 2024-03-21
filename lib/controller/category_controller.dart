@@ -12,6 +12,8 @@ import '../service/promotion_services.dart';
 
 
 class CategoryController extends GetxController {
+
+
   final _listOfCategory = <Category>[].obs;
 
   List<Category> get listOfAllCategories => _listOfCategory;
@@ -72,7 +74,6 @@ class CategoryController extends GetxController {
     super.onInit();
     getPromotions();
     getCategories();
-
   }
 
 }

@@ -20,7 +20,7 @@ class User {
   });
 
   User.fromJson(Map<String, dynamic> json) {
-    print(AppConstants.imagebaseurl+(json['profile_picture']) );
+    if(json.containsKey('profile_picture')) {print(AppConstants.imagebaseurl+(json['profile_picture']));}
 
     firstname = json['first_name'];
     lastname = json['last_name'];

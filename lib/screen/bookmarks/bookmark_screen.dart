@@ -71,6 +71,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                             controller.bookmarks[index].lessons!.title,
                             image:
                             controller.bookmarks[index].lessons!.image,
+                            price: '',
                           ));
                     } else if (controller.hasMorePages.value) {
                       // Show a loading indicator or button to load more

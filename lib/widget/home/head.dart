@@ -86,7 +86,7 @@ class HomeScreenHeader extends StatelessWidget {
                   tag: 'Search',
                   child: GestureDetector(
                       onTap: () {
-                        Get.to(() => const SearchCoursesScreen());
+                        Get.to(() =>  SearchScreen());
                       },
                       child: Container(
                         decoration: BoxDecoration(

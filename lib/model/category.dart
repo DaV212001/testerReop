@@ -5,13 +5,13 @@ class Category {
   int id;
   String name;
   String image;
-  List<SubCategory> subcategory;
+  List<SubCategory> subcategories;
 
   Category({
     required this.id,
     required this.name,
     required this.image,
-    required this.subcategory
+    required this.subcategories
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
@@ -22,10 +22,10 @@ class Category {
       });
     }
     return Category(
-      id: json['id'],
-      name: json['name'],
-      image: AppConstants.imagebaseurl + json['image'],
-      subcategory: subcategories,
+      id: json.containsKey('id')?json['id']:-1,
+      name: json.containsKey('name') ?json['name']:'',
+      image: json.containsKey('image')?AppConstants.imagebaseurl + json['image']:'',
+      subcategories: subcategories,
     );
   }
 }

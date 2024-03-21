@@ -32,7 +32,7 @@ class _CertificateCardState extends State<CertificateCard> {
             BoxShadow(
               color: FlutterFlowTheme.of(context).primary,
               blurRadius: 2,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             )
           ],
         ),
@@ -78,43 +78,67 @@ class _CertificateCardState extends State<CertificateCard> {
               Divider(),
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: PieChart(
-            dataMap: {
-              'Rank': double.parse(widget.certificate.testResult.rank!),
-              'No. of Questions': double.parse(widget.certificate.testResult.noOfQuestions!) - double.parse(widget.certificate.testResult.rank!),
-            },
-            animationDuration: const Duration(milliseconds: 800),
-            chartLegendSpacing: 32,
-            chartRadius: MediaQuery.of(context).size.width / 3.2,
-            colorList: [
-              FlutterFlowTheme.of(context).primary,
-              FlutterFlowTheme.of(context).secondary,
-            ],
-            initialAngleInDegree: 0,
-            chartType: ChartType.disc,
-            ringStrokeWidth: 32,
-            legendOptions: LegendOptions(
-              showLegendsInRow: false,
-              legendPosition: LegendPosition.right,
-              showLegends: true,
-              legendShape: BoxShape.circle,
-              legendTextStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                fontFamily: 'Poppins',
-                color: FlutterFlowTheme.of(context).secondaryText,
-              ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                'Rank - ${widget.certificate.testResult.rank}',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Poppins',
+                  color: FlutterFlowTheme.of(context).secondaryText
+                ),
+              )
             ),
-            chartValuesOptions: ChartValuesOptions(
-          showChartValuesInPercentage: true,
-          chartValueStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-            fontFamily: 'Poppins',
-            color: FlutterFlowTheme.of(context).primaryText
-          ),
-          chartValueBackgroundColor: Colors.transparent,
-          showChartValues: true,
-          showChartValuesOutside: false,
-          decimalPlaces: 0,
-        ),
-              ),
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                'No. of Questions - ${widget.certificate.testResult.noOfQuestions}',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Poppins',
+                  color: FlutterFlowTheme.of(context).secondaryText
+                )
+              )
+            )
+          ],
+        )
+        // PieChart(
+        //     dataMap: {
+        //       'Rank': widget.certificate.testResult.rank!.toDouble(),
+        //       'No. of Questions': widget.certificate.testResult.noOfQuestions!.toDouble() - widget.certificate.testResult.rank!.toDouble(),
+        //     },
+        //     animationDuration: const Duration(milliseconds: 800),
+        //     chartLegendSpacing: 32,
+        //     chartRadius: MediaQuery.of(context).size.width / 3.2,
+        //     colorList: [
+        //       FlutterFlowTheme.of(context).primary,
+        //       FlutterFlowTheme.of(context).secondary,
+        //     ],
+        //     initialAngleInDegree: 0,
+        //     chartType: ChartType.disc,
+        //     ringStrokeWidth: 32,
+        //     legendOptions: LegendOptions(
+        //       showLegendsInRow: false,
+        //       legendPosition: LegendPosition.right,
+        //       showLegends: true,
+        //       legendShape: BoxShape.circle,
+        //       legendTextStyle: FlutterFlowTheme.of(context).bodySmall.override(
+        //         fontFamily: 'Poppins',
+        //         color: FlutterFlowTheme.of(context).secondaryText,
+        //       ),
+        //     ),
+        //     chartValuesOptions: ChartValuesOptions(
+        //   showChartValuesInPercentage: true,
+        //   chartValueStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+        //     fontFamily: 'Poppins',
+        //     color: FlutterFlowTheme.of(context).primaryText
+        //   ),
+        //   chartValueBackgroundColor: Colors.transparent,
+        //   showChartValues: true,
+        //   showChartValuesOutside: false,
+        //   decimalPlaces: 0,
+        // ),
+        //       ),
       ),
             ]
           ),

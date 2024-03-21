@@ -24,7 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
     UserController controller = Get.put(UserController(), tag: 'User');
     if(token != null)
       {
+        print('here');
         await controller.fetchUser(token);
+        print('here 3');
       }
 
     return isFirstLaunch
