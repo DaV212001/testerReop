@@ -23,7 +23,7 @@ class Button extends StatelessWidget {
         height: 44,
         padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        color: agreedToTerms != null? agreedToTerms == true? FlutterFlowTheme.of(context).primary : Colors.grey : FlutterFlowTheme.of(context).primary,
+        color: agreedToTerms != null? agreedToTerms == true? Color(0xFFFF2C20) : Colors.grey : Color(0xFFFF2C20),
         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
               fontFamily: 'Poppins',
               color: Colors.white,

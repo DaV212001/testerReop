@@ -83,11 +83,11 @@ class _QuizScreenState extends State<QuizScreen> {
                                         options: FFButtonOptions(
                                           width: 150,
                                           height: 50,
-                                          color: theme.primary,
+                                          color: Color(0xFFFF2C20),
                                           textStyle: theme.titleSmall,
                                           elevation: 0,
                                           borderSide: BorderSide(
-                                            color: theme.primary,
+                                            color: Color(0xFFFF2C20),
                                             width: 1,
                                           ),
                                           borderRadius:
@@ -115,7 +115,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                                   .currentQuestionIndex
                                                   .value]
                                                   .id)
-                                              ? theme.primary
+                                              ? Color(0xFFFF2C20)
                                               : Colors.grey,
                                           textStyle: theme.titleSmall,
                                           elevation: 0,

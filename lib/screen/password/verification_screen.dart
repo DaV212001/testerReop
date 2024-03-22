@@ -96,7 +96,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        backgroundColor: FlutterFlowTheme.of(context).primary),
+                        backgroundColor: Color(0xFFFF2C20)),
                     onPressed: () {
                       // TODO: Implement verification logic here
                       Get.to( () => ResetPasswordScreen());

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mss_e_learning/model/error_data.dart';
 import 'package:mss_e_learning/model/sub_category.dart';
 import 'package:mss_e_learning/service/category_service.dart';
@@ -7,6 +8,7 @@ import 'package:mss_e_learning/util/api_call_status.dart';
 import 'package:mss_e_learning/util/error_util.dart';
 
 import '../model/category.dart';
+import '../model/lesson.dart';
 import '../model/promotion.dart';
 import '../service/promotion_services.dart';
 
@@ -23,6 +25,11 @@ class CategoryController extends GetxController {
 
   final _listOfPromotions = <Promotion>[].obs;
   List<Promotion> get listOfPromotions => _listOfPromotions;
+  Rx<SubCategory> _subCategory = SubCategory().obs;
+  SubCategory get subCategory => _subCategory.value;
+
+  final _listOfAllLessons = <Lesson>[].obs;
+  List<Lesson> get listOfAllLessons => _listOfAllLessons;
 
 
   getPromotions() async {
@@ -61,6 +68,14 @@ class CategoryController extends GetxController {
       status.value = ApiCallStatus.loading;
       SubCategory response = await SubCategoryService().getSubCatById(
           subCategoryId);
+      _subCategory.value = response;
+      if(subCategory.levels !=null ){
+      subCategory.levels?.forEach((element) {
+        for(Lesson i in element.lessons){
+          _listOfAllLessons.add(i);
+        }
+      });
+      }
       status.value = ApiCallStatus.success;
       return response;
     } on Exception catch (fetchError) {
@@ -69,9 +84,21 @@ class CategoryController extends GetxController {
     }
   }
 
+  List<Lesson> getAlllessons(){
+    if(subCategory.levels !=null ){
+      subCategory.levels?.forEach((element) {
+        for(Lesson i in element.lessons){
+          _listOfAllLessons.add(i);
+        }
+      });
+    }
+    return listOfAllLessons;
+  }
+
   @override
   void onInit() {
     super.onInit();
+    getSubCategoryById(11);
     getPromotions();
     getCategories();
   }

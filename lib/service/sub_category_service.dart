@@ -6,11 +6,14 @@ import '../util/app_constants.dart';
 class SubCategoryService{
 
   Future<SubCategory> getSubCatById(int subCategoryId) async {
+    print('CALLLEDDDDDD');
     final response = await get(
         Uri.parse('${AppConstants.api}/sub_category/$subCategoryId?populate=true'));
+    print('CHECKING SUBCATEGORY: ${response.body}');
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonData = json.decode(response.body);
       Map<String, dynamic> levelsJson = jsonData["data"];
+      print('CHECKING JSON: ${levelsJson['levels']}');
       return SubCategory.fromJson(levelsJson);
     } else {
       throw Exception(response.statusCode);

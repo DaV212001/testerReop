@@ -54,12 +54,12 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
           children: [
             Text(formattedName,
                 style:theme.headlineSmall.copyWith(
-                    color: theme.primary
+                    color: Color(0xFFFF2C20)
                 )),
             const SizedBox(height: 5),
             Text("${widget.user.email}",
                 style: theme.bodyMedium.copyWith(
-                  color: theme.secondary
+                  color: Color(0xFFFF2C20).withOpacity(0.5)
                 )),
           ],
         ),

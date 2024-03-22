@@ -156,15 +156,15 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                             tabs: [
                               Tab(child: Text('Lessons',
                                   style: TextStyle(fontSize: 16,
-                                      color: theme.primary
+                                      color: Color(0xFFFF2C20)
                                   ))),
                               Tab(child: Text('PDFs',
                                   style: TextStyle(fontSize: 16,
-                                      color: theme.primary
+                                      color: Color(0xFFFF2C20)
                                   ))),
                               Tab(child: Text('Videos',
                                   style: TextStyle(fontSize: 16,
-                                      color: theme.primary
+                                      color: Color(0xFFFF2C20)
                                   )))
                             ]
                         )

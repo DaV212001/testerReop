@@ -61,7 +61,7 @@ class HomeScreenHeader extends StatelessWidget {
                 ),
                 UserController.user.value!.profilepicture == null ? Icon(
                   Icons.person_2_outlined,
-                  color: FlutterFlowTheme.of(context).primary,
+                  color: Color(0xFFFF2C20),
                   size: MediaQuery.of(context).size.width * 0.1,
                 ):
                     Container(

@@ -50,7 +50,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
             refresh: () => controller.fetchPrivacyPolicy(),
           )
               : RefreshIndicator(
-              color: theme.primary,
+              color: Color(0xFFFF2C20),
               displacement: 100,
               onRefresh: () => controller.fetchPrivacyPolicy(),
               child: Padding(

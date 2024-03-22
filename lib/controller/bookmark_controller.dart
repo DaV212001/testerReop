@@ -53,13 +53,13 @@ String statusS = '';
       status.value = ApiCallStatus.loading;
 
       final certs = await BookMarkServices.fetchBookmarks(currentPage);
-      if (certs.isEmpty) {
+      if (certs[1]) {
         print('emptyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
         hasMorePages.value = false;// No more pages
         status.value = ApiCallStatus.success;
         return;
       } else {
-        bookmarks.addAll(certs);
+        bookmarks.addAll(certs[0]);
         currentPage++;
       }
       status.value = ApiCallStatus.success;

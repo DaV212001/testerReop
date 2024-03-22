@@ -17,6 +17,7 @@ import '../../layout/home/category_section.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../model/user.dart';
 import '../../widget/home/head.dart';
+import '../levels/level_detail_screen.dart';
 import '../search/search_screen.dart';
 import '../subcategory/sub_category_screen.dart';
 
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'Courses',
+                                    'Lessons',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .override(
@@ -89,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                   ),
                                 ),
-                                const SubCatGrid(),
+                                SubCatGrid(listOfLessons: controller.getAlllessons(),),
                               ],
                             ),
                           ),
@@ -112,20 +113,24 @@ class CategoryHorizontalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>SizedBox(
+    return Obx(()=>
+        controller.subCategory.levels==null? const SizedBox():
+        SizedBox(
       height: MediaQuery.of(context).size.height *0.17,
       child: ListView.builder(
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
-          itemCount: controller.listOfAllCategories.length,
+          itemCount: controller.subCategory.levels?.length,
           itemBuilder: (context, iindex) {
             return GestureDetector(
               onTap: (){
                 pushNewScreen(context,
-                    screen: CategoryDetailScreen(
-                      categoryId: controller
-                        .listOfAllCategories[iindex].id,));
+                    screen: LevelDetailScreen(
+                      level: controller.subCategory.levels![iindex],
+                      image: controller.subCategory.image!,
+                    ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -140,7 +145,7 @@ class CategoryHorizontalList extends StatelessWidget {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: CachedImage(
-                              url: controller.listOfAllCategories[iindex].image,
+                              url: controller.subCategory.image??'',
                               fit: BoxFit.cover
                           )
                       ),
@@ -150,13 +155,11 @@ class CategoryHorizontalList extends StatelessWidget {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.height *0.1,
                         child: Text(
-                            controller.listOfAllCategories[iindex].name,
+                            controller.subCategory.levels![iindex].name,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-
                             style: FlutterFlowTheme.of(context).bodySmall.override(
                               fontFamily: 'Poppins',
-
                             )
                         ),
                       ),

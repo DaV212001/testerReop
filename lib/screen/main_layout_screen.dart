@@ -34,7 +34,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
     List<Widget> buildScreens() {
       return [
         const HomeScreen(), //Home Page
-        const CategoryScreen(), //Category Page
+        // const CategoryScreen(), //Category Page
          CertificatesListScreen(), //Cart Page
         const ProfileScreen()
       ];
@@ -66,7 +66,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
-    Color activeColor = theme.primary;
+    Color activeColor = Color(0xFFFF2C20);
     Color inactiveColor = theme.primaryText.withOpacity(0.5);
     return [
       PersistentBottomNavBarItem(
@@ -84,21 +84,21 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           inactiveColorPrimary: inactiveColor,
           routeAndNavigatorSettings:
               const RouteAndNavigatorSettings(initialRoute: AppRoutes.home)),
-      PersistentBottomNavBarItem(
-          icon: Icon(
-            FontAwesomeIcons.list,
-            color: activeColor,
-          ),
-          inactiveIcon: Icon(
-            FontAwesomeIcons.list,
-            color: inactiveColor,
-          ),
-          title: ('Category'),
-          textStyle: const TextStyle(fontSize: 10),
-          activeColorPrimary: activeColor,
-          inactiveColorPrimary: inactiveColor,
-          routeAndNavigatorSettings: const RouteAndNavigatorSettings(
-              initialRoute: AppRoutes.category)),
+      // PersistentBottomNavBarItem(
+      //     icon: Icon(
+      //       FontAwesomeIcons.list,
+      //       color: activeColor,
+      //     ),
+      //     inactiveIcon: Icon(
+      //       FontAwesomeIcons.list,
+      //       color: inactiveColor,
+      //     ),
+      //     title: ('Category'),
+      //     textStyle: const TextStyle(fontSize: 10),
+      //     activeColorPrimary: activeColor,
+      //     inactiveColorPrimary: inactiveColor,
+      //     routeAndNavigatorSettings: const RouteAndNavigatorSettings(
+      //         initialRoute: AppRoutes.category)),
       PersistentBottomNavBarItem(
           icon: Icon(
             FontAwesomeIcons.certificate,

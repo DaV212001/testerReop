@@ -65,7 +65,7 @@ class CertificateController extends GetxController {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: Color(0xFFFF2C20),
                           blurRadius: 2,
                           offset: Offset(0, 2),
                         )
@@ -153,7 +153,7 @@ class CertificateController extends GetxController {
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
-                                        FlutterFlowTheme.of(context).primary,
+                                    Color(0xFFFF2C20),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(

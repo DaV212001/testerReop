@@ -35,7 +35,7 @@ class CategoryScreen extends StatelessWidget {
                       refresh: () => controller.getCategories(),
                     )
                   : RefreshIndicator(
-                      color: theme.primary,
+                      color: Color(0xFFFF2C20),
                       displacement: 100,
                       onRefresh: () => controller.getCategories(),
                       child: MasonryGridView.count(

@@ -73,7 +73,7 @@ class ProfileWidget extends StatelessWidget {
                         child: IconButton(
                             onPressed: onClicked,
                             icon: Icon(
-                              color: theme.primary,
+                              color: Color(0xFFFF2C20),
                               CupertinoIcons.profile_circled,
                               size: MediaQuery.of(context).size.width / 6,
                             )),

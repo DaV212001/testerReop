@@ -21,7 +21,7 @@ class QuizProgressIndicator extends GetView<QuizController> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: controller.progress.value == index
-                    ? theme.primary
+                    ? Color(0xFFFF2C20)
                     : theme.primaryText.withOpacity(0.25),
               ),
               margin: const EdgeInsets.symmetric(horizontal: 4),

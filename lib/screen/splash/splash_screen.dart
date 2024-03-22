@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: theme.primaryBackground,
       showLoader: false,
       loadingText: Text("Loading...",
-          style: theme.bodyLarge.copyWith(color: theme.primary)),
+          style: theme.bodyLarge.copyWith(color: Color(0xFFFF2C20))),
       futureNavigator: futureCall(),
       durationInSeconds: 0,
     );

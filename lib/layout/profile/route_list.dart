@@ -22,7 +22,7 @@ class RouteList extends StatelessWidget {
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     Icon arrowIcon = Icon(Icons.arrow_right_outlined,
-        color: theme.primary.withOpacity(0.8), size: 40);
+        color: Color(0xFFFF2C20).withOpacity(0.8), size: 40);
     final List<Map<String, dynamic>> itemList = [
       {
         "title": "Change Profile",
@@ -53,6 +53,8 @@ class RouteList extends StatelessWidget {
         "leadingIcon": buildIcon(Icons.dark_mode_outlined, context),
         "onTap": () {},
         "trailing": Switch.adaptive(
+          activeColor: Color(0xFFFF2C20),
+          thumbColor: MaterialStatePropertyAll<Color>(Colors.black),
           value: !ThemeManager.getThemeIsLight,
           onChanged: (bool value) {
             ThemeManager.changeTheme();
@@ -135,13 +137,13 @@ class RouteList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               onTap: item["onTap"],
-              splashColor: theme.primary.withOpacity(0.3),
-              highlightColor: theme.primary.withOpacity(0.25),
+              splashColor: Color(0xFFFF2C20).withOpacity(0.3),
+              highlightColor: Color(0xFFFF2C20).withOpacity(0.25),
               child: ListTile(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(
-                    color: theme.primary.withOpacity(0.15),
+                    color: Color(0xFFFF2C20).withOpacity(0.15),
                     width: 1
                   )
                 ),
@@ -160,7 +162,7 @@ class RouteList extends StatelessWidget {
   Widget buildIcon(IconData iconData, BuildContext context) {
     return Icon(
       iconData,
-      color: FlutterFlowTheme.of(context).primary.withOpacity(0.8),
+      color: Color(0xFFFF2C20).withOpacity(0.8),
       size: 25,
     );
   }

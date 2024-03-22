@@ -56,7 +56,7 @@ class QuizEndScreen extends StatelessWidget {
                 : Text(
                     "${controller.noOfCorrectQuestions} / ${controller.questions.length}",
                     style: theme.displaySmall
-                        .copyWith(color: theme.primary.withOpacity(0.8)),
+                        .copyWith(color: Color(0xFFFF2C20).withOpacity(0.8)),
                   ),
             const SizedBox(height: 10,),
             SvgPicture.asset(

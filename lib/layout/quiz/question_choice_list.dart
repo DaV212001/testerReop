@@ -37,12 +37,12 @@ class _QuestionChoiceListState extends State<QuestionChoiceList> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: isSelected
-                        ? theme.primary.withOpacity(0.9)
+                        ? Color(0xFFFF2C20).withOpacity(0.9)
                         : theme.primaryText.withOpacity(0.2),
                   ),
                   borderRadius: BorderRadius.circular(10),
                   color: isSelected
-                      ? theme.primary.withOpacity(0.9)
+                      ? Color(0xFFFF2C20).withOpacity(0.9)
                       : Colors.transparent,
                 ),
                 child: ListTile(

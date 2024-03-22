@@ -104,7 +104,7 @@ bool loading = false;
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        backgroundColor: FlutterFlowTheme.of(context).primary),
+                        backgroundColor: Color(0xFFFF2C20)),
                     onPressed: () async {
                       setState(() {
                         loading = true;

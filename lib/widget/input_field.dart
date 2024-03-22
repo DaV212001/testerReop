@@ -55,7 +55,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).primary,
+                    color: Color(0xFFFF2C20),
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(12),
@@ -123,7 +123,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primary,
+                  color: Color(0xFFFF2C20),
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(12),

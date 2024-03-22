@@ -113,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     dotsCount: pages.length,
                     position: _currentPage,
                     decorator: DotsDecorator(
-                      activeColor: theme.primary,
+                      activeColor: Color(0xFFFF2C20),
                       color: theme.primaryText.withOpacity(0.25),
                       activeSize: const Size(15, 15),
                       size: const Size(10, 10),

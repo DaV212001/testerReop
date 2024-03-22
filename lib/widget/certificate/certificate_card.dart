@@ -30,7 +30,7 @@ class _CertificateCardState extends State<CertificateCard> {
           color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: [
             BoxShadow(
-              color: FlutterFlowTheme.of(context).primary,
+              color: Color(0xFFFF2C20),
               blurRadius: 2,
               offset: const Offset(0, 2),
             )

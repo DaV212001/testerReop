@@ -46,14 +46,14 @@ class CourseHeader extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: theme.primary),
+                          color: Color(0xFFFF2C20)),
                     ),
                     SizedBox(
                       width: 2,
                     ),
                     Icon(
                       CupertinoIcons.arrow_right,
-                      color: theme.primary,
+                      color: Color(0xFFFF2C20),
                       size: 20,
                     )
                   ],

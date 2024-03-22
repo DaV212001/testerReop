@@ -46,7 +46,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
             refresh: () => controller.fetchBookMarks(),
           )
               : RefreshIndicator(
-              color: theme.primary,
+              color: Color(0xFFFF2C20),
               displacement: 100,
               onRefresh: () => controller.fetchBookMarks(),
               child: MasonryGridView.count(

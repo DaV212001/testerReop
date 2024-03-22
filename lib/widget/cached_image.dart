@@ -34,7 +34,7 @@ class CachedImage extends StatelessWidget {
           if(fromCarousel != null && fromCarousel!){
             return Container(
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primary,
+                color: Color(0xFFFF2C20),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ));
           }
