@@ -5,6 +5,7 @@ class AppConstants {
   static const String imagebaseurl = "https://learning.bhwethiopia.com/public/storage/";
   static const int subcatid = 3;
   static const Color primary = Color(0xFF4B39EF);
+  static const String authStorage = 'javascript_authorization_token';
   static var kAuthContainerGradient = const BoxDecoration(
     gradient: LinearGradient(
       colors: [
