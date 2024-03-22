@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/certificate_controller.dart';
-import 'package:mss_e_learning/screen/certificate/certificate_pdf.dart';
-import 'package:pie_chart/pie_chart.dart';
 import '../../model/certificate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -30,11 +28,11 @@ class _CertificateCardState extends State<CertificateCard> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: FlutterFlowTheme.of(context).primaryBackground,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: AppConstants.primary,
               blurRadius: 2,
-              offset: const Offset(0, 2),
+              offset: Offset(0, 2),
             )
           ],
         ),
@@ -55,7 +53,7 @@ class _CertificateCardState extends State<CertificateCard> {
                               color: FlutterFlowTheme.of(context).primaryText
                           ),
                         ),
-                        SizedBox(width: 10,),
+                        const SizedBox(width: 10,),
                         Text(
                             widget.certificate.testResult.level!.name,
                           style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -70,14 +68,14 @@ class _CertificateCardState extends State<CertificateCard> {
                       onTap: (){
                         controller.showCertificateDialog(context, widget.certificate);
                       },
-                      child: Icon(
+                      child: const Icon(
                         FontAwesomeIcons.eye,
                       ),
                     ),
                   ]
                 ),
               ),
-              Divider(),
+              const Divider(),
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

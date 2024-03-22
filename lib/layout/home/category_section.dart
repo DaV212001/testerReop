@@ -42,7 +42,7 @@ class _SubCatGridState extends State<SubCatGrid> {
         displacement: 100,
         onRefresh: () => controller.getSubCategoryById(AppConstants.subcatid),
         child: !checking? MasonryGridView.count(
-            itemCount: widget.listOfLessons.length,
+            itemCount: widget.listOfLessons.length ~/ 2,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             crossAxisCount: 2,
