@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:mss_e_learning/controller/privacy_policy_controller.dart';
 
 import '../../util/api_call_status.dart';
+import '../../util/app_constants.dart';
 import '../../widget/error_card.dart';
 
 
@@ -42,7 +43,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
           body: Obx(() => controller.status.value == ApiCallStatus.loading
               ? const Padding(
             padding: EdgeInsets.all(40.0),
-            child: Center(child: CircularProgressIndicator()),
+            child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
           )
               : controller.status.value == ApiCallStatus.error
               ? ErrorCard(
@@ -50,7 +51,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
             refresh: () => controller.fetchPrivacyPolicy(),
           )
               : RefreshIndicator(
-              color: Color(0xFFFF2C20),
+              color: AppConstants.primary,
               displacement: 100,
               onRefresh: () => controller.fetchPrivacyPolicy(),
               child: Padding(

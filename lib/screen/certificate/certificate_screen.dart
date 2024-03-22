@@ -3,6 +3,7 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
 import '../../controller/certificate_controller.dart';
 import 'package:get/get.dart';
+import '../../util/app_constants.dart';
 import '../../widget/certificate/certificate_card.dart';
 import '../../widget/load_more_button.dart';
 
@@ -33,7 +34,7 @@ class _CertificatesListScreenState extends State<CertificatesListScreen> {
           )),
       body: Obx(() {
         if (certificateController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator(color: AppConstants.primary,));
         } else if (certificateController.certificates.isEmpty) {
           return Center(
               child: HeaderImageAndText(

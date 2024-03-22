@@ -6,6 +6,8 @@ import 'package:mss_e_learning/screen/certificate/certificate_pdf.dart';
 import 'package:pie_chart/pie_chart.dart';
 import '../../model/certificate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../util/app_constants.dart';
 class CertificateCard extends StatefulWidget {
   final Certificates certificate;
   const CertificateCard({super.key, required this.certificate});
@@ -30,7 +32,7 @@ class _CertificateCardState extends State<CertificateCard> {
           color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: [
             BoxShadow(
-              color: Color(0xFFFF2C20),
+              color: AppConstants.primary,
               blurRadius: 2,
               offset: const Offset(0, 2),
             )

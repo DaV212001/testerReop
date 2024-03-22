@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class AppConstants {
   static const String api = "https://learning.bhwethiopia.com/api";
   static const String imagebaseurl = "https://learning.bhwethiopia.com/public/storage/";
+  static const int subcatid = 11;
+  static const Color primary = Color(0xFFFF2C20);
   static var kAuthContainerGradient = const BoxDecoration(
     gradient: LinearGradient(
       colors: [

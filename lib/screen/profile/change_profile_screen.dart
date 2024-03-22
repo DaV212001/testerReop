@@ -117,7 +117,7 @@ ChangeProfileController controller = Get.put(ChangeProfileController());
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        backgroundColor: Color(0xFFFF2C20)),
+                        backgroundColor: AppConstants.primary),
                     onPressed: () async {
                       setState(() {
                         loading = true;

@@ -10,6 +10,7 @@ import 'package:mss_e_learning/util/api_call_status.dart';
 import 'package:mss_e_learning/widget/error_card.dart';
 
 import '../../layout/password/header_image_and_text.dart';
+import '../../util/app_constants.dart';
 
 class QuizScreen extends StatefulWidget {
   final String? subcatID;
@@ -52,7 +53,7 @@ class _QuizScreenState extends State<QuizScreen> {
             () => controller.status.value == ApiCallStatus.loading
                 ? const Padding(
                     padding: EdgeInsets.all(50.0),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
                   )
                 : controller.status.value == ApiCallStatus.error
                     ? ErrorCard(
@@ -83,11 +84,11 @@ class _QuizScreenState extends State<QuizScreen> {
                                         options: FFButtonOptions(
                                           width: 150,
                                           height: 50,
-                                          color: Color(0xFFFF2C20),
+                                          color: AppConstants.primary,
                                           textStyle: theme.titleSmall,
                                           elevation: 0,
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF2C20),
+                                            color: AppConstants.primary,
                                             width: 1,
                                           ),
                                           borderRadius:
@@ -115,7 +116,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                                   .currentQuestionIndex
                                                   .value]
                                                   .id)
-                                              ? Color(0xFFFF2C20)
+                                              ? AppConstants.primary
                                               : Colors.grey,
                                           textStyle: theme.titleSmall,
                                           elevation: 0,

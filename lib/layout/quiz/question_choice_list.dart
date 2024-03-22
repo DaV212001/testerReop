@@ -3,6 +3,8 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/quiz_controller.dart';
 
+import '../../util/app_constants.dart';
+
 class QuestionChoiceList extends StatefulWidget {
   const QuestionChoiceList({super.key});
 
@@ -37,12 +39,12 @@ class _QuestionChoiceListState extends State<QuestionChoiceList> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: isSelected
-                        ? Color(0xFFFF2C20).withOpacity(0.9)
+                        ? AppConstants.primary.withOpacity(0.9)
                         : theme.primaryText.withOpacity(0.2),
                   ),
                   borderRadius: BorderRadius.circular(10),
                   color: isSelected
-                      ? Color(0xFFFF2C20).withOpacity(0.9)
+                      ? AppConstants.primary.withOpacity(0.9)
                       : Colors.transparent,
                 ),
                 child: ListTile(

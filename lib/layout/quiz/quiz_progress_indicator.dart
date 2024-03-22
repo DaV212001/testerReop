@@ -3,6 +3,8 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/quiz_controller.dart';
 
+import '../../util/app_constants.dart';
+
 class QuizProgressIndicator extends GetView<QuizController> {
   const QuizProgressIndicator({
     super.key,
@@ -21,7 +23,7 @@ class QuizProgressIndicator extends GetView<QuizController> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: controller.progress.value == index
-                    ? Color(0xFFFF2C20)
+                    ? AppConstants.primary
                     : theme.primaryText.withOpacity(0.25),
               ),
               margin: const EdgeInsets.symmetric(horizontal: 4),

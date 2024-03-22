@@ -7,6 +7,7 @@ import 'package:mss_e_learning/layout/lesson/lesson_details.dart';
 import 'package:mss_e_learning/widget/cached_image.dart';
 
 import '../../model/level.dart';
+import '../../util/app_constants.dart';
 
 class LevelDetailScreen extends StatefulWidget {
   final Level level;
@@ -46,13 +47,13 @@ class _LevelDetailScreenState extends State<LevelDetailScreen> {
                                 child: Center(
                                     child: Icon(
                                   Icons.play_lesson_outlined,
-                                  color: Color(0xFFFF2C20),
+                                  color: AppConstants.primary,
                                 ))),
                           );
                         },
                         errorBuilder: (context, url, error) => Icon(
                             Icons.play_lesson_outlined,
-                            color: Color(0xFFFF2C20)),
+                            color: AppConstants.primary),
                       ).image,
                     ),
                     boxShadow: const [

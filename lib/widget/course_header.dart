@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 
+import '../util/app_constants.dart';
+
 class CourseHeader extends StatelessWidget {
   final String title;
   final bool showMore;
@@ -46,14 +48,14 @@ class CourseHeader extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xFFFF2C20)),
+                          color: AppConstants.primary),
                     ),
                     SizedBox(
                       width: 2,
                     ),
                     Icon(
                       CupertinoIcons.arrow_right,
-                      color: Color(0xFFFF2C20),
+                      color: AppConstants.primary,
                       size: 20,
                     )
                   ],

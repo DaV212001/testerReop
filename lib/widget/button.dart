@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 
+import '../util/app_constants.dart';
+
 class Button extends StatelessWidget {
   final String text;
   final VoidCallback onPress;
@@ -23,7 +25,7 @@ class Button extends StatelessWidget {
         height: 44,
         padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        color: agreedToTerms != null? agreedToTerms == true? Color(0xFFFF2C20) : Colors.grey : Color(0xFFFF2C20),
+        color: agreedToTerms != null? agreedToTerms == true? AppConstants.primary : Colors.grey : AppConstants.primary,
         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
               fontFamily: 'Poppins',
               color: Colors.white,

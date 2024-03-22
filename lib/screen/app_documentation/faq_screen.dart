@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:mss_e_learning/controller/faq_controller.dart';
 import 'package:mss_e_learning/model/faq.dart';
 
+import '../../util/app_constants.dart';
+
 
 class FAQScreen extends StatelessWidget {
   final faqController = Get.put(FAQController());
@@ -19,7 +21,7 @@ class FAQScreen extends StatelessWidget {
             () {
           if (faqController.isLoading.isTrue && faqController.faqs.isEmpty) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: AppConstants.primary,),
             );
           } else {
             return Column(

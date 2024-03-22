@@ -12,6 +12,7 @@ import 'package:mss_e_learning/screen/app_documentation/privacy_policy_screen.da
 import '../../screen/app_documentation/faq_screen.dart';
 import '../../screen/app_documentation/terms_and_conditions_screen.dart';
 import '../../screen/profile/change_profile_screen.dart';
+import '../../util/app_constants.dart';
 
 class RouteList extends StatelessWidget {
   const RouteList({
@@ -22,7 +23,7 @@ class RouteList extends StatelessWidget {
   Widget build(BuildContext context) {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     Icon arrowIcon = Icon(Icons.arrow_right_outlined,
-        color: Color(0xFFFF2C20).withOpacity(0.8), size: 40);
+        color: AppConstants.primary.withOpacity(0.8), size: 40);
     final List<Map<String, dynamic>> itemList = [
       {
         "title": "Change Profile",
@@ -53,7 +54,7 @@ class RouteList extends StatelessWidget {
         "leadingIcon": buildIcon(Icons.dark_mode_outlined, context),
         "onTap": () {},
         "trailing": Switch.adaptive(
-          activeColor: Color(0xFFFF2C20),
+          activeColor: AppConstants.primary,
           thumbColor: MaterialStatePropertyAll<Color>(Colors.black),
           value: !ThemeManager.getThemeIsLight,
           onChanged: (bool value) {
@@ -137,13 +138,13 @@ class RouteList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               onTap: item["onTap"],
-              splashColor: Color(0xFFFF2C20).withOpacity(0.3),
-              highlightColor: Color(0xFFFF2C20).withOpacity(0.25),
+              splashColor: AppConstants.primary.withOpacity(0.3),
+              highlightColor: AppConstants.primary.withOpacity(0.25),
               child: ListTile(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(
-                    color: Color(0xFFFF2C20).withOpacity(0.15),
+                    color: AppConstants.primary.withOpacity(0.15),
                     width: 1
                   )
                 ),
@@ -162,7 +163,7 @@ class RouteList extends StatelessWidget {
   Widget buildIcon(IconData iconData, BuildContext context) {
     return Icon(
       iconData,
-      color: Color(0xFFFF2C20).withOpacity(0.8),
+      color: AppConstants.primary.withOpacity(0.8),
       size: 25,
     );
   }

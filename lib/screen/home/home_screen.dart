@@ -16,6 +16,7 @@ import '../../controller/user_controller.dart';
 import '../../layout/home/category_section.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../model/user.dart';
+import '../../util/app_constants.dart';
 import '../../widget/home/head.dart';
 import '../levels/level_detail_screen.dart';
 import '../search/search_screen.dart';
@@ -30,7 +31,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController search = TextEditingController();
-  CategoryController controller = Get.put(CategoryController());
+  CategoryController controller = Get.put(CategoryController(), tag: 'Category');
   UserController uController = Get.find(tag: 'User');
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         () => controller.status.value == ApiCallStatus.loading
             ? const Padding(
                 padding: EdgeInsets.all(50.0),
-                child: Center(child: CircularProgressIndicator()),
+                child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
               )
             : controller.status.value == ApiCallStatus.error || !uController.hasFetchedUser
                 ? ErrorCard(

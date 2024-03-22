@@ -10,6 +10,8 @@ import 'package:mss_e_learning/screen/main_layout_screen.dart';
 import 'package:mss_e_learning/screen/onboarding/onboarding_screen.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
 
+import '../../util/app_constants.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -46,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: theme.primaryBackground,
       showLoader: false,
       loadingText: Text("Loading...",
-          style: theme.bodyLarge.copyWith(color: Color(0xFFFF2C20))),
+          style: theme.bodyLarge.copyWith(color:AppConstants.primary)),
       futureNavigator: futureCall(),
       durationInSeconds: 0,
     );

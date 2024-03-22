@@ -103,7 +103,7 @@ ChangePasswordController controller= Get.put(ChangePasswordController());
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        backgroundColor: Color(0xFFFF2C20)),
+                        backgroundColor: AppConstants.primary),
                     onPressed: () {
                       // TODO: Implement password reset logic here
                       Get.to(const MainLayoutScreen());

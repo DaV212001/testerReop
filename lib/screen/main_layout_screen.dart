@@ -7,6 +7,7 @@ import 'package:mss_e_learning/screen/quiz/quiz_screen.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../util/app_constants.dart';
 import 'category/category_screen.dart';
 import 'home/home_screen.dart';
 
@@ -66,7 +67,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
-    Color activeColor = Color(0xFFFF2C20);
+    Color activeColor = AppConstants.primary;
     Color inactiveColor = theme.primaryText.withOpacity(0.5);
     return [
       PersistentBottomNavBarItem(

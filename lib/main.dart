@@ -11,7 +11,7 @@ import 'config/themes/data/app_themes.dart';
 import 'config/themes/theme_manager.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
-final navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 
 Future<void> main() async {
@@ -40,6 +40,7 @@ class MssLearnProgramming extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         builder: FlutterSmartDialog.init(),
         navigatorObservers: [FlutterSmartDialog.observer],
+      navigatorKey: navigatorKey, // Assign the navigator key
         theme: AppThemes.lightTheme,
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeManager.getThemeMode(),
@@ -47,4 +48,11 @@ class MssLearnProgramming extends StatelessWidget {
         home: const SplashScreen(),
     );
   }
+}
+
+void restartApp() {
+  navigatorKey.currentState?.pushAndRemoveUntil(
+    MaterialPageRoute(builder: (_) => const MssLearnProgramming()),
+        (route) => false,
+  );
 }

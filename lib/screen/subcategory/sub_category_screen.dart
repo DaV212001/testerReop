@@ -10,6 +10,7 @@ import 'package:mss_e_learning/widget/error_card.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../controller/lesson_controllers.dart';
+import '../../util/app_constants.dart';
 import '../../widget/sub_category/sub_category_card.dart';
 import '../lesson/lesson_screen.dart';
 
@@ -49,7 +50,7 @@ class CategoryDetailScreen extends StatelessWidget {
         child: Obx(
           () => controller.status.value == ApiCallStatus.loading
               ? const SizedBox(
-                  width: 50, height: 50, child: CircularProgressIndicator())
+                  width: 50, height: 50, child: CircularProgressIndicator(color: AppConstants.primary,))
               : controller.status.value == ApiCallStatus.error
                   ? ErrorCard(
                       errorData: controller.errorData.value,
@@ -92,7 +93,7 @@ class CategoryDetailScreen extends StatelessWidget {
                                     child: SubCategoryCard(
                                       name: subCategories[index].name!,
                                       image: subCategories[index].image!,
-                                      price: subCategories[index].price!.toString(),
+                                      price: subCategories[index].price!.toString(), isPremium: false,
                                     ),
                                   );
                                 })

@@ -16,6 +16,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../../controller/lesson_controllers.dart';
 import '../../controller/user_controller.dart';
 import '../../layout/lesson/lesson_details.dart';
+import '../../util/app_constants.dart';
 import '../quiz/quiz_screen.dart';
 
 class SubCategoryDetailScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
         body: Obx(() => controller.status.value == ApiCallStatus.loading
             ? const Padding(
           padding: EdgeInsets.all(50.0),
-          child: Center(child: CircularProgressIndicator()),
+          child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
         )
             : controller.status.value == ApiCallStatus.error
             ? ErrorCard(
@@ -86,11 +87,11 @@ class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
                                 return Center(
                                   child: Container(
                                       color: Colors.white,
-                                      child:Center(child: Icon(Icons.play_lesson_outlined, color: Color(0xFFFF2C20),))
+                                      child:Center(child: Icon(Icons.play_lesson_outlined, color: AppConstants.primary,))
                                   ),
                                 );
                               },
-                              errorBuilder:  (context, url, error) => Icon(Icons.play_lesson_outlined, color: Color(0xFFFF2C20)),
+                              errorBuilder:  (context, url, error) => Icon(Icons.play_lesson_outlined, color: AppConstants.primary),
                             ).image,
                           ),
                           boxShadow: const [
@@ -182,9 +183,9 @@ class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
                               headerBorderColor: Colors.blueGrey,
                               headerBorderColorOpened: Colors.transparent,
                               headerBorderWidth: 1,
-                              headerBackgroundColorOpened: Color(0xFFFF2C20),
-                              contentBackgroundColor: Color(0xFFFF2C20),
-                              contentBorderColor: Color(0xFFFF2C20),
+                              headerBackgroundColorOpened: AppConstants.primary,
+                              contentBackgroundColor: AppConstants.primary,
+                              contentBorderColor: AppConstants.primary,
                               contentVerticalPadding: 0,
                               contentBorderWidth: 3,
                               contentHorizontalPadding: 10,
@@ -199,13 +200,13 @@ class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
                               children: [
                                 AccordionSection(
                                   isOpen: false,
-                                  leftIcon: Icon(Icons.circle, color: Color(0xFFFF2C20)),
-                                  headerBackgroundColor: Color(0xFFFF2C20).withOpacity(0.2),
+                                  leftIcon: Icon(Icons.circle, color: AppConstants.primary),
+                                  headerBackgroundColor: AppConstants.primary.withOpacity(0.2),
                                   headerBackgroundColorOpened:
-                                  Color(0xFFFF2C20).withOpacity(0.15),
-                                  headerBorderColorOpened: Color(0xFFFF2C20),
+                                  AppConstants.primary.withOpacity(0.15),
+                                  headerBorderColorOpened: AppConstants.primary,
                                   contentBackgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                                  contentBorderColor: Color(0xFFFF2C20).withOpacity(0.3),
+                                  contentBorderColor: AppConstants.primary.withOpacity(0.3),
                                   headerBorderWidth: 1,
                                   contentBorderWidth: 1,
                                   contentVerticalPadding: 5,
@@ -225,7 +226,7 @@ class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
                                                 customBorder: RoundedRectangleBorder(
                                                   borderRadius: BorderRadius.circular(10),
                                                 ),
-                                                splashColor: Color(0xFFFF2C20),
+                                                splashColor: AppConstants.primary,
                                                 highlightColor: Colors.white,
                                                 child: ListTile(
                                                     onTap: () {
@@ -244,10 +245,10 @@ class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
                                                       controller.listOfAllLevels[index1]
                                                           .lessons[index2].title,
                                                       maxLines: 4,
-                                                      style: TextStyle(
-                                                          fontSize: 15, color: Color(0xFFFF2C20)),
+                                                      style: const TextStyle(
+                                                          fontSize: 15, color: AppConstants.primary),
                                                     ))),
-                                            Divider(color: Color(0xFFFF2C20),),
+                                            const Divider(color: AppConstants.primary,),
                                             if(controller.listOfAllLevels[index1].lessons[index2] == controller.listOfAllLevels[index1].lessons.last)
                                               GestureDetector(
                                                 onTap: () {
@@ -255,7 +256,7 @@ class _SubCategoryDetailScreenState extends State<SubCategoryDetailScreen> {
                                                   Get.to(() => QuizScreen(subcatID: controller.listOfAllLevels[index1].lessons[index2].subcategoryId.toString(), levelId: controller.listOfAllLevels[index1].id.toString(),));
                                                 },
                                                 child:  Card(
-                                                    color: Color(0xFFFF2C20),
+                                                    color: AppConstants.primary,
                                                     child: Padding(
                                                       padding: EdgeInsets.all(8.0),
                                                       child: Text('Take quiz', style: FlutterFlowTheme.of(context).bodyMedium.override(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/terms_and_conditions_controller.dart';
+import '../../util/app_constants.dart';
 
 class TermAndConditionScreen extends StatelessWidget {
   final TermAndConditionController controller = Get.put(TermAndConditionController());
@@ -16,7 +17,7 @@ class TermAndConditionScreen extends StatelessWidget {
       body: Obx(
             () {
           if (controller.isLoading.isTrue) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator(color: AppConstants.primary,));
           } else {
             final termAndCondition = controller.termAndCondition.value;
             return Padding(

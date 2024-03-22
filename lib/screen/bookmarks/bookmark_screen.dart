@@ -9,6 +9,7 @@ import 'package:mss_e_learning/screen/lesson/lesson_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../../layout/lesson/lesson_details.dart';
 import '../../util/api_call_status.dart';
+import '../../util/app_constants.dart';
 import '../../widget/error_card.dart';
 import '../../widget/home/category_card.dart';
 import '../../widget/load_more_button.dart';
@@ -38,7 +39,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
           child: Obx(() => controller.status.value == ApiCallStatus.loading
               ? const Padding(
             padding: EdgeInsets.all(40.0),
-            child: Center(child: CircularProgressIndicator()),
+            child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
           )
               : controller.status.value == ApiCallStatus.error
               ? ErrorCard(
@@ -46,7 +47,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
             refresh: () => controller.fetchBookMarks(),
           )
               : RefreshIndicator(
-              color: Color(0xFFFF2C20),
+              color: AppConstants.primary,
               displacement: 100,
               onRefresh: () => controller.fetchBookMarks(),
               child: MasonryGridView.count(
@@ -71,6 +72,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                             controller.bookmarks[index].lessons!.title,
                             image:
                             controller.bookmarks[index].lessons!.image,
+                            isPremium: false,
                             price: '',
                           ));
                     } else if (controller.hasMorePages.value) {

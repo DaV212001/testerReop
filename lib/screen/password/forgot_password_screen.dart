@@ -135,7 +135,7 @@ bool loading = false;
                                   });
                                   Get.to(() => ResetPasswordScreen());
                                 },
-                                child: loading? CircularProgressIndicator() : const Text(
+                                child: loading? const CircularProgressIndicator(color: AppConstants.primary,) : const Text(
                                   'Send Email',
                                   style: TextStyle(
                                       color: Colors.white

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mss_e_learning/widget/cached_image.dart';
 import '../../controller/user_controller.dart';
 import '../../screen/search/search_screen.dart';
+import '../../util/app_constants.dart';
 class HomeScreenHeader extends StatelessWidget {
   const HomeScreenHeader({
     super.key,
@@ -61,7 +62,7 @@ class HomeScreenHeader extends StatelessWidget {
                 ),
                 UserController.user.value!.profilepicture == null ? Icon(
                   Icons.person_2_outlined,
-                  color: Color(0xFFFF2C20),
+                  color: AppConstants.primary,
                   size: MediaQuery.of(context).size.width * 0.1,
                 ):
                     Container(

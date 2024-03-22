@@ -9,7 +9,8 @@ class SubCategoryCard extends StatelessWidget {
   final String name;
   final String image;
   final String price;
-  const SubCategoryCard({super.key, required this.name,required this.image, required this.price});
+  final bool isPremium;
+  const SubCategoryCard({super.key, required this.name,required this.image, required this.price, required this.isPremium});
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +48,16 @@ class SubCategoryCard extends StatelessWidget {
               Container(
                 width: double.infinity,
                 margin: const EdgeInsets.only(top: 5, left: 7),
-                child: Text(price == ''? '': '$price ETB',
-                    style: TextStyle(
-                        color: theme.primaryText
-                    )),
+                child: Row(
+                  children: [
+                    Text(price == ''? '': '$price ETB',
+                        style: TextStyle(
+                            color: theme.primaryText
+                        )),
+                    if(isPremium)
+                      Icon(Icons.star_rounded, color: Colors.yellow,)
+                  ],
+                ),
               ),
             ],
           ),

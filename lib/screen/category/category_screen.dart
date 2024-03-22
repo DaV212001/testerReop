@@ -10,6 +10,8 @@ import 'package:mss_e_learning/widget/error_card.dart';
 import 'package:mss_e_learning/widget/home/category_card.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
+import '../../util/app_constants.dart';
+
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
 
@@ -27,7 +29,7 @@ class CategoryScreen extends StatelessWidget {
           child: Obx(() => controller.status.value == ApiCallStatus.loading
               ? const Padding(
                   padding: EdgeInsets.all(40.0),
-                  child: Center(child: CircularProgressIndicator()),
+                  child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
                 )
               : controller.status.value == ApiCallStatus.error
                   ? ErrorCard(
@@ -35,7 +37,7 @@ class CategoryScreen extends StatelessWidget {
                       refresh: () => controller.getCategories(),
                     )
                   : RefreshIndicator(
-                      color: Color(0xFFFF2C20),
+                      color: AppConstants.primary,
                       displacement: 100,
                       onRefresh: () => controller.getCategories(),
                       child: MasonryGridView.count(

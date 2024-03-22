@@ -5,6 +5,7 @@ import 'package:mss_e_learning/model/sub_category.dart';
 import 'package:mss_e_learning/service/category_service.dart';
 import 'package:mss_e_learning/service/sub_category_service.dart';
 import 'package:mss_e_learning/util/api_call_status.dart';
+import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/util/error_util.dart';
 
 import '../model/category.dart';
@@ -27,10 +28,14 @@ class CategoryController extends GetxController {
   List<Promotion> get listOfPromotions => _listOfPromotions;
   Rx<SubCategory> _subCategory = SubCategory().obs;
   SubCategory get subCategory => _subCategory.value;
+  Rx<bool> _isPremium = false.obs;
+  bool get isPaidSubCategory => _isPremium.value;
 
   final _listOfAllLessons = <Lesson>[].obs;
   List<Lesson> get listOfAllLessons => _listOfAllLessons;
 
+  final _listOfPaidSubCategories = <SubCategory>[].obs;
+  List<SubCategory> get listOfPaidSubCategories => _listOfPaidSubCategories;
 
   getPromotions() async {
     try {
@@ -44,6 +49,15 @@ class CategoryController extends GetxController {
     } on Exception catch (fetchError) {
       status.value = ApiCallStatus.error;
       errorData.value = ErrorUtil.getErrorData(fetchError.toString());
+    }
+  }
+
+  isUserPremium() async  {
+    await getPaidSubCategories();
+    for (var element in _listOfPaidSubCategories) {
+      if(element.id == AppConstants.subcatid){
+        _isPremium.value = true;
+      }
     }
   }
 
@@ -62,6 +76,20 @@ class CategoryController extends GetxController {
     }
   }
 
+
+
+  getPaidSubCategories() async {
+    try {
+      status.value = ApiCallStatus.loading;
+
+      final response = await SubCategoryService().getPaidSubCategories();
+      _listOfPaidSubCategories.addAll(response);
+      status.value = ApiCallStatus.success;
+    } on Exception catch (fetchError) {
+      status.value = ApiCallStatus.error;
+      errorData.value = ErrorUtil.getErrorData(fetchError.toString());
+    }
+  }
 
   getSubCategoryById(int subCategoryId) async {
     try {
@@ -84,6 +112,8 @@ class CategoryController extends GetxController {
     }
   }
 
+
+
   List<Lesson> getAlllessons(){
     if(subCategory.levels !=null ){
       subCategory.levels?.forEach((element) {
@@ -98,7 +128,8 @@ class CategoryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getSubCategoryById(11);
+    isUserPremium();
+    getSubCategoryById(AppConstants.subcatid);
     getPromotions();
     getCategories();
   }

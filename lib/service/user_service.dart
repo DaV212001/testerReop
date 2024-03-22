@@ -214,6 +214,35 @@ print(request.fields);
     }
   }
 
+  Future<String> getPaymentLink(int subCategoryId) async {
+
+    print('CALLLLEDDDDDD');
+
+    String? token = await AuthService.getAuthorizationToken();
+    if(token == null) {
+      return '';
+    }
+    final Map<String, dynamic> requestData = {
+      "subcategory_id": subCategoryId
+    };
+    final response = await post(
+        Uri.parse('${AppConstants.api}/user_payment'),
+        body: jsonEncode(requestData),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
+        }
+    );
+    String paymentLink = '';
+    print('CHECKING MAKE PAYMENT: ${response.body}');
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      final String checkoutUrl = responseData['data'][0]['chapa']['data']['checkout_url'];
+      print('CHECKING URL: $checkoutUrl');
+      paymentLink = checkoutUrl;
+    }
+    return paymentLink;
+  }
 
   Future<User> getUser(
       String token

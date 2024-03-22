@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mss_e_learning/model/user.dart';
 import 'package:mss_e_learning/widget/profile_widget.dart';
 
+import '../../util/app_constants.dart';
+
 class UserScreenHeader extends StatefulWidget {
   final User user;
 
@@ -54,12 +56,12 @@ class _UserScreenHeaderState extends State<UserScreenHeader> {
           children: [
             Text(formattedName,
                 style:theme.headlineSmall.copyWith(
-                    color: Color(0xFFFF2C20)
+                    color: AppConstants.primary
                 )),
             const SizedBox(height: 5),
             Text("${widget.user.email}",
                 style: theme.bodyMedium.copyWith(
-                  color: Color(0xFFFF2C20).withOpacity(0.5)
+                  color: AppConstants.primary.withOpacity(0.5)
                 )),
           ],
         ),

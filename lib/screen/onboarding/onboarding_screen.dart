@@ -7,6 +7,8 @@ import 'package:mss_e_learning/config/config_preference.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:mss_e_learning/widget/button.dart';
 
+import '../../util/app_constants.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -113,7 +115,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     dotsCount: pages.length,
                     position: _currentPage,
                     decorator: DotsDecorator(
-                      activeColor: Color(0xFFFF2C20),
+                      activeColor: AppConstants.primary,
                       color: theme.primaryText.withOpacity(0.25),
                       activeSize: const Size(15, 15),
                       size: const Size(10, 10),

@@ -7,6 +7,8 @@ import 'package:mss_e_learning/controller/quiz_controller.dart';
 import 'package:mss_e_learning/generated/assets.dart';
 import 'package:mss_e_learning/widget/button.dart';
 
+import '../../util/app_constants.dart';
+
 class QuizEndScreen extends StatelessWidget {
   const QuizEndScreen({
     super.key,
@@ -56,7 +58,7 @@ class QuizEndScreen extends StatelessWidget {
                 : Text(
                     "${controller.noOfCorrectQuestions} / ${controller.questions.length}",
                     style: theme.displaySmall
-                        .copyWith(color: Color(0xFFFF2C20).withOpacity(0.8)),
+                        .copyWith(color: AppConstants.primary.withOpacity(0.8)),
                   ),
             const SizedBox(height: 10,),
             SvgPicture.asset(

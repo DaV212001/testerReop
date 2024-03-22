@@ -11,6 +11,7 @@ import 'package:mss_e_learning/service/lesson_service.dart';
 import 'package:mss_e_learning/controller/lesson_description_controllers.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../controller/lesson_controllers.dart';
+import '../../util/app_constants.dart';
 import 'header_image_and_buttons.dart';
 export 'package:mss_e_learning/controller/lesson_description_controllers.dart';
 
@@ -117,7 +118,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         child: !loaded
             ? const Padding(
           padding: EdgeInsets.all(50.0),
-          child: Center(child: CircularProgressIndicator()),
+          child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
         )
             :Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -130,7 +131,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
                         actions: [
                       if(controller.isBookmarkLoading == true)
-                        const CircularProgressIndicator(),
+                        const CircularProgressIndicator(color: AppConstants.primary,),
                       if(controller.isBookmarkLoading == false)
                         IconButton(
                             onPressed: ()async{
@@ -153,18 +154,19 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         floating: true,
                         bottom: TabBar(
                             isScrollable: true,
+                            indicatorColor: AppConstants.primary,
                             tabs: [
                               Tab(child: Text('Lessons',
                                   style: TextStyle(fontSize: 16,
-                                      color: Color(0xFFFF2C20)
+                                      color: AppConstants.primary
                                   ))),
                               Tab(child: Text('PDFs',
                                   style: TextStyle(fontSize: 16,
-                                      color: Color(0xFFFF2C20)
+                                      color: AppConstants.primary
                                   ))),
                               Tab(child: Text('Videos',
                                   style: TextStyle(fontSize: 16,
-                                      color: Color(0xFFFF2C20)
+                                      color: AppConstants.primary
                                   )))
                             ]
                         )
@@ -187,7 +189,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                               !loaded
                                   ? const Padding(
                                 padding: EdgeInsets.all(50.0),
-                                child: Center(child: CircularProgressIndicator()),
+                                child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
                               )
                                   : Expanded(
                                 child: SingleChildScrollView(

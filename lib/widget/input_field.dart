@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+
+import '../util/app_constants.dart';
 class InputFieldWidget extends StatefulWidget {
 
   final TextEditingController textEditingController;
@@ -55,7 +57,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0xFFFF2C20),
+                    color: AppConstants.primary,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(12),
@@ -123,7 +125,7 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Color(0xFFFF2C20),
+                  color: AppConstants.primary,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(12),

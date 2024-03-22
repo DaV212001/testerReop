@@ -5,6 +5,8 @@ import 'package:mss_e_learning/model/footer_data.dart';
 import 'package:mss_e_learning/widget/svg_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../util/app_constants.dart';
+
 class UserScreenFooter extends StatelessWidget {
   final FooterData footerData;
 
@@ -12,7 +14,7 @@ class UserScreenFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Color(0xFFFF2C20).withOpacity(0.85);
+    Color color = AppConstants.primary.withOpacity(0.85);
     return Column(
       children: [
         Text(footerData.copyWriteText,

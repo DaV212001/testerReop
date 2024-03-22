@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/widget/cached_image.dart';
 
+import '../util/app_constants.dart';
+
 class ProfileWidget extends StatelessWidget {
   final dynamic imagePath;
   final VoidCallback onClicked;
@@ -73,7 +75,7 @@ class ProfileWidget extends StatelessWidget {
                         child: IconButton(
                             onPressed: onClicked,
                             icon: Icon(
-                              color: Color(0xFFFF2C20),
+                              color: AppConstants.primary,
                               CupertinoIcons.profile_circled,
                               size: MediaQuery.of(context).size.width / 6,
                             )),

@@ -108,7 +108,7 @@ class SearchScreen extends StatelessWidget {
                 screen: CategoryDetailScreen(
                     categoryId: category.id,));
           },
-          child: SubCategoryCard(name: category.name, image: category.image, price: '',),
+          child: SubCategoryCard(name: category.name, image: category.image, price: '', isPremium: false,),
         );
       },
     );
@@ -133,7 +133,7 @@ class SearchScreen extends StatelessWidget {
               courseName: subcategory.name!,
             ));
           },
-          child: SubCategoryCard(name: subcategory.name!, image: subcategory.image!, price: subcategory.price.toString(),),
+          child: SubCategoryCard(name: subcategory.name!, image: subcategory.image!, price: subcategory.price.toString(), isPremium: false,),
         );
       },
     );
@@ -156,7 +156,7 @@ class SearchScreen extends StatelessWidget {
                 screen: LessonDetailScreen(
                     lessonId: lesson.id));
           },
-          child: SubCategoryCard(name: lesson.title, image: lesson.image, price: '',),
+          child: SubCategoryCard(name: lesson.title, image: lesson.image, price: '', isPremium: false,),
         );
       },
     );

@@ -96,7 +96,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        backgroundColor: Color(0xFFFF2C20)),
+                        backgroundColor: AppConstants.primary),
                     onPressed: () {
                       // TODO: Implement verification logic here
                       Get.to( () => ResetPasswordScreen());

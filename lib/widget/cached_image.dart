@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:mss_e_learning/generated/assets.dart';
 
+import '../util/app_constants.dart';
+
 class CachedImage extends StatelessWidget {
   final String url;
   final BoxFit fit;
@@ -34,7 +36,7 @@ class CachedImage extends StatelessWidget {
           if(fromCarousel != null && fromCarousel!){
             return Container(
               decoration: BoxDecoration(
-                color: Color(0xFFFF2C20),
+                color: AppConstants.primary,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ));
           }

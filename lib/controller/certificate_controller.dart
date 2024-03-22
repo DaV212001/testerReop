@@ -8,6 +8,8 @@ import 'package:path_provider/path_provider.dart';
 import '../model/certificate.dart';
 import '../service/certificate_service.dart'; // Import your CertificateServices
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../util/app_constants.dart';
 class CertificateController extends GetxController {
   var certificates = <Certificates>[].obs;
   var isLoading = true.obs;
@@ -65,7 +67,7 @@ class CertificateController extends GetxController {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xFFFF2C20),
+                          color: AppConstants.primary,
                           blurRadius: 2,
                           offset: Offset(0, 2),
                         )
@@ -153,7 +155,7 @@ class CertificateController extends GetxController {
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
-                                    Color(0xFFFF2C20),
+                                    AppConstants.primary,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
