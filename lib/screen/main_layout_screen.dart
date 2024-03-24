@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:mss_e_learning/screen/certificate/certificate_screen.dart';
 import 'package:mss_e_learning/screen/profile/profile_screen.dart';
 import 'package:mss_e_learning/screen/quiz/quiz_screen.dart';
@@ -10,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../util/app_constants.dart';
 import 'category/category_screen.dart';
 import 'home/home_screen.dart';
+import 'package:mss_e_learning/controller/user_controller.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   const MainLayoutScreen({super.key});
@@ -28,9 +31,12 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
+
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
+    UserController controller = Get.put(UserController(), tag: 'User');
 
     List<Widget> buildScreens() {
       return [

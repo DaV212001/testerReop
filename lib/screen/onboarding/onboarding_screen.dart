@@ -23,19 +23,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   List<Map<String, dynamic>> pagesData = [
     {
       'title': 'Welcome to Learn JavaScript',
-      'image': 'assets/images/illustrations/too_many_requests.svg',
+      'image': 'assets/icon/icon.png',
       'description':
           'Begin your journey to master JavaScript with our interactive lessons and challenges.',
     },
     {
       'title': 'Practice Coding Skills',
-      'image': 'assets/images/illustrations/too_many_requests.svg',
+      'image': 'assets/icon/icon.png',
       'description':
           'Apply your knowledge and practice coding skills with real-world projects and exercises.',
     },
     {
       'title': 'Join a Community',
-      'image': 'assets/images/illustrations/too_many_requests.svg',
+      'image': 'assets/icon/icon.png',
       'description':
           'Connect with fellow learners, share insights, and collaborate on coding projects.',
     },
@@ -65,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Assuming you have imported the necessary packages
-              SvgPicture.asset('${item['image']}', width: 200, height: 300),
+              Image.asset('${item['image']}', width: 200, height: 300),
               Text(
                 item['title'],
                 textAlign: TextAlign.center,

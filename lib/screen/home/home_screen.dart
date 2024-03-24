@@ -31,10 +31,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController search = TextEditingController();
-  CategoryController controller = Get.put(CategoryController(), tag: 'Category');
-  UserController uController = Get.find(tag: 'User');
+
   @override
   Widget build(BuildContext context) {
+
+    CategoryController controller = Get.put(CategoryController(), tag: 'Category');
+    UserController uController = Get.find(tag: 'User');
 
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -44,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.all(50.0),
                 child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
               )
-            : controller.status.value == ApiCallStatus.error || !uController.hasFetchedUser
+            : controller.status.value == ApiCallStatus.error
                 ? ErrorCard(
                     errorData: controller.errorData.value,
                     refresh: () async {
