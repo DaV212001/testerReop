@@ -9,10 +9,36 @@ import 'package:mss_e_learning/screen/bookmarks/bookmark_screen.dart';
 import 'package:mss_e_learning/screen/password/change_password_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mss_e_learning/screen/app_documentation/privacy_policy_screen.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../screen/app_documentation/faq_screen.dart';
 import '../../screen/app_documentation/terms_and_conditions_screen.dart';
 import '../../screen/profile/change_profile_screen.dart';
 import '../../util/app_constants.dart';
+
+
+void rateApp() async {
+  const String appLink = 'market://details?id=${AppConstants.packageName}';
+  if (await canLaunchUrl(Uri.parse(appLink))) {
+    await launchUrl(Uri.parse(appLink));
+  } else {
+    throw 'Could not launch $appLink';
+  }
+}
+void shareApp() async {
+  const String appLink = 'https://play.google.com/store/apps/details?id=${AppConstants.packageName}';
+
+  await Share.share(appLink);
+}
+
+void moreApps() async {
+  const String appLink = 'https://play.google.com/store/apps/dev?id=6045428611691139973';
+  if (await canLaunchUrl(Uri.parse(appLink))) {
+    await launchUrl(Uri.parse(appLink));
+  } else {
+    throw 'Could not launch $appLink';
+  }
+}
 
 class RouteList extends StatelessWidget {
   const RouteList({
@@ -71,19 +97,25 @@ class RouteList extends StatelessWidget {
       {
         "title": "Share This App",
         "leadingIcon": buildIcon(Icons.share, context),
-        "onTap": () {},
+        "onTap": () {
+          shareApp();
+        },
         "trailing": arrowIcon
       },
       {
         "title": "More Apps",
         "leadingIcon": buildIcon(Icons.android, context),
-        "onTap": () {},
+        "onTap": () {
+          moreApps();
+        },
         "trailing": arrowIcon
       },
       {
         "title": "Rate Us",
         "leadingIcon": buildIcon(Icons.star_rate_outlined, context),
-        "onTap": () {},
+        "onTap": () {
+          rateApp();
+        },
         "trailing": arrowIcon
       },
       {
@@ -142,17 +174,17 @@ class RouteList extends StatelessWidget {
               highlightColor: AppConstants.primary.withOpacity(0.25),
               child: ListTile(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(
-                    color: AppConstants.primary.withOpacity(0.15),
-                    width: 1
-                  )
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(
+                        color: AppConstants.primary.withOpacity(0.15),
+                        width: 1
+                    )
                 ),
                 tileColor: theme.primaryBackground,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 leading: item["leadingIcon"],
                 title:
-                    Text(item["title"], style: const TextStyle(fontSize: 16)),
+                Text(item["title"], style: const TextStyle(fontSize: 16)),
                 trailing: item["trailing"],
               ),
             ));

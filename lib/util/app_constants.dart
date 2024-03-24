@@ -6,6 +6,7 @@ class AppConstants {
   static const int subcatid = 3;
   static const Color primary = Color(0xFF4B39EF);
   static const String authStorage = 'javascript_authorization_token';
+  static const String packageName = 'com.msslearn.javascript';
   static var kAuthContainerGradient = const BoxDecoration(
     gradient: LinearGradient(
       colors: [
