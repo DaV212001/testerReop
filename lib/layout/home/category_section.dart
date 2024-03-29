@@ -51,56 +51,18 @@ class _SubCatGridState extends State<SubCatGrid> {
             shrinkWrap: true,
             padding: const EdgeInsets.all(0),
             itemBuilder: (context, index) {
-
-              if(index == 0){
-                star = false;
-              } else{
-                if(controller.isPaidSubCategory == false){
-                  star = true;
-                } else {
-                  star = false;
-                }
-              }
-
               var lessonId = widget.listOfLessons[index].id;
-              return Container(
-                child: GestureDetector(
-                  onTap: () async {
-                    if(index == 0){
-                      Get.to((){
-                        return LessonDetailScreen(lessonId: lessonId);
-                      });
-                    } else{
-                      if(controller.isPaidSubCategory){
-                        Get.to((){
-                          return LessonDetailScreen(lessonId: lessonId);
-                        });
-                      } else {
-                        setState(() {
-                          checking = true;
-                        });
-                        String link = await UserService().getPaymentLink(AppConstants.subcatid);
-                        if(link == ''){
-                          setState(() {
-                            checking = false;
-                          });
-                          Get.to(()=>LessonDetailScreen(lessonId: lessonId));
-                        }
-                        Get.to(() => PaymentScreen(url: link));
-
-                        setState(() {
-                          checking = false;
-                        });
-                      }
-                    }
-
-                  },
-                  child:
-                  SubCategoryCard(
-                    name:  widget.listOfLessons[index].title,
-                    image:  widget.listOfLessons[index].image,
-                    price: '', isPremium: star ,
-                  ),
+              return GestureDetector(
+                onTap: () async {
+                    Get.to((){
+                      return LessonDetailScreen(lessonId: lessonId);
+                    });
+                },
+                child:
+                SubCategoryCard(
+                  name:  widget.listOfLessons[index].title,
+                  image:  widget.listOfLessons[index].image,
+                  price: '', isPremium: false,
                 ),
               );
             }) : const Center(

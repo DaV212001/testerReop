@@ -22,10 +22,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   double _currentPageAsDouble = 0;
   List<Map<String, dynamic>> pagesData = [
     {
-      'title': 'Welcome to Learn JavaScript',
+      'title': 'Welcome to Learn ${AppConstants.appName}',
       'image': 'assets/icon/icon.png',
       'description':
-          'Begin your journey to master JavaScript with our interactive lessons and challenges.',
+          'Begin your journey to master ${AppConstants.appName} with our interactive lessons and challenges.',
     },
     {
       'title': 'Practice Coding Skills',

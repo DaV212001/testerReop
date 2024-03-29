@@ -48,16 +48,10 @@ class SubCategoryCard extends StatelessWidget {
               Container(
                 width: double.infinity,
                 margin: const EdgeInsets.only(top: 5, left: 7),
-                child: Row(
-                  children: [
-                    Text(price == ''? '': '$price ETB',
-                        style: TextStyle(
-                            color: theme.primaryText
-                        )),
-                    if(isPremium)
-                      Icon(Icons.star_rounded, color: Colors.yellow,)
-                  ],
-                ),
+                child: Text(price == ''? '': '$price ETB',
+                    style: TextStyle(
+                        color: theme.primaryText
+                    )),
               ),
             ],
           ),
