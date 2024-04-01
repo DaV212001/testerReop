@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mss_e_learning/layout/password/header_image_and_text.dart';
 import '../../controller/certificate_controller.dart';
 import 'package:get/get.dart';
+import '../../service/ads_service.dart';
 import '../../util/app_constants.dart';
+import '../../widget/ad_block.dart';
 import '../../widget/certificate/certificate_card.dart';
 import '../../widget/load_more_button.dart';
 
@@ -19,6 +22,20 @@ class CertificatesListScreen extends StatefulWidget {
 class _CertificatesListScreenState extends State<CertificatesListScreen> {
   final CertificateController certificateController =
   Get.put(CertificateController());
+
+  List<BannerAd> bannerAds = [];
+  @override
+  void initState() {
+    loadAd();
+    super.initState();
+  }
+
+  void loadAd() async {
+    bannerAds = await AdsService().loadBannerAds(count: 3);
+    setState(() {});
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +53,20 @@ class _CertificatesListScreenState extends State<CertificatesListScreen> {
         if (certificateController.isLoading.value) {
           return Center(child: CircularProgressIndicator(color: AppConstants.primary,));
         } else if (certificateController.certificates.isEmpty) {
-          return Center(
-              child: HeaderImageAndText(
-                showbackButton: false,
-                imagePath: 'assets/images/illustrations/no_certificates.svg',
-                headerText: 'No certificates yet',
-                color: FlutterFlowTheme.of(context).primaryText,
-              ));
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[0], isbottom: false),
+              Center(
+                  child: HeaderImageAndText(
+                    showbackButton: false,
+                    imagePath: 'assets/images/illustrations/no_certificates.svg',
+                    headerText: 'No certificates yet',
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  )),
+              if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[1], isbottom: true),
+            ],
+          );
         } else {
           return RefreshIndicator(
             color: Theme.of(context).primaryColor,
@@ -53,8 +77,15 @@ class _CertificatesListScreenState extends State<CertificatesListScreen> {
               return certificateController.fetchCertificates();
             },
             child: ListView.builder(
-              itemCount: certificateController.certificates.length + 1,
+              itemCount: certificateController.certificates.length + 2,
               itemBuilder: (context, index) {
+                if(index == 0 && bannerAds.isNotEmpty){
+                  return AdBlock(bannerAd: bannerAds[0], isbottom: false);
+                }
+                if(index == certificateController.certificates.length + 2 && bannerAds.isNotEmpty){
+                  return AdBlock(bannerAd: bannerAds[2], isbottom: true);
+                }
+
                 if (index < certificateController.certificates.length) {
                   final certificate = certificateController.certificates[index];
                   return CertificateCard(certificate: certificate);

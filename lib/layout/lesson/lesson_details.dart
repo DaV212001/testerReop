@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mss_e_learning/layout/lesson/lesson_pdf.dart';
 import 'package:mss_e_learning/layout/lesson/lesson_video.dart';
 import 'package:mss_e_learning/model/lesson_description.dart';
@@ -11,7 +12,9 @@ import 'package:mss_e_learning/service/lesson_service.dart';
 import 'package:mss_e_learning/controller/lesson_description_controllers.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../controller/lesson_controllers.dart';
+import '../../service/ads_service.dart';
 import '../../util/app_constants.dart';
+import '../../widget/ad_block.dart';
 import 'header_image_and_buttons.dart';
 export 'package:mss_e_learning/controller/lesson_description_controllers.dart';
 
@@ -74,8 +77,17 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
       LessonController()
   );
   bool loaded = false;
+
+  List<BannerAd> bannerAds = [];
+
+  void loadAd() async {
+    bannerAds = await AdsService().loadBannerAds(count: 3);
+    setState(() {});
+  }
+
   @override
   void initState() {
+    loadAd();
     super.initState();
     controller.checkIfBookMarked(widget.lessonId);
     getLesson();
@@ -152,7 +164,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         style: TextStyle(color: theme.primaryText)),
                         pinned: true,
                         floating: true,
-                        bottom: TabBar(
+                        bottom: const TabBar(
                             isScrollable: true,
                             indicatorColor: AppConstants.primary,
                             tabs: [
@@ -173,48 +185,56 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                     )
                   ];
                 },
-                body: TabBarView(
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () => _model.unfocusNode.canRequestFocus
-                            ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                            : FocusScope.of(context).unfocus(),
-                        child: Scaffold(
-                          key: scaffoldKey,
-                          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-                          body: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              !loaded
-                                  ? const Padding(
-                                padding: EdgeInsets.all(50.0),
-                                child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
-                              )
-                                  : Expanded(
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      buildHeader(context),
-                                      Divider(
-                                        height: 32,
-                                        thickness: 1,
-                                        color: FlutterFlowTheme.of(context).alternate,
+                body: Column(
+                  children: [
+                    if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[0], isbottom: false),
+                    Expanded(
+                      child: TabBarView(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () => _model.unfocusNode.canRequestFocus
+                                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                  : FocusScope.of(context).unfocus(),
+                              child: Scaffold(
+                                key: scaffoldKey,
+                                backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                body: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    !loaded
+                                        ? const Padding(
+                                      padding: EdgeInsets.all(50.0),
+                                      child: Center(child: CircularProgressIndicator(color: AppConstants.primary,)),
+                                    )
+                                        : Expanded(
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            buildHeader(context),
+                                            Divider(
+                                              height: 32,
+                                              thickness: 1,
+                                              color: FlutterFlowTheme.of(context).alternate,
+                                            ),
+                                            buildBody(context)
+                                          ],
+                                        ),
                                       ),
-                                      buildBody(context)
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
+                              ),
+                            ),
+                            PdfScreen(lesson: lesson),
+                            VideoScreen(lesson: lesson)
+                          ]
                       ),
-                      PdfScreen(lesson: lesson),
-                      VideoScreen(lesson: lesson)
-                    ]
+                    ),
+                    if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[2], isbottom: false),
+                  ],
                 )
             ))
     );
@@ -242,22 +262,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[1], isbottom: false),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                lesson!.title!,
-                textAlign: TextAlign.start,
-                style: FlutterFlowTheme.of(context).headlineMedium,
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(24, 12, 0, 0),
+          padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 0, 0),
           child: Text(
             'Lesson Details',
             textAlign: TextAlign.start,

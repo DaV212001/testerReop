@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mss_e_learning/controller/user_controller.dart';
 import 'package:mss_e_learning/layout/profile/route_list.dart';
 import 'package:mss_e_learning/layout/profile/user_screen_footer.dart';
@@ -13,8 +14,32 @@ import 'package:mss_e_learning/screen/auth/log_in.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
 import 'package:mss_e_learning/widget/button.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../service/ads_service.dart';
+import '../../widget/ad_block.dart';
+
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+
+
+  List<BannerAd> bannerAds = [];
+  @override
+  void initState() {
+    loadAd();
+    super.initState();
+  }
+
+  void loadAd() async {
+    bannerAds = await AdsService().loadBannerAds(count: 3);
+    setState(() {});
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +67,11 @@ class ProfileScreen extends StatelessWidget {
             UserScreenHeader(
               user: user,
             ),
+            if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[0], isbottom: false),
             const SizedBox(
               height: 5,
             ),
-            const RouteList(),
+            RouteList(bannerAd: bannerAds.isNotEmpty ? bannerAds[1]: null,),
             const SizedBox(
               height: 5,
             ),
@@ -59,7 +85,8 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            UserScreenFooter(footerData: footerData)
+            UserScreenFooter(footerData: footerData),
+            if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[2], isbottom: true),
           ]),
         ),
       ),

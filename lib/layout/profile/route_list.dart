@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mss_e_learning/config/themes/theme_manager.dart';
+import 'package:mss_e_learning/controller/ad_controller.dart';
 import 'package:mss_e_learning/screen/bookmarks/bookmark_screen.dart';
 import 'package:mss_e_learning/screen/password/change_password_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,6 +17,7 @@ import '../../screen/app_documentation/faq_screen.dart';
 import '../../screen/app_documentation/terms_and_conditions_screen.dart';
 import '../../screen/profile/change_profile_screen.dart';
 import '../../util/app_constants.dart';
+import '../../widget/ad_block.dart';
 
 
 void rateApp() async {
@@ -41,8 +44,9 @@ void moreApps() async {
 }
 
 class RouteList extends StatelessWidget {
+  final BannerAd? bannerAd;
   const RouteList({
-    super.key,
+    super.key, required this.bannerAd,
   });
 
   @override
@@ -50,6 +54,7 @@ class RouteList extends StatelessWidget {
     final FlutterFlowTheme theme = FlutterFlowTheme.of(context);
     Icon arrowIcon = Icon(Icons.arrow_right_outlined,
         color: AppConstants.primary.withOpacity(0.8), size: 40);
+    AdController testController = Get.put(AdController());
     final List<Map<String, dynamic>> itemList = [
       {
         "title": "Change Profile",
@@ -91,8 +96,13 @@ class RouteList extends StatelessWidget {
       {
         "title": "Remove ADS",
         "leadingIcon": buildIcon(Icons.adb, context),
-        "onTap": () {},
+        "onTap": () {
+          testController.removeAds();
+        },
         "trailing": arrowIcon
+      },
+      {
+        "title": "Ad",
       },
       {
         "title": "Share This App",
@@ -163,6 +173,9 @@ class RouteList extends StatelessWidget {
       itemCount: itemList.length,
       itemBuilder: (context, index) {
         final item = itemList[index];
+        if(item["title"] == "Ad"){
+          return AdBlock(bannerAd: bannerAd, isbottom: false);
+        }
         return Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: InkWell(

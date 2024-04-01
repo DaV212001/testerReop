@@ -10,6 +10,7 @@ import 'package:mss_e_learning/screen/main_layout_screen.dart';
 import 'package:mss_e_learning/screen/onboarding/onboarding_screen.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
 
+import '../../service/ads_service.dart';
 import '../../util/app_constants.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -36,6 +37,16 @@ class _SplashScreenState extends State<SplashScreen> {
         : token != null
             ? Future.value(const MainLayoutScreen())
             : Future.value(const SignUpWidget());
+  }
+
+  @override
+  void initState() {
+    showAppOpenAd();
+    super.initState();
+  }
+
+  void showAppOpenAd() async {
+    await AdsService().showAppOpenAd();
   }
 
   @override

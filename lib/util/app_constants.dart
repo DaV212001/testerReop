@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
-  static const String api = "https://learning.bhwethiopia.com/api";
-  static const String imagebaseurl = "https://learning.bhwethiopia.com/public/storage/";
+  static const String api = "https://api.techsavvyadademia.com/api";
+  static const String imagebaseurl = "https://api.techsavvyadademia.com/public/storage/";
   static const int subcatid = 1;
   static const Color primary = Color(0xFF4B39EF);
   static const String authStorage = 'java_authorization_token';

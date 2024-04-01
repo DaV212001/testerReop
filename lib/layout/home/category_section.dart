@@ -51,18 +51,21 @@ class _SubCatGridState extends State<SubCatGrid> {
             shrinkWrap: true,
             padding: const EdgeInsets.all(0),
             itemBuilder: (context, index) {
+
               var lessonId = widget.listOfLessons[index].id;
-              return GestureDetector(
-                onTap: () async {
-                    Get.to((){
-                      return LessonDetailScreen(lessonId: lessonId);
-                    });
-                },
-                child:
-                SubCategoryCard(
-                  name:  widget.listOfLessons[index].title,
-                  image:  widget.listOfLessons[index].image,
-                  price: '', isPremium: false,
+              return Container(
+                child: GestureDetector(
+                  onTap: () async {
+                      Get.to((){
+                        return LessonDetailScreen(lessonId: lessonId);
+                      });
+                  },
+                  child:
+                  SubCategoryCard(
+                    name:  widget.listOfLessons[index].title,
+                    image:  widget.listOfLessons[index].image,
+                    price: '', isPremium: star ,
+                  ),
                 ),
               );
             }) : const Center(

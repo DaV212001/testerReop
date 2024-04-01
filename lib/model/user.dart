@@ -1,5 +1,7 @@
 import 'package:mss_e_learning/util/app_constants.dart';
 
+import 'ads.dart';
+
 class User {
   String? firstname;
   String? lastname;
@@ -8,6 +10,7 @@ class User {
   int? id;
   String? profilepicture;
   int? roleid;
+  Ad? ad;
 
   User({
     this.firstname,
@@ -16,7 +19,8 @@ class User {
     this.phone,
     this.id,
     this.profilepicture,
-    this.roleid
+    this.roleid,
+    this.ad
   });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -29,6 +33,7 @@ class User {
     id = json['id'];
     profilepicture = json.containsKey('profile_picture')? json['profile_picture'] != null? AppConstants.imagebaseurl+(json['profile_picture']) : null:'';
     roleid = json.containsKey('role_id')? json['role_id']??-1 : -1;
+    ad = json['ads'] != null? Ad.fromJson(json['ads']): Ad();
   }
 
 

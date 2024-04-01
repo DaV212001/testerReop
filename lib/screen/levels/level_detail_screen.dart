@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mss_e_learning/controller/level_controller.dart';
 import 'package:mss_e_learning/layout/lesson/lesson_details.dart';
-import 'package:mss_e_learning/widget/button.dart';
 import 'package:mss_e_learning/widget/cached_image.dart';
-
+import '../../layout/password/header_image_and_text.dart';
 import '../../model/level.dart';
+import '../../service/ads_service.dart';
 import '../../util/app_constants.dart';
+import '../../widget/ad_block.dart';
 import '../quiz/quiz_screen.dart';
 
 class LevelDetailScreen extends StatefulWidget {
@@ -24,12 +25,23 @@ class LevelDetailScreen extends StatefulWidget {
 class _LevelDetailScreenState extends State<LevelDetailScreen> {
   LevelController levelController = Get.put(LevelController());
 
+  List<BannerAd> bannerAds = [];
+  @override
+  void initState() {
+    loadAd();
+    super.initState();
+  }
+
+  void loadAd() async {
+    bannerAds = await AdsService().loadBannerAds(count: 3);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     bool allLessonsOpened = levelController.allLessonsOpened(widget.level);
 
     return Scaffold(
-
       body: Column(mainAxisSize: MainAxisSize.max, children: [
         Expanded(
           child: SingleChildScrollView(
@@ -50,14 +62,14 @@ class _LevelDetailScreenState extends State<LevelDetailScreen> {
                             return Center(
                               child: Container(
                                   color: Colors.white,
-                                  child: Center(
+                                  child: const Center(
                                       child: Icon(
-                                        Icons.play_lesson_outlined,
-                                        color: AppConstants.primary,
-                                      ))),
+                                    Icons.play_lesson_outlined,
+                                    color: AppConstants.primary,
+                                  ))),
                             );
                           },
-                          errorBuilder: (context, url, error) => Icon(
+                          errorBuilder: (context, url, error) => const Icon(
                               Icons.play_lesson_outlined,
                               color: AppConstants.primary),
                         ).image,
@@ -78,7 +90,7 @@ class _LevelDetailScreenState extends State<LevelDetailScreen> {
                     ),
                     child: Padding(
                       padding:
-                      const EdgeInsetsDirectional.fromSTEB(16, 36, 16, 0),
+                          const EdgeInsetsDirectional.fromSTEB(16, 36, 16, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +127,7 @@ class _LevelDetailScreenState extends State<LevelDetailScreen> {
                           Container(
                             decoration: BoxDecoration(
                                 color: Colors.transparent,
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(15),
                                     topLeft: Radius.circular(15)),
                                 boxShadow: [
@@ -131,8 +143,8 @@ class _LevelDetailScreenState extends State<LevelDetailScreen> {
                                 style: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white),
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white),
                               ),
                             ),
                           ),
@@ -140,76 +152,107 @@ class _LevelDetailScreenState extends State<LevelDetailScreen> {
                       ),
                     ),
                   ),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: widget.level.lessons.length,
-                        itemBuilder: (context, index1) {
-                          int lessonId = widget.level.lessons[index1].id;
-                          String lessonTitle = widget.level.lessons[index1].title;
+                  if (bannerAds.isNotEmpty)
+                    AdBlock(bannerAd: bannerAds[0], isbottom: false),
+                  widget.level.lessons.isEmpty
+                      ? Center(
+                          child: HeaderImageAndText(
+                          showbackButton: false,
+                          imagePath:
+                              'assets/images/illustrations/no_certificates.svg',
+                          headerText: 'No certificates yet',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                        ))
+                      : Flexible(
+                          fit: FlexFit.loose,
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: widget.level.lessons.length,
+                              itemBuilder: (context, index1) {
+                                int lessonId = widget.level.lessons[index1].id;
+                                String lessonTitle =
+                                    widget.level.lessons[index1].title;
 
-                          // Check if the lesson is opened
-                          bool isLessonOpened =
-                          levelController.openedLessons.contains(lessonId);
+                                // Check if the lesson is opened
+                                bool isLessonOpened = levelController.checkIfOpened(lessonId);
 
-                          return Column(
-                            children: [
-                              ListTile(
-                                title: Text(lessonTitle),
-                                onTap: () {
-                                  // Add the lesson to the list of opened lessons
-                                  levelController.addOpenedLesson(lessonId);
-                                  setState(() {
-                                    isLessonOpened = true;
-                                  });
-                                  Get.to(
-                                          () => LessonDetailScreen(lessonId: lessonId));
-                                },
-                                // Customize appearance based on whether the lesson is opened
-                                leading: Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(18),
-                                    child: CachedImage(
-                                      url: widget.level.lessons[index1].image,
-                                      fit: BoxFit.fill,
+                                return Column(
+                                  children: [
+                                    ListTile(
+                                      title: Text(lessonTitle),
+                                      onTap: () {
+                                        // Add the lesson to the list of opened lessons
+                                        levelController
+                                            .addOpenedLesson(lessonId);
+                                        setState(() {
+                                          isLessonOpened = true;
+                                        });
+                                        Get.to(() => LessonDetailScreen(
+                                            lessonId: lessonId));
+                                      },
+                                      // Customize appearance based on whether the lesson is opened
+                                      leading: Container(
+                                        width: 50,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          child: CachedImage(
+                                            url: widget
+                                                .level.lessons[index1].image,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ),
+                                      trailing: Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                              color: isLessonOpened
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primary
+                                                  : Colors.grey,
+                                              shape: BoxShape.circle)),
                                     ),
-                                  ),
-                                ),
-                                trailing: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                        color: isLessonOpened
-                                            ? FlutterFlowTheme.of(context).primary
-                                            : Colors.grey,
-                                        shape: BoxShape.circle)),
-                              ),
-                              const Divider()
-                            ],
-                          );
-                        }),
-                  ),
-                  Visibility(
-                      visible: allLessonsOpened,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Button(
-                            text: 'Take Quiz',
-                            onPress: () {
-                              Get.to(() => QuizScreen(
+                                    const Divider()
+                                  ],
+                                );
+                              }),
+                        ),
+                  if (bannerAds.isNotEmpty)
+                    AdBlock(bannerAd: bannerAds[1], isbottom: false),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FFButtonWidget(
+                      text: 'Take Quiz',
+                      onPressed: () {
+                        if (allLessonsOpened) {
+                          Get.to(() => QuizScreen(
                                 subcatID: AppConstants.subcatid.toString(),
                                 levelId: widget.level.id.toString(),
                               ));
-                            }),
-                      ))
+                        } else {
+                          Get.snackbar(
+                              'Error', 'Please complete all lessons first',
+                              backgroundColor: Colors.red);
+                        }
+                      },
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        color: allLessonsOpened
+                            ? AppConstants.primary
+                            : Colors.grey,
+                      ),
+                    ),
+                  ),
+                  if (bannerAds.isNotEmpty)
+                    AdBlock(bannerAd: bannerAds[2], isbottom: true),
                 ]),
           ),
         ),

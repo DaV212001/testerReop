@@ -4,9 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mss_e_learning/controller/category_controller.dart';
+import 'package:mss_e_learning/controller/ad_controller.dart';
+import 'package:mss_e_learning/service/ads_service.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
+import 'package:mss_e_learning/util/ad_unit_ids.dart';
 import 'package:mss_e_learning/util/api_call_status.dart';
+import 'package:mss_e_learning/widget/ad_block.dart';
 import 'package:mss_e_learning/widget/cached_image.dart';
 import 'package:mss_e_learning/widget/error_card.dart';
 import 'package:flutter/animation.dart';
@@ -31,6 +36,27 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController search = TextEditingController();
+
+  AdController adController = Get.put(AdController());
+
+  List<BannerAd> bannerAds = [];
+  @override
+  void initState() {
+    loadAd();
+    showAppOpenAd();
+
+    super.initState();
+  }
+
+  void loadAd() async {
+    bannerAds = await AdsService().loadBannerAds(count: 3);
+    setState((){});
+  }
+
+  AppOpenAd? appOpenAd;
+  void showAppOpenAd() async {
+    await AdsService().showInterstitialAd();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +93,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[0], isbottom: false),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 18.0),
                                   child: HomeScreenHeader(),
                                 ),
+                                // if(testController.test.value) Container(
+                                //   height: 50,
+                                //   width: 50,
+                                //   decoration: BoxDecoration(
+                                //     color: AppConstants.primary,
+                                //   ),
+                                // ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                                   child: CategoryHorizontalList(controller: controller),
@@ -82,6 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: AdsCarousel(
                                       promotion: controller.listOfPromotions),
                                 ),
+                                if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[1], isbottom: false),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
@@ -94,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 SubCatGrid(listOfLessons: controller.getAlllessons(),),
+                                if(bannerAds.isNotEmpty) AdBlock(bannerAd: bannerAds[2], isbottom: true),
                               ],
                             ),
                           ),
@@ -105,6 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+
 
 class CategoryHorizontalList extends StatelessWidget {
   const CategoryHorizontalList({
