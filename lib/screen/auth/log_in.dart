@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:mss_e_learning/layout/auth/footer.dart';
 import 'package:mss_e_learning/service/user_service.dart';
+import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/util/app_routes.dart';
 import 'package:mss_e_learning/controller/log_in_controllers.dart';
 import 'package:mss_e_learning/widget/button.dart';
@@ -129,7 +130,7 @@ class _LogInWidgetState extends State<LogInWidget>
                     ),
                     alignment: const AlignmentDirectional(0, 0),
                     child: Text(
-                      'MSS-Learning',
+                      AppConstants.headerAppName,
                       style: FlutterFlowTheme.of(context).displaySmall.override(
                             fontFamily: 'Outfit',
                             color: Colors.white,

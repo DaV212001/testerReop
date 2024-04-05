@@ -13,7 +13,7 @@ class AdController extends GetxController {
   final _storage = GetStorage();
   UserController userController = Get.put(UserController());
 
-  RxBool showAds = true.obs;
+  RxBool showAds = false.obs;
 
 
   @override

@@ -15,6 +15,7 @@ import '../../layout/auth/footer.dart';
 import '../../layout/auth/header.dart';
 import '../../model/user.dart';
 import '../../controller/sign_up_controllers.dart';
+import '../../util/app_constants.dart';
 import '../../widget/input_field.dart';
 export '../../controller/sign_up_controllers.dart';
 
@@ -149,7 +150,7 @@ bool agreedToTerms = false;
                           ),
                           alignment: const AlignmentDirectional(0, 0),
                           child: Text(
-                            'MSS-Learning',
+                            AppConstants.headerAppName,
                             style: FlutterFlowTheme.of(context)
                                 .displaySmall
                                 .override(

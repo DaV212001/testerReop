@@ -12,6 +12,7 @@ import 'package:mss_e_learning/model/footer_data.dart';
 import 'package:mss_e_learning/model/user.dart';
 import 'package:mss_e_learning/screen/auth/log_in.dart';
 import 'package:mss_e_learning/service/authorization_service.dart';
+import 'package:mss_e_learning/util/app_constants.dart';
 import 'package:mss_e_learning/widget/button.dart';
 
 import '../../service/ads_service.dart';
@@ -45,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     User user = UserController.user.value??User(firstname: ' ', lastname: ' ', email: '', id: -1);
     FooterData footerData = FooterData(
-        copyWriteText: "MSS @ 2024",
+        copyWriteText: "${AppConstants.headerAppName} @ 2024",
         faceBookLink: "https://www.linkedin.com/",
         instagramLink: "https://www.linkedin.com/",
         telegramLink: "https://www.linkedin.com/",
