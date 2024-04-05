@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class AppConstants {
   static const String api = "https://api.techsavvyadademia.com/api";
   static const String imagebaseurl = "https://api.techsavvyadademia.com/public/storage/";
-  static const int subcatid = 25;
+  static const int subcatid = 26;
   static const Color primary = Color(0xFF4B39EF);
-  static const String authStorage = 'ml_authorization_token';
-  static const String packageName = 'com.msslearn.machine_learning';
-  static const String appName = 'Machine Learning';
+  static const String authStorage = 'fsd_authorization_token';
+  static const String packageName = 'com.msslearn.full_stack_development';
+  static const String appName = 'Fullstack Development';
   static const String headerAppName = 'Tech Savvy';
   static var kAuthContainerGradient = const BoxDecoration(
     gradient: LinearGradient(
