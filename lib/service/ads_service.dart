@@ -54,15 +54,12 @@ class AdsService {
   }
 
   Future<void> showInterstitialAd() async {
-    print('======================================SHOWING INTERSTITIAL AD===================================');
 
     if (_adController.showAds.value == true) {
-      print('======================================TRYING TO SHOW INTERSTITIAL AD===================================');
       await InterstitialAd.load(
           adUnitId: AdUnitId.interstitialAdUnitId,
           request: const AdRequest(),
           adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
-            print('======================================SHOWEDDDDDDDDDDDDDD INTERSTITIAL AD===================================');
             ad.show();
             ad.fullScreenContentCallback =
                 FullScreenContentCallback(onAdDismissedFullScreenContent: (ad) {
@@ -74,19 +71,17 @@ class AdsService {
               ad.dispose();
             });
           }, onAdFailedToLoad: (aderr) {
-            print('===============================================================AD FAILEDDDDDDDDDDDDD========================: $aderr');
           }));
     }
   }
 
   Future<String> getPaymentLink(int certificateID) async {
-    print('CALLLLEDDDDDD');
 
     String? token = await AuthService.getAuthorizationToken();
     if (token == null) {
       return '';
     }
-    final Map<String, dynamic> requestData = {"certificate_id": certificateID};
+
     final response = await post(
         Uri.parse('${AppConstants.api}/user_payment_for_ads'),
         headers: {

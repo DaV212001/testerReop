@@ -160,7 +160,7 @@ class _LevelDetailScreenState extends State<LevelDetailScreen> {
                           showbackButton: false,
                           imagePath:
                               'assets/images/illustrations/no_certificates.svg',
-                          headerText: 'No certificates yet',
+                          headerText: 'No lessons yet',
                           color: FlutterFlowTheme.of(context).primaryText,
                         ))
                       : Flexible(

@@ -12,14 +12,15 @@ class SearchControllerr extends GetxController {
   final lessons = <Lesson>[].obs;
 
   Future<void> getSearchData(String searchName) async {
-    // try {
+    try {
       final List searchData = await _searchService.getSearchData(searchName);
       categories.assignAll(searchData[0] as List<Category>);
       subcategories.assignAll(searchData[1] as List<SubCategory>);
       lessons.assignAll(searchData[2] as List<Lesson>);
     }
-    // catch (e) {
-    //   print('Error fetching search data: $e');
-    // }
+    catch (e) {
+      print('Error fetching search data: $e');
+    }
 
+}
 }

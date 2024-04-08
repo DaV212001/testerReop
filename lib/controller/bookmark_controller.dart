@@ -5,14 +5,10 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:mss_e_learning/service/bookmark_services.dart';
-import 'package:mss_e_learning/service/lesson_service.dart';
 import 'package:path_provider/path_provider.dart';
 import '../model/bookmark.dart';
 import '../model/certificate.dart';
 import '../model/error_data.dart';
-import '../model/lesson.dart';
-import '../service/certificate_service.dart'; // Import your CertificateServices
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../util/api_call_status.dart';
 import '../util/error_util.dart';
