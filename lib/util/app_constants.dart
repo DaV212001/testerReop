@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class AppConstants {
   static const String api = "https://api.techsavvyadademia.com/api";
   static const String imagebaseurl = "https://api.techsavvyadademia.com/public/storage/";
-  static const int subcatid = 33;
+  static const int subcatid = 34;
   static const Color primary = Color(0xFF4B39EF);
-  static const String authStorage = 'bc_authorization_token';
-  static const String packageName = 'com.msslearn.bc';
-  static const String appName = 'Blockchain';
+  static const String authStorage = 'cc_authorization_token';
+  static const String packageName = 'com.msslearn.cc';
+  static const String appName = 'Cloud Computing';
   static const String headerAppName = 'Tech Savvy';
   static var kAuthContainerGradient = const BoxDecoration(
     gradient: LinearGradient(
