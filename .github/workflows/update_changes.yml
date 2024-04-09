@@ -21,6 +21,7 @@ jobs:
       - name: Update Code
         run: |
           # Add commands to update the code here
+          git fetch origin ${{ github.event.inputs.branch }}
           git checkout ${{ github.event.inputs.branch }}
           git cherry-pick ${{ github.event.inputs.commit_hash }}  # Apply the commit to the branch
           
