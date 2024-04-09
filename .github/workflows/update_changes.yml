@@ -1,0 +1,33 @@
+name: Update Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to push commit to'
+        required: true
+      commit_hash:
+        description: 'Commit hash to push'
+        required: true
+
+jobs:
+  update-branch:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Update Code
+        run: |
+          # Add commands to update the code here
+          git checkout ${{ github.event.inputs.branch }}
+          git cherry-pick ${{ github.event.inputs.commit_hash }}  # Apply the commit to the branch
+          
+      - name: Push Changes
+        run: |
+          if git push origin ${{ github.event.inputs.branch }}; then
+            echo "Push successful"
+          else
+            echo "Push failed"
+          fi
