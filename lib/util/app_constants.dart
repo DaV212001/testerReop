@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class AppConstants {
   static const String api = "https://api.techsavvyadademia.com/api";
   static const String imagebaseurl = "https://api.techsavvyadademia.com/public/storage/";
-  static const int subcatid = 37;
+  static const int subcatid = 38;
   static const Color primary = Color(0xFF4B39EF);
-  static const String authStorage = 'iot_authorization_token';
-  static const String packageName = 'com.msslearn.iot';
-  static const String appName = 'IOT';
+  static const String authStorage = 'go_authorization_token';
+  static const String packageName = 'com.msslearn.go';
+  static const String appName = 'GO';
   static const String headerAppName = 'Tech Savvy';
   static var kAuthContainerGradient = const BoxDecoration(
     gradient: LinearGradient(
