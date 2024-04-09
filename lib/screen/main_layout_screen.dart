@@ -85,7 +85,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
             FontAwesomeIcons.house,
             color: inactiveColor,
           ),
-          title: ('Home'),
+          title: ('Main'),
           textStyle: const TextStyle(fontSize: 10),
           activeColorPrimary: activeColor,
           inactiveColorPrimary: inactiveColor,
